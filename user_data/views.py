@@ -11,14 +11,14 @@ from email.mime.text import MIMEText
 import random
 import datetime
 import time 
-
+import hashlib
 
 
 
 
 def login(request):
 	email =  request.POST.get("email","")
-	password = request.POST.get("password","")
+	password = hashlib.sha256(bytes(request.POST.get('password',''))).hexdigest()
 	user_data = User_Account.objects.all().filter(email = email)
 	got = True
 	for e in user_data:
@@ -46,8 +46,9 @@ def login(request):
 	return HttpResponseRedirect('/home')
 
 def signup(request):
-	password = request.POST.get('password','')
+	password = hashlib.sha256(bytes(request.POST.get('password',''))).hexdigest()
 	name = request.POST.get('name','')
+	name = name[0].upper() + name[1:] #for capitalizing first letter
 	phone = request.POST.get('phone_number','')
 	email = request.POST.get('email','')
 	print password,name,phone,email
@@ -63,7 +64,7 @@ def signup(request):
 	for i in data:
 		if(i.user_id > val):val = i.user_id;break
 	new_user_id =  val +  1
-	vericode = ''.join(random.choice('0123456789ABCDEF') for i in range(16))
+	vericode = ''.join(random.choice('0123456789ABCDEF') for i in range(16)) #This creates a random String of letters Used for Unique Identity
 	print vericode 
 	verilink = "127.0.0.1:8000/auth/verified?id=" + str(new_user_id) + "&veri=" + vericode
 	print verilink
@@ -120,7 +121,7 @@ def verified(request):
 def change(request):
 	email = request.POST.get('email','')
 	veri = request.POST.get('vericode','')
-	new_pass = request.POST.get('password','')
+	new_pass = hashlib.sha256(bytes(request.POST.get('password',''))).hexdigest()
 	acc = User_Account.objects.all().filter(email = email)
 	for i in acc:
 		vericode = i.vericode
@@ -143,7 +144,7 @@ def sendveri(request):
 		vericode = i.vericode
 		test = False
 	if(test):
-				return render(request,"forpass.html",{'sendmessage' : "This Email Does not Exist in our Database"})
+			return render(request,"forpass.html",{'sendmessage' : "This Email Does not Exist in our Database"})
 	outer = MIMEMultipart('alternative')
 	outer['Subject'] = "Verify Account For Interstellar"
 	outer['To'] = email

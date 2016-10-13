@@ -6,7 +6,6 @@ def home(request):
 	data['infomessage'] = request.session.get('infomessage')
 	data['open'] = request.session.get('open')
 	data['errormessage'] = request.session.get('errormessage')
-	print data
 	user_id = request.session.get('id','')
 	vericode = request.session.get('vericode','')
 	if(user_id != '' and vericode != ''):
