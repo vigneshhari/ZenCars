@@ -65,12 +65,13 @@ def signup(request):
 	new_user_id =  val +  1
 	vericode = ''.join(random.choice('0123456789ABCDEF') for i in range(16))
 	print vericode 
+	verilink = "127.0.0.1:8000/auth/verified?id=" + str(new_user_id) + "&veri=" + vericode
+	print verilink
 	'''
 	outer = MIMEMultipart('alternative')
 	outer['Subject'] = "Verify Account For Cygnus"
 	outer['To'] = email
 	outer['From'] = 'cygnus@cecsummit.org'
-	verilink = "https://cygnusquiz.herokuapp.com/app/verified?id=" + str(new_user_id) + "&veri=" + vericode
 	message = """
 			<h2>Hello {},</h2> 
 				<h3>This is a Verification Message</h3>
@@ -103,6 +104,7 @@ def signup(request):
 	request.session['infomessage'] = "Please Verify Your Account to Continue"
 	request.session['open'] = 'login'
 	return HttpResponseRedirect("/home")
+
 def verified(request):
 	id = request.GET.get('id')
 	vericode = request.GET.get('veri')
@@ -110,30 +112,31 @@ def verified(request):
 	for e in dat:
 		if(str(e.vericode) == str(vericode)):
 			User_Account.objects.filter(user_id = id).update(verified = 1)
-			request.session['logid'] = id
-			request.session['vericode'] = vericode
-			return render(request, 'login.html' , {'loginmessage' : "Account Verified Login To Continue"})
-	return render(request,'verified.html',{'id' : id})
+			request.session['infomessage'] = "Account Verified. Login To Continue"
+			request.session['open'] = 'login'
+			return HttpResponseRedirect("/home")
+	return HttpResponseRedirect("/home")
 
 def change(request):
-	email = request.GET.get('email','')
-	veri = request.GET.get('veri','')
-	new_pass = request.GET.get('pass','')
-	if(len(new_pass) < 7):
-		return render(request,"forpass.html",{'changemessage' : "Password should be longer than 7 charecters"})
-	acc = User_Account.objects.all().filter(mail = email)
+	email = request.POST.get('email','')
+	veri = request.POST.get('vericode','')
+	new_pass = request.POST.get('password','')
+	acc = User_Account.objects.all().filter(email = email)
 	for i in acc:
 		vericode = i.vericode
-		print vericode
 	if(vericode == veri):
-		User_Account.objects.all().filter(mail = email).update(password = new_pass)
+		User_Account.objects.all().filter(email = email).update(password = new_pass)
 	else:
-		return render(request,"forpass.html",{'changemessage' : "Wrong Vericode"})
-	return render(request, 'login.html' , {'loginmessage' : "Password Changed Please Login To Continue"})
+		request.session['errormessage'] = "Wrong Information Provided"
+		request.session['open'] = 'forgot'
+		return HttpResponseRedirect("/home")
+	request.session['infomessage'] = "Password Changed. Log in With your New Acocunt"
+	request.session['open'] = 'login'
+	return HttpResponseRedirect("/home")
 
 def sendveri(request):
 	email = request.GET.get('email','')
-	user = User_Account.objects.all().filter(mail = email)
+	user = User_Account.objects.all().filter(email = email)
 	test = True
 	for i in user:
 		name = i.name

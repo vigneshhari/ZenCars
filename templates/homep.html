@@ -25,7 +25,6 @@
 		<link rel="alternate stylesheet" type="text/css" href="{%static 'assets/switcher/css/color6.css'%}" title="color6" media="all" />
 
 		<script type="text/javascript">
-
 		function startwindow() {
     	var val =  "{{ open }}";
    		if(val == "login")
@@ -34,11 +33,15 @@
         	{document.getElementById("register_top").click();}
         if(val == "forgot")
         	{document.getElementById("forgot_top").click();}
-        if(val == "change")
-        	{document.getElementById("change_top").click();}
+		}
+		function forget(){
+			document.getElementById("close").click();
+			document.getElementById("forgot_top").click();
 		}
         window.onload = startwindow;
         </script>
+
+
 
 		<!--[if lt IE 9]>
 		<script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -80,7 +83,7 @@
 				<div class="row">
 					<div class="col-md-4 col-xs-6">
 						<div class="b-topBar__addr">
-							<span class="fa fa-map-marker"></span>
+							<span id="college" class="fa fa-map-marker"></span>
 							College Of Engineering Chengannur
 						</div>
 					</div>
@@ -109,15 +112,15 @@
 									<div class="modal-dialog" role="document">
 										<div class="modal-content modal-info">
 											<div class="modal-header">
-												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
+												<button type="button" class="close"  data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
 											</div>
 											<div class="modal-body modal-spa">
 												<div class="login-grids">
 												
 														<div class="login-right">
-															<form action="#" method="post">
+															<form action="/auth/change" method="post">
 																	{% csrf_token %}
-																<h3>Forgot YOur Password </h3>
+																<h3>Forgot Your Password </h3>
 																<br>
 															</div>
 															{%if errormessage != null%}
@@ -132,20 +135,36 @@
 															{%endif%}						
 																<div class="input-group margin-bottom-sm">
  																 <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw" aria-hidden="true"></i></span>
-  																	<input class="form-control" type="text" required="" placeholder="Email address">
+  																	<input class="form-control" name="email" type="email" required="" placeholder="Email address">
 																</div>
 																<br>
 																<div class="input-group margin-bottom-sm">
  																 <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw" aria-hidden="true"></i></span>
-  																	<input class="form-control" type="text" required="" placeholder="Enter Vericode Recieved in Email">
+  																	<input class="form-control" name="vericode" type="text" required="" placeholder="Enter Vericode Recieved in Email">
 																</div>
+
 																<br>
 																<div class="input-group margin-bottom-sm">
  																 <span class="input-group-addon"><i class="fa fa-key fa-fw" aria-hidden="true"></i></span>
-  																	<input class="form-control" type="password" required="" placeholder="New Password">
+  																	<input class="form-control" id="forpass" name="password" type="password" required="" placeholder="New Password" oninput="check(this)">
+  																	<script language='javascript' type='text/javascript'>
+																
+																    var paslength = document.getElementById("forpass")
+																		function validate_signup(){
+																			
+																		  	if(paslength.value.length <= 7){
+																				paslength.setCustomValidity("Passwords should be longer than 7 charecters");
+																			}else {
+																		    	paslength.setCustomValidity('');
+																		  }
+																		}
+																		paslength.onchange = validate_signup;
+																		paslength.onkeyup = validate_signup;
+																</script>
 																</div>
-																<br>
+																
 																<div class="login-right">
+																<h4><a href="#"> Resend Verification Email</a>
 																<input type="submit" value="Change Password" >
 															</form>
 														</div>
@@ -155,57 +174,6 @@
 									</div>
 								</div>
 
-
-
-								<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-									<div class="modal-dialog" role="document">
-										<div class="modal-content modal-info">
-											<div class="modal-header">
-												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
-											</div>
-											<div class="modal-body modal-spa">
-												<div class="login-grids">
-												
-														<div class="login-right">
-															<form action="#" method="post">
-																	{% csrf_token %}
-																<h3>Change Your Password </h3>
-																<br>
-															</div>
-															{%if errormessage != null%}
-															<div class="alert alert-danger">
-														    {{errormessage}}
-														    </div>
-															{%endif%}		
-															{%if infomessage != null%}
-															<div class="alert alert-info">
-														    {{infomessage}}
-														    </div>
-															{%endif%}						
-																<div class="input-group margin-bottom-sm">
- 																 <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw" aria-hidden="true"></i></span>
-  																	<input class="form-control" type="text" required="" placeholder="Email address">
-																</div>
-																<br>
-																<div class="input-group">
-																  <span class="input-group-addon"><i class="fa fa-key fa-fw" aria-hidden="true"></i></span>
-																  <input class="form-control" required="" type="password" placeholder="Old Password">
-																</div>
-																<br>
-																<div class="input-group">
-																  <span class="input-group-addon"><i class="fa fa-key fa-fw" aria-hidden="true"></i></span>
-																  <input class="form-control" required="" type="password" placeholder="New Password">
-																</div>
-																<br>
-																<div class="login-right">	
-																<input type="submit" value="Change Password" >
-															</form>
-														</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
 
 
 
@@ -213,7 +181,7 @@
 									<div class="modal-dialog" role="document">
 										<div class="modal-content modal-info">
 											<div class="modal-header">
-												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
+												<button type="button" class="close" id="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
 											</div>
 											<div class="modal-body modal-spa">
 												<div class="login-grids">
@@ -236,7 +204,7 @@
 															{%endif%}						
 																<div class="input-group margin-bottom-sm">
  																 <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw" aria-hidden="true"></i></span>
-  																	<input class="form-control" type="text" name="email" required="" placeholder="Email address">
+  																	<input class="form-control" type="email" name="email" required="" placeholder="Email address">
 																</div>
 																<br>
 																<div class="input-group">
@@ -246,9 +214,7 @@
 
 																<div class="login-right">
 
-						
-																<h4><a href="#" data-toggle="modal" data-target="#myModal3">Forgot password</a> / <a href="#">Create new password</a></h4>
-																	
+																<h4><a href='javascript:;' onclick='forget();'> Forgot password</a> 
 																<input type="submit" value="SIGNIN" >
 															</form>
 														</div>
@@ -300,12 +266,17 @@
 																  <input class="form-control" id="confirm_password" name="repeat-password" required="" type="password" placeholder="Repeat Password" oninput="check(this)">
 																<script language='javascript' type='text/javascript'>
 																    var password = document.getElementById("password"), confirm_password = document.getElementById("confirm_password"),phone_number = document.getElementById("phone_number");
-
-																		function validate(){
+																    var paslength = document.getElementById("forpass")
+																		function validate_signup(){
 																			if(phone_number.value.length != 10){
 																				phone_number.setCustomValidity("Please enter a 10 digit phone number");
 																			}else {
 																		    phone_number.setCustomValidity('');
+																		  }
+																		  	if(paslength.value.length <= 7){
+																				password.setCustomValidity("Passwords should be longer than 7 charecters");
+																			}else {
+																		    	password.setCustomValidity('');
 																		  }
 																			if(password.value.length <= 7){
 																				password.setCustomValidity("Passwords should be longer than 7 charecters");
@@ -319,9 +290,9 @@
 																		    confirm_password.setCustomValidity('');
 																		  }
 																		}
-																		phone_number.onchange = validate
-																		password.onchange = validate;
-																		confirm_password.onkeyup = validate;
+																		phone_number.onchange = validate_signup;
+																		password.onchange = validate_signup;
+																		confirm_password.onkeyup = validate_signup;
 																</script>
 																</div>
 																<br>
