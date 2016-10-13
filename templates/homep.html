@@ -25,28 +25,19 @@
 		<link rel="alternate stylesheet" type="text/css" href="{%static 'assets/switcher/css/color6.css'%}" title="color6" media="all" />
 
 		<script type="text/javascript">
-        function getSearchParameters() {
-      var prmstr = window.location.search.substr(1);
-      return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
-		}
 
-		function transformToAssocArray( prmstr ) {
-    	var prmarr = prmstr.split("&");
-   		 for ( var i = 0; i < prmarr.length; i++) {
-        var tmparr = prmarr[i].split("=");
-        if(tmparr[0] == "open" && tmparr[1] == "login")
+		function startwindow() {
+    	var val =  "{{ open }}";
+   		if(val == "login")
         	{document.getElementById("signin_top").click();}
-        if(tmparr[0] == "open" && tmparr[1] == "register")
+        if(val == "register")
         	{document.getElementById("register_top").click();}
-        if(tmparr[0] == "open" && tmparr[1] == "forgot")
+        if(val == "forgot")
         	{document.getElementById("forgot_top").click();}
-        if(tmparr[0] == "open" && tmparr[1] == "change")
+        if(val == "change")
         	{document.getElementById("change_top").click();}
-    	}
-    return params;
 		}
-
-        window.onload = getSearchParameters;
+        window.onload = startwindow;
         </script>
 
 		<!--[if lt IE 9]>
@@ -56,7 +47,6 @@
 
 	</head>
 	<body class="m-index" data-scrolling-animations="true" data-equal-height=".b-auto__main-item">
-
 		<!-- Loader -->
 				<div id="page-preloader"><span class="spinner"></span></div>
 		<!-- Loader end -->
@@ -103,10 +93,16 @@
 					<div class="col-md-4 col-xs-10">
 						<nav class="b-topBar__nav">
 							<ul>
+								{%if name == null%}
 								<li><a href="#" style ="color:black" data-toggle="modal" data-target="#myModal1" id="signin_top">SIGN IN</a></li>
 								<li><a href="#" style ="color:black" data-toggle="modal" data-target="#myModal2" id="register_top">REGISTER</a></li>		
 								<li><a href="#" style ="visibility: hidden;" data-toggle="modal" data-target="#myModal3" id="forgot_top"></a></li>		
 								<li><a href="#" style ="visibility: hidden;" data-toggle="modal" data-target="#myModal4" id="change_top"></a></li>		
+								{%endif%}
+								{%if name != null%}
+								<li><a href="/auth/logout" style ="color:black">Logout</a></li>
+								<li><a href="#" style ="color:black">Welcome Back {{name}}</a></li>
+								{%endif%}
 
 
 								<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -120,7 +116,8 @@
 												
 														<div class="login-right">
 															<form action="#" method="post">
-																<h3>Signin with your account </h3>
+																	{% csrf_token %}
+																<h3>Forgot YOur Password </h3>
 																<br>
 															</div>
 															{%if errormessage != null%}
@@ -171,7 +168,8 @@
 												
 														<div class="login-right">
 															<form action="#" method="post">
-																<h3>Signin with your account </h3>
+																	{% csrf_token %}
+																<h3>Change Your Password </h3>
 																<br>
 															</div>
 															{%if errormessage != null%}
@@ -221,7 +219,8 @@
 												<div class="login-grids">
 												
 														<div class="login-right">
-															<form action="#" method="post">
+															<form action="/auth/login" method="post">
+																	{% csrf_token %}
 																<h3>Signin with your account </h3>
 																<br>
 															</div>
@@ -237,20 +236,19 @@
 															{%endif%}						
 																<div class="input-group margin-bottom-sm">
  																 <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw" aria-hidden="true"></i></span>
-  																	<input class="form-control" type="text" required="" placeholder="Email address">
+  																	<input class="form-control" type="text" name="email" required="" placeholder="Email address">
 																</div>
 																<br>
 																<div class="input-group">
 																  <span class="input-group-addon"><i class="fa fa-key fa-fw" aria-hidden="true"></i></span>
-																  <input class="form-control" required="" type="password" placeholder="Password">
+																  <input class="form-control" required="" name="password" type="password" placeholder="Password">
 																</div>
 
 																<div class="login-right">
 
 						
-																<h4><a href="#">Forgot password</a> / <a href="#">Create new password</a></h4>
-																	<input type="checkbox"  id="brand" value="">
-																	<label for="brand"><span></span>Remember Me.</label>
+																<h4><a href="#" data-toggle="modal" data-target="#myModal3">Forgot password</a> / <a href="#">Create new password</a></h4>
+																	
 																<input type="submit" value="SIGNIN" >
 															</form>
 														</div>
@@ -271,24 +269,25 @@
 											<div class="modal-body modal-spa">
 												<div class="login-grids">
 														<div class="login-right">
-															<form action="#" method="get">
+															<form action="/auth/signup" method="POST">
+																	{% csrf_token %}
 																<h3>Create your account </h3>
 																</div>
 
 																<br>&nbsp<br>									
 																<div class="input-group margin-bottom-sm">
  																 <span class="input-group-addon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-  																	<input class="form-control" type="text" required="" placeholder="Name">
+  																	<input class="form-control" type="text" required="" name="name" placeholder="Name">
 																</div>
 																<br>
 																<div class="input-group">
 																  <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw" aria-hidden="true"></i></span>
-																  <input class="form-control" type="email" required="" placeholder="Email Address">
+																  <input class="form-control" id="name" type="email" name="email" required="" placeholder="Email Address">
 																</div>
 																<br>								
 																<div class="input-group margin-bottom-sm">
  																 <span class="input-group-addon"><i class="fa fa-phone" aria-hidden="true"></i></span>
-  																	<input class="form-control" id="phone_number" required="" type="text" placeholder="Phone Number">
+  																	<input class="form-control" id="phone_number" name="phone_number" required="" type="tel" placeholder="Phone Number">
 																</div>
 																<br>
 																<div class="input-group">
@@ -330,7 +329,7 @@
 																<input type="submit" value="CREATE ACCOUNT" >
 															</form>
 														</div>
-													<p>By logging in you agree to our <span>Terms and Conditions</span> and <span>Privacy Policy</span></p>
+													<p>By Creating an Account you agree to our <span>Terms and Conditions</span> and <span>Privacy Policy</span></p>
 												</div>
 											</div>
 										</div>

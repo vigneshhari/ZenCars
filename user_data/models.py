@@ -1,12 +1,13 @@
 
 from django.db import models
 
-class User(models.Model):
+class User_Account(models.Model):
 	user_id = models.IntegerField()
-	email = models.CharField(max_length = 500)
 	name = models.CharField(max_length = 500)
-	password = models.CharField(max_length = 500)
-	phone_number = models.IntegerField()
-	creationdate = models.DateTimeField()
+	password = models.CharField(max_length = 100)
+	email = models.CharField(max_length = 100)
+	phone_no = models.CharField(max_length = 25)
+	vericode = models.CharField(max_length = 100)
+	verified = models.IntegerField()
 	
 
