@@ -322,8 +322,8 @@
 				<div class="row">
 					<div class="col-sm-3 col-xs-4">
 						<div class="b-nav__logo wow slideInLeft" data-wow-delay="0.3s">
-							<h3><a href="home.html">Zen<span>Cars</span></a></h3>
-							<h2><a href="home.html">&nbsp Find Your Dream</a></h2>
+							<h3><a href="/home">Zen<span>Cars</span></a></h3>
+							<h2><a href="/home">&nbsp Find Your Dream</a></h2>
 						</div>
 					</div>
 					<div class="col-sm-9 col-xs-8">
@@ -338,35 +338,20 @@
 							</div>
 							<div class="collapse navbar-collapse navbar-main-slide" id="nav">
 								<ul class="navbar-nav-menu">
+									<li><a href="compare.html">Home</a></li>
+									{%if name != null%}
 									<li class="dropdown">
-										<a class="dropdown-toggle" data-toggle='dropdown' href="home.html">Home <span class="fa fa-caret-down"></span></a>
+										<a class="dropdown-toggle" data-toggle='dropdown' href="#">Account<span class="fa fa-caret-down"></span></a>
 										<ul class="dropdown-menu h-nav">
-											<li><a href="home.html">Home Page 1</a></li>
-											<li><a href="home-2.html">Home Page 2</a></li>
+											<li><a href="listings.html">Details</a></li>
+											<li><a href="listingsTwo.html">View Cars</a></li>
+											<li><a href="listTable.html">Add Car</a></li>
 										</ul>
 									</li>
-									<li class="dropdown">
-										<a class="dropdown-toggle" data-toggle='dropdown' href="#">Grid <span class="fa fa-caret-down"></span></a>
-										<ul class="dropdown-menu h-nav">
-											<li><a href="listings.html">listing 1</a></li>
-											<li><a href="listingsTwo.html">listing 2</a></li>
-											<li><a href="listTable.html">listing 3</a></li>
-											<li><a href="listTableTwo.html">listing 4</a></li>
-										</ul>
-									</li>
-									<li><a href="compare.html">compare</a></li>
+									{%endif%}
+									<li><a href="about.html">Blog</a></li>
 									<li><a href="about.html">About</a></li>
-									<li><a href="article.html">Services</a></li>
-									<li class="dropdown">
-										<a class="dropdown-toggle" data-toggle='dropdown' href="#">Blog <span class="fa fa-caret-down"></span></a>
-										<ul class="dropdown-menu h-nav">
-											<li><a href="blog.html">Blog 1</a></li>
-											<li><a href="blogTwo.html">Blog 2</a></li>
-											<li><a href="404.html">Page 404</a></li>
-										</ul>
-									</li>
-									<li><a href="submit1.html">Shop</a></li>
-									<li><a href="contacts.html">Contact</a></li>
+									<li><a href="contacts.html">Contact Us</a></li>
 								</ul>
 							</div>
 						</div>
@@ -394,8 +379,8 @@
 						<div class="container">
 							<div class="carousel-caption b-slider__info">
 								<h3>Find your dream</h3>
-								<h2>Lamborghini Aventador</h2>
-								<p>Model 2015 <span>$184,900</span></p>
+								<h2>Porshe Camerro</h2>
+								<p>Model 2015 <span>$248,900</span></p>
 								<a class="btn m-btn" href="detail.html">see details<span class="fa fa-angle-right"></span></a>
 							</div>
 						</div>
@@ -406,7 +391,7 @@
 							<div class="carousel-caption b-slider__info">
 								<h3>Find your dream</h3>
 								<h2>Lamborghini Aventador</h2>
-								<p>Model 2015 <span>$184,900</span></p>
+								<p>Model 2015 <span>$384,900</span></p>
 								<a class="btn m-btn" href="detail.html">see details<span class="fa fa-angle-right"></span></a>
 							</div>
 						</div>

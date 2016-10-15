@@ -18,7 +18,7 @@ import hashlib
 
 def login(request):
 	email =  request.POST.get("email","")
-	password = hashlib.sha256(bytes(request.POST.get('password',''))).hexdigest()
+	password = hashlib.sha256(bytes(request.POST.get('password',''))).hexdigest() #hash function
 	user_data = User_Account.objects.all().filter(email = email)
 	got = True
 	for e in user_data:

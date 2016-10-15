@@ -8,6 +8,11 @@ https://docs.djangoproject.com/en/1.10/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.10/ref/settings/
+
+superuser 
+username = vignesh
+password = zentech123
+
 """
 
 import os
@@ -44,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'user_data',
+    'car_data',
 ]
 
 MIDDLEWARE = [

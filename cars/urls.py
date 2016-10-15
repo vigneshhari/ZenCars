@@ -7,5 +7,6 @@ import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^auth/', include('user_data.urls')),
+    url(r'^car' , include('car_data.urls')),
  	url(r'^home/', views.home),   
 ]
