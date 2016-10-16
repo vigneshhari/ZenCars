@@ -5,6 +5,7 @@ from django.http import JsonResponse
 from models import User_Account
 from django.db.models import Max
 from django.http import HttpResponseRedirect
+from car_data.models import Car_data_new,Car_data_old, Varient_data
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -182,4 +183,26 @@ def logout(request):
 	request.session['vericode'] = ''
 	return HttpResponseRedirect('/home')
 
-    
+def view(request):
+	try:
+		user_id = request.session['id']
+		if(user_id == '' ):return HttpResponseRedirect("/home")
+	except:
+		return HttpResponseRedirect("/home")
+	data = Car_data_old.objects.all().filter(user_id = user_id)
+	oldcar = {}
+	o = []
+	for i in data:
+		oldcar['name'] = i.brand + " " + i.name
+		if(i.general_information == None):i.general_information = ""
+		oldcar['info'] = ' '.join(i.general_information.split("\n"))[:100]
+		oldcar['det'] = "/car/view?type=old&id=" + str(i.car_id)
+		oldcar['price'] = i.price
+		oldcar['reading'] = i.reading
+		oldcar['fuel'] = i.fuel
+		oldcar['year'] = i.year
+		oldcar['pic'] = i.photolinks
+		oldcar['trans'] = i.transmission 
+		o.append(oldcar)
+		oldcar={}
+	return render(request,"usercar.html",{"car" : o , "len" : len(o)})

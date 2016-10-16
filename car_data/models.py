@@ -42,14 +42,18 @@ class Car_data_old(models.Model):
 
 class Varient_data(models.Model):
 	car_id = models.IntegerField()
-	varient_id = models.IntegerField()
+	varient_id = models.AutoField(primary_key=True);
 	name = models.CharField(max_length = 500)
+	photolinks = models.TextField()
+	videolink = models.CharField(max_length =100)
+	main_car = models.CharField(max_length = 500)
 	price = models.IntegerField()
 	features = models.TextField()
-	milege = models.CharField(max_length=10) # Vehicle Milege ** Seperatly Stored For Easy Acess
-	Body_type = models.CharField(max_length=20) #Sedan ,Suv ,Muv Etc ..
+	body_type = models.CharField(max_length=20) #Sedan ,Suv ,Muv Etc ..
 	specifications = models.TextField()
 	general_information = models.TextField()
+	hits = models.IntegerField(null=True) # Count Number of People Viewing Car 
+
 
 class Car_review(models.Model):
 	car_id = models.IntegerField()

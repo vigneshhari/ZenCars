@@ -25,7 +25,7 @@
 		<![endif]-->
 
 	</head>
-	<body class="m-listings" data-scrolling-animations="true" >
+	<body class="m-listTable" data-scrolling-animations="true" data-equal-height=".b-items__cell">
 
 		<!-- Loader -->
 		<div id="page-preloader"><span class="spinner"></span></div>
@@ -55,6 +55,48 @@
 		</div>
 		<!-- End Switcher -->
 
+		<header class="b-topBar wow slideInDown" data-wow-delay="0.7s">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4 col-xs-6">
+						<div class="b-topBar__addr">
+							<span class="fa fa-map-marker"></span>
+							202 W 7TH ST, LOS ANGELES, CA 90014
+						</div>
+					</div>
+					<div class="col-md-2 col-xs-6">
+						<div class="b-topBar__tel">
+							<span class="fa fa-phone"></span>
+							1-800- 624-5462
+						</div>
+					</div>
+					<div class="col-md-4 col-xs-6">
+						<nav class="b-topBar__nav">
+							<ul>
+								<li><a href="#">Cart</a></li>
+								<li><a href="#">Register</a></li>
+								<li><a href="#">Sign in</a></li>
+							</ul>
+						</nav>
+					</div>
+					<div class="col-md-2 col-xs-6">
+						<div class="b-topBar__lang">
+							<div class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle='dropdown'>Language</a>
+								<a class="m-langLink dropdown-toggle" data-toggle='dropdown' href="#"><span class="b-topBar__lang-flag m-en"></span>EN<span class="fa fa-caret-down"></span></a>
+								<ul class="dropdown-menu h-lang">
+									<li><a class="m-langLink dropdown-toggle" data-toggle='dropdown' href="#"><span class="b-topBar__lang-flag m-en"></span>EN</a></li>
+									<li><a class="m-langLink dropdown-toggle" data-toggle='dropdown' href="#"><span class="b-topBar__lang-flag m-es"></span>ES</a></li>
+									<li><a class="m-langLink dropdown-toggle" data-toggle='dropdown' href="#"><span class="b-topBar__lang-flag m-de"></span>DE</a></li>
+									<li><a class="m-langLink dropdown-toggle" data-toggle='dropdown' href="#"><span class="b-topBar__lang-flag m-fr"></span>FR</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header><!--b-topBar-->
+
 		<section class="b-modal">
 			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
@@ -64,6 +106,7 @@
 							<h4 class="modal-title" id="myModalLabel">Video</h4>
 						</div>
 						<div class="modal-body">
+							<iframe width="560" height="315" src="https://www.youtube.com/embed/a_ugz7GoHwY" allowfullscreen></iframe>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -72,50 +115,13 @@
 				</div>
 			</div>
 		</section><!--b-modal-->
-		<header class="b-topBar wow slideInDown" data-wow-delay="0.7s">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-4 col-xs-6">
-						<div class="b-topBar__addr">
-							<span class="fa fa-map-marker"></span>
-							College Of Engineering Chengannur
-						</div>
-					</div>
-					<div class="col-md-2 col-xs-6">
-						<div class="b-topBar__tel">
-							<span class="fa fa-phone"></span>
-							+91 9562854642
-						</div>
-					</div>
-					<div class="col-md-4 col-xs-6">
-						<nav class="b-topBar__nav">
-							<ul>
-								{%if name == null%}
-								<li><a href="#" style ="color:black" data-toggle="modal" data-target="#myModal1" id="signin_top">SIGN IN</a></li>
-								<li><a href="#" style ="color:black" data-toggle="modal" data-target="#myModal2" id="register_top">REGISTER</a></li>		
-								<li><a href="#" style ="visibility: hidden;" data-toggle="modal" data-target="#myModal3" id="forgot_top"></a></li>		
-								<li><a href="#" style ="visibility: hidden;" data-toggle="modal" data-target="#myModal4" id="change_top"></a></li>		
-								{%endif%}
-								{%if name != null%}
-								<li><a href="/auth/logout" style ="color:black">Logout</a></li>
-								<li><a href="#" style ="color:black">Welcome Back {{name}}</a></li>
-								{%endif%}
-							</ul>
-						</nav>
-					</div>
-					
-					</div>
-				</div>
-			</div>
-		</header><!--b-topBar-->
-
 		<nav class="b-nav">
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-3 col-xs-4">
 						<div class="b-nav__logo wow slideInLeft" data-wow-delay="0.3s">
-							<h3><a href="/home">Zen<span>Cars</span></a></h3>
-							<h2><a href="/home">&nbsp Find Your Dream</a></h2>
+							<h3><a href="home.html">Auto<span>Club</span></a></h3>
+							<h2><a href="home.html">AUTO DEALER TEMPLATE</a></h2>
 						</div>
 					</div>
 					<div class="col-sm-9 col-xs-8">
@@ -169,20 +175,16 @@
 
 		<section class="b-pageHeader">
 			<div class="container">
-				<h1 class=" wow zoomInLeft" data-wow-delay="0.5s">Auto Listings</h1>
+				<h1 class="wow zoomInLeft" data-wow-delay="0.5s">Your Cars</h1>
 				<div class="b-pageHeader__search wow zoomInRight" data-wow-delay="0.5s">
-					{% if resultlen == None %}
-					<h3>Your search returned No results</h3>
-					{% else %}
-					<h3>Your search returned {{resultlen}} results</h3>
-					{%endif%}
+					<h3>Your Have {{len}} cars</h3>
 				</div>
 			</div>
 		</section><!--b-pageHeader-->
 
 		<div class="b-breadCumbs s-shadow">
 			<div class="container wow zoomInUp" data-wow-delay="0.5s">
-				<a href="home.html" class="b-breadCumbs__page">Home</a><span class="fa fa-angle-right"></span><a href="listings.html" class="b-breadCumbs__page m-active">Search Results</a>
+				<a href="home.html" class="b-breadCumbs__page">Home</a><span class="fa fa-angle-right"></span><a href="listTable.html" class="b-breadCumbs__page m-active">Your Cars</a>
 			</div>
 		</div><!--b-breadCumbs-->
 
@@ -190,76 +192,60 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-4 col-xs-12">
-						<div class="b-infoBar__compare wow zoomInUp" data-wow-delay="0.5s">
-							<a href="compare.html" class="b-infoBar__compare-item"><span class="fa fa-compress"></span>Comapre Selected Vehicles</a>
-						</div>
 					</div>
-					<div class="col-lg-8 col-xs-12">
-						<div class="b-infoBar__select">
-							<form method="post" action="/">
-								<div class="b-infoBar__select-one wow zoomInUp" data-wow-delay="0.5s">
-									<span class="b-infoBar__select-one-title">SELECT VIEW</span>
-									<a href="listingsTwo.html" class="m-list m-active"><span class="fa fa-list"></span></a>
-									<a href="listTable.html" class="m-table"><span class="fa fa-table"></span></a>
-								</div>
-								<div class="b-infoBar__select-one wow zoomInUp" data-wow-delay="0.5s">
-									<span class="b-infoBar__select-one-title">SORT BY</span>
-									<select name="select2" class="m-select">
-										<option value="" selected="">Last Added</option>
-									</select>
-									<span class="fa fa-caret-down"></span>
-								</div>
-							</form>
-						</div>
-					</div>
+					
 				</div>
 			</div>
 		</div><!--b-infoBar-->
 
-		<section class="b-items s-shadow">
+		<div class="b-items">
 			<div class="container">
-				<div class="row">		
+				<div class="row">
 					<div class="col-lg-9 col-sm-8 col-xs-12">
-						<div class="b-items__cars">
-						{%for e in old%}
-							<div class="b-items__cars-one wow zoomInUp" data-wow-delay="0.5s">
-								<div class="b-items__cars-one-img">
-									<img class="img-responsive" src={{e.pic.url}}  alt='nissan'/>
-									<span class="b-items__cars-one-img-type m-premium">Used</span>
-									<form action="/" method="post">
-										<input type="checkbox" name="check1" id='check1'/>
-										<label for="check1" class="b-items__cars-one-img-check"><span class="fa fa-check"></span></label>
-									</form>
-								</div>
-								<div class="b-items__cars-one-info">
-									<header class="b-items__cars-one-info-header s-lineDownLeft">
-										<h2>{{e.name}}</h2>
-										<span>{{e.price}} Rs</span>
-									</header>
-									<p>
-										{{e.info}}
-									</p>
-									<div class="b-items__cars-one-info-km">
-										<span class="fa fa-tachometer"></span> {{e.reading}}
+						<div class="row">
+							
+							{%for e in car%}
+							<div class="col-lg-4 col-md-6 col-xs-12">
+								<div class="b-items__cell wow zoomInUp" data-wow-delay="0.5s">
+									<div class="b-items__cars-one-img">
+										<img class='img-responsive' src="{{e.pic.url}}" alt='chevrolet'/>
 									</div>
-									<div class="b-items__cars-one-info-details">
-										<div class="b-featured__item-links">
-											<a href="#">Registered {{e.year}}</a>
-											<a href="#">Used</a>
-											<a href="#">{{e.trans}}</a>
-											<a href="#">{{e.fuel}}</a>
+									<div class="b-items__cell-info">
+										<div class="s-lineDownLeft b-items__cell-info-title">
+											<h2 class="">{{e.name}}</h2>
+											&nbsp&nbsp&nbsp<a href="detail.html"  style="color: orange">Sold Car ?</a>
+												<a href="detail.html" style="color: red" >Delete</a>
 										</div>
-										<a href="{{e.det}}" class="btn m-btn">VIEW DETAILS<span class="fa fa-angle-right"></span></a>
+										<p>{{e.info}}</p>
+										<div class="row m-smallPadding">
+											<div class="col-xs-6">
+												<ul>
+													<li>Registered {{e.year}}</li>
+													<li>{{e.trans}}</li>
+													<li>{{e.fuel}}</li>
+												</ul>
+												<h5 class="b-items__cell-info-price">{{e.price}} Rs</h5>
+											</div>
+											<div class="col-xs-6">
+												<div class="b-items__cell-info-km">
+													<span class="fa fa-tachometer"></span>
+													<p>{{e.reading}}</p>
+												</div>
+												<a href="{{e.det}}" class="btn m-btn">VIEW DETAILS<span class="fa fa-angle-right"></span></a>
+												
+											</div>
+										</div>
 									</div>
 								</div>
-								</div>
+							</div>
 							{%endfor%}
-						
-						</div>									
-						{% if len > 0 %}
-						<div class="b-items__pagination wow zoomInUp" data-wow-delay="0.5s">
-							<div class="b-items__pagination-main">
-								<a data-toggle="modal" data-target="#myModal" href="#" class="m-left"><span class="fa fa-angle-left"></span></a>
+
+							
+						</div>
+
+						<div class="b-items__pagination">
+							<div class="b-items__pagination-main wow zoomInUp" data-wow-delay="0.5s">
+								<a href="#" class="m-left"><span class="fa fa-angle-left"></span></a>
 								<span class="m-active"><a href="#">1</a></span>
 								<span><a href="#">2</a></span>
 								<span><a href="#">3</a></span>
@@ -267,97 +253,11 @@
 								<a href="#" class="m-right"><span class="fa fa-angle-right"></span></a>    
 							</div>
 						</div>
-						{%else%}
-						<div class="b-items__pagination wow zoomInUp" data-wow-delay="0.5s">
-							<div class="b-items__pagination-main">
-								<span class="m-active">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href="/home">Your Query Did not Return any Results</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
-							</div>
-						</div>
-						{%endif%}
 					</div>
-
-					<div class="col-lg-3 col-sm-4 col-xs-12">
-						<aside class="b-items__aside">
-							<h2 class="s-title wow zoomInUp" data-wow-delay="0.5s">REFINE YOUR SEARCH</h2>
-							<div class="b-items__aside-main wow zoomInUp" data-wow-delay="0.5s">
-								<form>
-									<div class="b-items__aside-main-body">
-										<div class="b-items__aside-main-body-item">
-											<label>SELECT A MAKE</label>
-											<div>
-												<select name="select1" class="m-select">
-													<option value="" selected="">Any Make</option>
-												</select>
-												<span class="fa fa-caret-down"></span>
-											</div>
-										</div>
-										<div class="b-items__aside-main-body-item">
-											<label>SELECT A MODEL</label>
-											<div>
-												<select name="select1" class="m-select">
-													<option value="" selected="">Any Make</option>
-												</select>
-												<span class="fa fa-caret-down"></span>
-											</div>
-										</div>
-										<div class="b-items__aside-main-body-item">
-											<label>PRICE RANGE</label>
-											<div class="slider"></div>
-											<input type="hidden" name="min" value="100" class="j-min" />
-											<input type="hidden" name="max" value="1000" class="j-max" />
-										</div>
-										<div class="b-items__aside-main-body-item">
-											<label>VEHICLE TYPE</label>
-											<div>
-												<select name="select1" class="m-select">
-													<option value="" selected="">Any Type</option>
-												</select>
-												<span class="fa fa-caret-down"></span>
-											</div>
-										</div>
-										<div class="b-items__aside-main-body-item">
-											<label>VEHICLE STATUS</label>
-											<div>
-												<select name="select1" class="m-select">
-													<option value="" selected="">Any Status</option>
-												</select>
-												<span class="fa fa-caret-down"></span>
-											</div>
-										</div>
-										<div class="b-items__aside-main-body-item">
-											<label>FUEL TYPE</label>
-											<div>
-												<select name="select1" class="m-select">
-													<option value="" selected="">All Fuel Types</option>
-												</select>
-												<span class="fa fa-caret-down"></span>
-											</div>
-										</div>
-									</div>
-									<footer class="b-items__aside-main-footer">
-										<button type="submit" class="btn m-btn">FILTER VEHICLES<span class="fa fa-angle-right"></span></button><br />
-										<a href="">RESET ALL FILTERS</a>
-									</footer>
-								</form>
-							</div>
-							<div class="b-items__aside-sell wow zoomInUp" data-wow-delay="0.5s">
-								<div class="b-items__aside-sell-img">
-									<h3>SELL YOUR CAR</h3>
-								</div>
-								<div class="b-items__aside-sell-info">
-									<p>
-										Nam tellus enimds eleifend dignis lsim
-										biben edum tristique sed metus fusce
-										Maecenas lobortis.
-									</p>
-									<a href="submit1.html" class="btn m-btn">REGISTER NOW<span class="fa fa-angle-right"></span></a>
-								</div>
-							</div>
-						</aside>
-					</div>
+					
 				</div>
 			</div>
-		</section><!--b-items-->
+		</div><!--b-items-->
 
 		<div class="b-features">
 			<div class="container">

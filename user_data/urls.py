@@ -9,5 +9,6 @@ urlpatterns = [
 	url(r'sendvericode' , views.sendveri , name='sendveri'),
     url(r'logout' , views.logout , name='logout'),
     url(r'req' , views.req , name='req'),
-
+    url(r'view' , views.view , name='view'),
+ 
     ]

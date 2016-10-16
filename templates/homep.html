@@ -96,9 +96,7 @@ function setCities(chooser) {
     var db = regiondb[choice];
     newElem = document.createElement("option");
 	newElem.text = "Any Model";
-    newElem.value = "cus";
-    cityChooser.add(newElem, where);newElem.text = "Any Model";
-    newElem.value = "cus";
+    newElem.value = "Any Model";
     cityChooser.add(newElem, where);
     if (choice != "") {
         for (var i = 0; i < db.length; i++) {
@@ -413,8 +411,8 @@ function setCities(chooser) {
 									<li class="dropdown">
 										<a class="dropdown-toggle" data-toggle='dropdown' href="#">Account<span class="fa fa-caret-down"></span></a>
 										<ul class="dropdown-menu h-nav">
-											<li><a href="listings.html">Details</a></li>
-											<li><a href="listingsTwo.html">View Cars</a></li>
+											<li><a href="/auth/details">Details</a></li>
+											<li><a href="/auth/view">View Cars</a></li>
 											<li><a href="/car/add">Add Car</a></li>
 										</ul>
 									</li>
@@ -763,8 +761,8 @@ function setCities(chooser) {
 							<div class="col-xs-12 col-md-8">
 								<div class="m-firstSelects">
 									<div class="col-xs-4">
-										<select name="select1" id="car" onclick="setCities(this)">
-													<option value="Any">Any Make</option>
+										<select name="brand" id="car" onclick="setCities(this)">
+													<option value="Any Make">Any Make</option>
 													<option value="Maserati">Maserati</option>
 													<option value="Chevrolet">Chevrolet</option>
 													<option value="Porsche">Porsche</option>
@@ -808,18 +806,19 @@ function setCities(chooser) {
 										<span class="fa fa-caret-down"></span>
 									</div>
 									<div class="col-xs-4">
-										<select name="select2" id="name">
-											<option value="" selected="">Any Model</option>
+										<select name="model" id="name">
+											<option value="Any Model" selected="">Any Model</option>
 										</select>
 										<span class="fa fa-caret-down"></span>
 									</div>
 									<div class="col-xs-4">
-										<select name="select3">
-											<option value="new">New</option>
-											<option value="used">Used</option>
+										<select name="status">
+											<option value="Any">Any</option>
+											<option value="New">New</option>
+											<option value="Used">Used</option>
 										</select>
 										<span class="fa fa-caret-down"></span>
-										<p>E.G:  NEW, USED, CERTIFIED</p>
+										<p>E.G:  NEW, USED </p>
 									</div>
 								</div>
 								

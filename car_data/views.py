@@ -1,17 +1,43 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from .forms import DocumentForm
-from .models import Car_data_new,Car_data_old
+from .models import Car_data_new,Car_data_old, Varient_data
 from user_data.models import User_Account
 import datetime
 
 # Fields in Car_Details ... General Information/Review --> Features/Specs --> User Reviews --> Estimated Fuel Cost --> Gallery
 
 def search(request):
-	lis = []
-	lis.append({"test":"test"})
-	lis.append({"test":"test"})
-	return render(request,"listv.html",{'cardata' : lis , 'resultlen' : len(lis)})
+	oldcar,new = {},{}
+	new = Car_data_new.objects.all()
+	old = Car_data_old.objects.all()
+	if(str(request.GET.get('brand',"Any Make")) != "Any Make" ):
+		print "Reached"
+		new = new.filter(name__contains = request.GET.get('brand'))
+		old = old.filter(brand__contains = request.GET.get('brand'))
+		if(str(request.GET.get('model',"Any Model")) != "Any Model"):
+			new = new.filter(name__contains =request.GET.get('model'))
+			old = old.filter(name__contains =request.GET.get('model'))
+	if(request.GET.get('status') != "Any"):
+		if(request.GET.get('status') == "New"):old =[]
+		if(request.GET.get('status') == "Used"):new =[]
+	if(request.GET.get('min') != '' or request.GET.get('max') != ''):
+		pass
+	o = []
+	for i in old:
+		oldcar['name'] = i.brand + " " + i.name
+		oldcar['info'] = ' '.join(i.general_information.split("\n"))[:100]
+		oldcar['det'] = "/car/view?type=old&id=" + str(i.car_id)
+		oldcar['price'] = i.price
+		oldcar['reading'] = i.reading
+		oldcar['fuel'] = i.fuel
+		oldcar['year'] = i.year
+		oldcar['pic'] = i.photolinks
+		oldcar['trans'] = i.transmission 
+		o.append(oldcar)
+		oldcar={}
+	print o
+	return render(request,"listv.html",{"old":o , "len" :len(o)})
 
 def viewadd(request):
 	print "hi there"
@@ -69,7 +95,7 @@ def add(request):
 	if(step == '5'):
 			Car_data_old.objects.all().filter(car_id = car_id).update(hits = 0 , confirmed = 1 ,status = "sell" , date = datetime.datetime.now())
 			request.session['step'] = '1'
-			return HttpResponseRedirect("user/cars")
+			return HttpResponseRedirect("/auth/cars")
 	return 0
 
 def view(request):
@@ -77,32 +103,61 @@ def view(request):
 	id = request.GET.get('id',False)
 	if(type == False or id == False):
 		return HttpResponseRedirect("/home")
-	details = Car_data_old.objects.all().filter(car_id = id)
-	data = {}
-	for i in details:
-		data['brand'] = i.brand
-		data['name'] = i.name
-		data['photo'] = i.photolinks
-		data['price'] = i.price
-		data['video'] = i.videolink
-		data['read'] = i.reading
-		data['general'] = i.general_information
-		for n in User_Account.objects.all().filter(user_id = i.user_id):
-			data['sellername'] = n.name
-			data['phno'] = n.phone_no
-		data['milege'] = i.milege
-		data['location'] = i.Location
-		f = i.features
-		f1,f2,f3 = [],[],[]
-		temp = 0;
-		for d in f.split(","):
-			if(temp == 3):temp = 0
-			if(temp == 0):f1.append({"feat" : d})
-			if(temp == 1):f2.append({"feat" : d})
-			if(temp == 2):f3.append({"feat" : d})
-			temp += 1
-		data['f1'] = f1;data['f2'] = f2;data['f3'] = f3
-		data['type'] = i.body_type
-		data['trans'] = i.transmission
-		data['fuel'] = i.fuel
-	return render(request,"oldcar.html",data)
+	if(type == 'old'):
+		details = Car_data_old.objects.all().filter(car_id = id)
+		data = {}
+		for i in details:
+			data['brand'] = i.brand
+			data['name'] = i.name
+			data['photo'] = i.photolinks
+			data['price'] = i.price
+			data['video'] = i.videolink
+			data['read'] = i.reading
+			data['general'] = i.general_information
+			for n in User_Account.objects.all().filter(user_id = i.user_id):
+				data['sellername'] = n.name
+				data['phno'] = n.phone_no
+			data['milege'] = i.milege
+			data['location'] = i.Location
+			f = i.features
+			f1,f2,f3 = [],[],[]
+			temp = 0;
+			for d in f.split(","):
+				if(temp == 3):temp = 0
+				if(temp == 0):f1.append({"feat" : d})
+				if(temp == 1):f2.append({"feat" : d})
+				if(temp == 2):f3.append({"feat" : d})
+				temp += 1
+			data['f1'] = f1;data['f2'] = f2;data['f3'] = f3
+			data['type'] = i.body_type
+			data['trans'] = i.transmission
+			data['fuel'] = i.fuel
+		return render(request,"oldcar.html",data)
+	elif(type == "var"):
+		data = {}
+		details = Varient_data.objects.all().filter(varient_id = id)
+		for i in details:
+			pic = i.photolinks
+			picture,spec,feat = [],[],[]
+			temp = 0
+			for k in pic.split(","):
+				picture.append({"link" : k ,'no' : temp})
+				temp +=1
+			data['picture'] = picture
+			for j in i.specifications.split(","):
+				if(len(j.split(":")) == 2):
+					n,m = j.split(":")
+					spec.append({'ind' : n  , 'val' :m})
+			data['spec'] = spec
+			data['info'] = i.general_information
+			f = i.features
+			f1,f2,f3 = [],[],[]
+			temp = 0;
+			for d in f.split(","):
+				if(temp == 3):temp = 0
+				if(temp == 0):f1.append({"feat" : d})
+				if(temp == 1):f2.append({"feat" : d})
+				if(temp == 2):f3.append({"feat" : d})
+				temp += 1
+			data['f1'] = f1;data['f2'] = f2;data['f3'] = f3
+		return render(request,'varicar.html',data)

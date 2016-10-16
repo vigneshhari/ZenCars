@@ -105,21 +105,23 @@
 			var slider = $('.slider').length;
 			if(slider){
 		        jQuery(".slider").slider({
-		            min: 100,
-		            max: 1000,
-		            values: [0,1000],
-		            range: true,
+		            min: 0,
+		            max: 120,
+		            animate:true,
+		            values: [0,120],
+		            range: false,
 		            slide: function(event, ui){
+		            	if(ui.values[1] - 20 > 0  && ui.values[0] <100 ){
 		                $(".ui-slider-handle span.min").text(ui.values[0]);
-		                $(".ui-slider-handle span.max").text(ui.values[1]);
+		                $(".ui-slider-handle span.max").text(ui.values[1] - 20);}
 		            },
 		            stop:function(event, ui){
 		                $("input.j-min").val(ui.values[0]);
 		                $("input.j-max").val(ui.values[1]);
 		            }
 		        });
-		        $(".ui-slider-handle:first-of-type").append("<span class='min'>100</span>");
-		        $(".ui-slider-handle:last-of-type").append("<span class='max'>1000</span>");
+		        $(".ui-slider-handle:first-of-type").append("<span class='min'>0 Lakh</span>");
+		        $(".ui-slider-handle:last-of-type").append("<span class='max'>100 Lakhs</span>");
 			}
 		},
 
