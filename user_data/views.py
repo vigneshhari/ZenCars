@@ -15,6 +15,10 @@ import hashlib
 
 
 
+def req(request):
+		request.session['infomessage'] = "Please Login to View this page"
+		request.session['open'] = 'login'
+		return HttpResponseRedirect("/home")
 
 def login(request):
 	email =  request.POST.get("email","")

@@ -24,8 +24,8 @@ class Car_data_old(models.Model):
 	brand = models.CharField(max_length=100)
 	name = models.CharField(max_length = 100) # Name of the Car
 	year = models.IntegerField(null=True)
-	photolinks = models.CharField(max_length=1000 , null=True)
-	videolinks = models.CharField(max_length=100 , null=True)
+	photolinks = models.FileField(upload_to = 'carsell/', default = 'carsell/None/no-img.jpg')
+	videolink = models.CharField(max_length=100 , null=True)
 	price = models.CharField(max_length = 50, null=True) # its a charecter because its a range of values most commonly :)
 	features = models.TextField(null=True)
 	fuel = models.CharField(max_length=10)
