@@ -76,11 +76,10 @@ def signup(request):
 		if(i.user_id > val):val = i.user_id;break
 	new_user_id =  val +  1
 	vericode = ''.join(random.choice('0123456789ABCDEF') for i in range(16)) #This creates a random String of letters Used for Unique Identity
-	verilink = "127.0.0.1:8000/auth/verified?id=" + str(new_user_id) + "&veri=" + vericode
+	verilink = "zencars.herokuapp.com/auth/verified?id=" + str(new_user_id) + "&veri=" + vericode
 	print verilink
-	'''
 	outer = MIMEMultipart('alternative')
-	outer['Subject'] = "Verify Account For Cygnus"
+	outer['Subject'] = "Verify Account For ZenCars"
 	outer['To'] = email
 	outer['From'] = 'cygnus@cecsummit.org'
 	message = """
@@ -95,7 +94,7 @@ def signup(request):
 				<p>If the above link is not working please enter the Verification Code Manually</p>
 				<br>
 				<h3>The verification code is  {}</h3>
-					<h4>Cygnus Team :)</h4>
+					<h4>Team ZenCars</h4>
 					<br>
 					 DO not Reply To this message 
 				""".format(name,verilink,vericode)
@@ -109,7 +108,6 @@ def signup(request):
 		print "Sent Email"
 	except Exception, e:
 		print e
-	'''
 	p = User_Account(email = email,password=password,user_id=new_user_id,name=name,phone_no=phone,vericode=vericode,verified=0)
 	p.save()
 	request.session['infomessage'] = "Please Verify Your Account to Continue"
