@@ -10,5 +10,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^auth/', include('user_data.urls')),
     url(r'^car' , include('car_data.urls')),
+    url(r'^blog' , include('blog.urls')),
  	url(r'^home/', views.home),   
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

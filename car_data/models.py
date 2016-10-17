@@ -8,7 +8,6 @@ class Car_data_new(models.Model):
 	photolinks = models.CharField(max_length=1000)
 	videolinks = models.CharField(max_length=100)
 	price = models.CharField(max_length = 50) # its a charecter because its a range of values most commonly :)
-	features = models.TextField()
 	milege = models.CharField(max_length=10) # Vehicle Milege ** Seperatly Stored For Easy Acess
 	body_type = models.CharField(max_length=20) #Sedan ,Suv ,Muv Etc ..
 	specifications = models.TextField()
