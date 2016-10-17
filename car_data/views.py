@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from .forms import DocumentForm
-from .models import Car_data_new,Car_data_old, Varient_data
+from django.http import JsonResponse
+from .models import Car_data_new,Car_data_old, Varient_data , Car_review
 from user_data.models import User_Account
 import datetime
 
@@ -10,7 +11,7 @@ import datetime
 def search(request):
 	oldcar,new = {},{}
 	new = Car_data_new.objects.all()
-	old = Car_data_old.objects.all()
+	old = Car_data_old.objects.all().filter(status = 'sell' , confirmed = 1)
 	if(str(request.GET.get('brand',"Any Make")) != "Any Make" ):
 		print "Reached"
 		new = new.filter(name__contains = request.GET.get('brand'))
@@ -18,6 +19,9 @@ def search(request):
 		if(str(request.GET.get('model',"Any Model")) != "Any Model"):
 			new = new.filter(name__contains =request.GET.get('model'))
 			old = old.filter(name__contains =request.GET.get('model'))
+	if(request.GET.get('type','') != ''):
+		new = new.filter(body_type__iexact = request.GET.get('type'))
+		old = old.filter(body_type__iexact = request.GET.get('type'))
 	if(request.GET.get('status') != "Any"):
 		if(request.GET.get('status') == "New"):old =[]
 		if(request.GET.get('status') == "Used"):new =[]
@@ -95,20 +99,37 @@ def add(request):
 	if(step == '5'):
 			Car_data_old.objects.all().filter(car_id = car_id).update(hits = 0 , confirmed = 1 ,status = "sell" , date = datetime.datetime.now())
 			request.session['step'] = '1'
-			return HttpResponseRedirect("/auth/cars")
+			return HttpResponseRedirect(("car/view?type=old?id="+str(car_id)))
 	return 0
 
 def view(request):
+	data = {}
 	type = request.GET.get('type',False)
 	id = request.GET.get('id',False)
 	if(type == False or id == False):
 		return HttpResponseRedirect("/home")
+	user_id = request.session.get('id','')
+	if(user_id ==''):user_id=-1
+	data['user_id'] = user_id
+	data['car_id'] = id
+	user = User_Account.objects.all().filter(user_id = user_id)
+	for i in user:
+		data['username'] = i.name
+
+	review = Car_review.objects.all().filter(car_id = id , car_type = type)
+	re = []
+	for r in review:
+		for jj in User_Account.objects.all().filter(user_id = r.user_id):
+			re.append({'name' : jj.name , 'content' : r.content ,'photo' : jj.photo})
+	data['rev'] = re
+	data['revlen'] = len(re)
+
 	if(type == 'old'):
+		data['status'] = 'old'
 		details = Car_data_old.objects.all().filter(car_id = id)
-		data = {}
 		for i in details:
 			data['brand'] = i.brand
-			data['name'] = i.name
+			data['name'] = i.brand + " " + i.name
 			data['photo'] = i.photolinks
 			data['price'] = i.price
 			data['video'] = i.videolink
@@ -134,7 +155,38 @@ def view(request):
 			data['fuel'] = i.fuel
 		return render(request,"oldcar.html",data)
 	elif(type == "var"):
-		data = {}
+		data['status'] = 'var'
+		details = Varient_data.objects.all().filter(varient_id = id)
+		for i in details:
+			data['name'] = i.name
+			data['price'] = i.price
+			data['brand'] = i.main_car
+			pic = i.photolinks
+			picture,spec,feat = [],[],[]
+			temp = 0
+			for k in pic.split(","):
+				picture.append({"link" : k ,'no' : temp})
+				temp +=1
+			data['picture'] = picture
+			for j in i.specifications.split(","):
+				if(len(j.split(":")) == 2):
+					n,m = j.split(":")
+					spec.append({'ind' : n  , 'val' :m})
+			data['spec'] = spec
+			data['info'] = i.general_information
+			f = i.features
+			f1,f2,f3 = [],[],[]
+			temp = 0;
+			for d in f.split(","):
+				if(temp == 3):temp = 0
+				if(temp == 0):f1.append({"feat" : d.split(":")[0]})
+				if(temp == 1):f2.append({"feat" : d.split(":")[0]})
+				if(temp == 2):f3.append({"feat" : d.split(":")[0]})
+				temp += 1
+			data['f1'] = f1;data['f2'] = f2;data['f3'] = f3
+		return render(request,'varicar.html',data)
+	elif(type == "new"):
+		data['status'] = 'new'
 		details = Varient_data.objects.all().filter(varient_id = id)
 		for i in details:
 			pic = i.photolinks
@@ -161,3 +213,7 @@ def view(request):
 				temp += 1
 			data['f1'] = f1;data['f2'] = f2;data['f3'] = f3
 		return render(request,'varicar.html',data)
+
+def comm(request):
+	Car_review(car_id = request.POST.get('car','') , user_id = request.POST.get('user','') , car_type = request.POST.get('type','') , content = request.POST.get('text') ,date = datetime.datetime.now() ).save()
+	return HttpResponseRedirect(request.META['HTTP_REFERER'])

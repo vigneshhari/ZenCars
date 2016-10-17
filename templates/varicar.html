@@ -95,49 +95,43 @@
 					<div class="col-md-4 col-xs-6">
 						<div class="b-topBar__addr">
 							<span class="fa fa-map-marker"></span>
-							202 W 7TH ST, LOS ANGELES, CA 90014
+							College Of Engineering Chengannur
 						</div>
 					</div>
 					<div class="col-md-2 col-xs-6">
 						<div class="b-topBar__tel">
 							<span class="fa fa-phone"></span>
-							1-800- 624-5462
+							+91 9562854642
 						</div>
 					</div>
 					<div class="col-md-4 col-xs-6">
 						<nav class="b-topBar__nav">
 							<ul>
-								<li><a href="#">Cart</a></li>
-								<li><a href="#">Register</a></li>
-								<li><a href="#">Sign in</a></li>
+								{%if username == null%}
+								<li><a href="#" style ="color:black" data-toggle="modal" data-target="#myModal1" id="signin_top">SIGN IN</a></li>
+								<li><a href="#" style ="color:black" data-toggle="modal" data-target="#myModal2" id="register_top">REGISTER</a></li>		
+								<li><a href="#" style ="visibility: hidden;" data-toggle="modal" data-target="#myModal3" id="forgot_top"></a></li>		
+								<li><a href="#" style ="visibility: hidden;" data-toggle="modal" data-target="#myModal4" id="change_top"></a></li>		
+								{%endif%}
+								{%if username != null%}
+								<li><a href="/auth/logout" style ="color:black">Logout</a></li>
+								<li><a href="#" style ="color:black">Welcome Back {{username}}</a></li>
+								{%endif%}
 							</ul>
 						</nav>
-					</div>
-					<div class="col-md-2 col-xs-6">
-						<div class="b-topBar__lang">
-							<div class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle='dropdown'>Language</a>
-								<a class="m-langLink dropdown-toggle" data-toggle='dropdown' href="#"><span class="b-topBar__lang-flag m-en"></span>EN<span class="fa fa-caret-down"></span></a>
-								<ul class="dropdown-menu h-lang">
-									<li><a class="m-langLink dropdown-toggle" data-toggle='dropdown' href="#"><span class="b-topBar__lang-flag m-en"></span>EN</a></li>
-									<li><a class="m-langLink dropdown-toggle" data-toggle='dropdown' href="#"><span class="b-topBar__lang-flag m-es"></span>ES</a></li>
-									<li><a class="m-langLink dropdown-toggle" data-toggle='dropdown' href="#"><span class="b-topBar__lang-flag m-de"></span>DE</a></li>
-									<li><a class="m-langLink dropdown-toggle" data-toggle='dropdown' href="#"><span class="b-topBar__lang-flag m-fr"></span>FR</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
+					</div>	
 				</div>
 			</div>
 		</header><!--b-topBar-->
 
+		
 		<nav class="b-nav">
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-3 col-xs-4">
 						<div class="b-nav__logo wow slideInLeft" data-wow-delay="0.3s">
-							<h3><a href="home.html">Auto<span>Club</span></a></h3>
-							<h2><a href="home.html">AUTO DEALER TEMPLATE</a></h2>
+							<h3><a href="/home">Zen<span>Cars</span></a></h3>
+							<h2><a href="/home">&nbsp Find Your Dream</a></h2>
 						</div>
 					</div>
 					<div class="col-sm-9 col-xs-8">
@@ -152,35 +146,21 @@
 							</div>
 							<div class="collapse navbar-collapse navbar-main-slide" id="nav">
 								<ul class="navbar-nav-menu">
+									<li><a href="compare.html">Home</a></li>
+									{%if username != null%}
 									<li class="dropdown">
-										<a class="dropdown-toggle" data-toggle='dropdown' href="home.html">Home <span class="fa fa-caret-down"></span></a>
+										<a class="dropdown-toggle" data-toggle='dropdown' href="#">Account<span class="fa fa-caret-down"></span></a>
 										<ul class="dropdown-menu h-nav">
-											<li><a href="home.html">Home Page 1</a></li>
-											<li><a href="home-2.html">Home Page 2</a></li>
+											<li><a href="/auth/details">Details</a></li>
+											<li><a href="/auth/view?type=sell">View Listed Cars</a></li>
+											<li><a href="/auth/view?type=sold">View Sold Cars</a></li>
+											<li><a href="/car/add">Add Car</a></li>
 										</ul>
 									</li>
-									<li class="dropdown">
-										<a class="dropdown-toggle" data-toggle='dropdown' href="#">Grid <span class="fa fa-caret-down"></span></a>
-										<ul class="dropdown-menu h-nav">
-											<li><a href="listings.html">listing 1</a></li>
-											<li><a href="listingsTwo.html">listing 2</a></li>
-											<li><a href="listTable.html">listing 3</a></li>
-											<li><a href="listTableTwo.html">listing 4</a></li>
-										</ul>
-									</li>
-									<li><a href="compare.html">compare</a></li>
+									{%endif%}
+									<li><a href="about.html">Blog</a></li>
 									<li><a href="about.html">About</a></li>
-									<li><a href="article.html">Services</a></li>
-									<li class="dropdown">
-										<a class="dropdown-toggle" data-toggle='dropdown' href="#">Blog <span class="fa fa-caret-down"></span></a>
-										<ul class="dropdown-menu h-nav">
-											<li><a href="blog.html">Blog 1</a></li>
-											<li><a href="blogTwo.html">Blog 2</a></li>
-											<li><a href="404.html">Page 404</a></li>
-										</ul>
-									</li>
-									<li><a href="submit1.html">Shop</a></li>
-									<li><a href="contacts.html">Contact</a></li>
+									<li><a href="contacts.html">Contact Us</a></li>
 								</ul>
 							</div>
 						</div>
@@ -367,6 +347,77 @@
 										</div>
 									</div>
 								</div>
+
+								<br>
+								&nbsp
+								<br>
+
+								<div class="b-article__main-comments">
+								<div class=" wow zoomInUp" data-wow-delay="0.5s">
+								{%if revlen == 0%}
+								<div class="s-lineDownLeft  s-titleLeft">
+										<h2 class="s-titleDet">No Comments Avaliable. Be The First To Comment</h2>
+									</div>
+								{%else%}
+								<div class="s-lineDownLeft  s-titleLeft">
+										<h2 class="s-titleDet">COMMENTS</h2>
+									</div>
+								{%endif%}
+								</div>
+								<div class="clearfix"></div>
+								<div class="row">
+									
+								{%for e in rev%}
+									<div class="col-xs-12">
+										<div class="b-article__main-comments-one wow zoomInUp" data-wow-delay="0.5s">
+											<div class="b-article__main-comments-one-person">
+											  <img src="{{e.photo.url}}" class="img-responsive img-thumbnail" style ="max-height:125px;width: 80px;height: auto;"  alt="{{username}}" width="304" height="236"> 						
+											 </div>
+											<div class="b-article__main-comments-one-text">
+												<header class="b-article__main-comments-one-text-head">
+													<h6>{{e.name}}</h6>
+												</header>
+												<p>
+													{{e.content}}
+												</p>
+											</div>
+										</div>
+									</div>
+									{% endfor %}
+								</div>
+							</div>
+							
+							{% if user_id > 0 %}
+							<div class="b-article__main-add wow zoomInUp" data-wow-delay="0.5s">
+								<div class="s-lineDownLeft  s-titleLeft">
+									<div>
+										<h2 class="s-titleDet">COMMENT AS {{username}}</h2>
+									</div>
+								</div>
+
+									<div class="row">
+									<form action="/car/comm" method="POST" id="comm">
+										
+									<textarea name="text" style="color: black" id="comm" placeholder="MESSAGE"></textarea>
+																		{%csrf_token%}
+									 <input type="hidden" name="user" value="{{user_id}}">
+									  <input type="hidden" name="car" value="{{car_id}}">
+									   <input type="hidden" name="type" value="{{status}}">
+									<button type="submit" class="btn m-btn" >SEND COMMENT<span class="fa fa-angle-right"></span></button>
+								</form>
+							</div>
+							</div>
+							{%else%}
+							<div class="b-article__main-add wow zoomInUp" data-wow-delay="0.5s">
+								<div class="s-lineDownLeft  s-titleLeft">
+									<div>
+										<h2 class="s-titleDet">Please Login To Post Comments</h2>
+									</div>
+								</div>					
+							</div>
+							{%endif%}
+
+
 							</div>
 						</div>
 						<div class="col-md-4 col-xs-12">
@@ -385,6 +436,8 @@
 									</div>
 									{%endfor%}
 								</div>
+
+								{% if username != null%}
 								<div class="b-detail__main-aside-about wow zoomInUp" data-wow-delay="0.5s">
 									<h2 class="s-titleDet">INQUIRE ABOUT THIS VEHICLE</h2>
 									<div class="b-detail__main-aside-about-call">
@@ -398,26 +451,21 @@
 									<div class="b-detail__main-aside-about-form">
 										<div class="b-detail__main-aside-about-form-links">
 											<a href="#" class="j-tab m-active s-lineDownCenter" data-to='#form1'>GENERAL INQUIRY</a>
-											<a href="#" class="j-tab" data-to='#form2'>SCHEDULE TEST DRIVE</a>
 										</div>
 										<form id="form1" action="/" method="post">
-											<input type="text" placeholder="YOUR NAME" value="" name="name" />
-											<input type="email" placeholder="EMAIL ADDRESS" value="" name="email" />
-											<input type="tel" placeholder="PHONE NO." value="" name="name" />
 											<textarea name="text" placeholder="message"></textarea>
 											<div><input type="checkbox" name="one" value="" /><label>Send me a copy of this message</label></div>
-											<div><input type="checkbox" name="two" value="" /><label>Send me a copy of this message</label></div>
-											<button type="submit" class="btn m-btn">SEND MESSAGE<span class="fa fa-angle-right"></span></button>
-										</form>
-										<form id="form2" action="/" method="post">
-											<input type="text" placeholder="YOUR NAME" value="" name="name" />
-											<textarea name="text" placeholder="message"></textarea>
-											<div><input type="checkbox" name="one" value="" /><label>Send me a copy of this message</label></div>
-											<div><input type="checkbox" name="two" value="" /><label>Send me a copy of this message</label></div>
 											<button type="submit" class="btn m-btn">SEND MESSAGE<span class="fa fa-angle-right"></span></button>
 										</form>
 									</div>
 								</div>
+								{%else%}
+								<div class="b-detail__main-aside-about wow zoomInUp" data-wow-delay="0.5s">
+									<h2 class="s-titleDet">Login Or Register Account To View Seller Information</h2>
+								</div>
+								{%endif%}
+
+
 								<div class="b-detail__main-aside-payment wow zoomInUp" data-wow-delay="0.5s">
 									<h2 class="s-titleDet">CAR PAYMENT CALCULATOR</h2>
 									<div class="b-detail__main-aside-payment-form">

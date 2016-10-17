@@ -17,10 +17,14 @@ import hashlib
 
 
 def req(request):
-		request.session['infomessage'] = "Please Login to View this page"
+		request.session['infomessage'] = "Please Login Here"
 		request.session['open'] = 'login'
+		request.session['redirect'] = request.META['HTTP_REFERER']
 		return HttpResponseRedirect("/home")
-
+def reg(request):
+		request.session['open'] = 'register'
+		request.session['redirect'] = request.META['HTTP_REFERER']
+		return HttpResponseRedirect("/home")
 def login(request):
 	email =  request.POST.get("email","")
 	password = hashlib.sha256(bytes(request.POST.get('password',''))).hexdigest() #hash function
@@ -48,7 +52,10 @@ def login(request):
 		return HttpResponseRedirect("/home")
 	request.session['id'] = _id  
 	request.session['vericode'] = vericode
-	return HttpResponseRedirect('/home')
+	url = request.session.get('redirect','')
+	request.session['redirect'] = ''
+	if(url == ''):return HttpResponseRedirect('/home')
+	return HttpResponseRedirect(url)
 
 def signup(request):
 	password = hashlib.sha256(bytes(request.POST.get('password',''))).hexdigest() #Hasing Password For Better Security
@@ -183,15 +190,58 @@ def logout(request):
 	request.session['vericode'] = ''
 	return HttpResponseRedirect('/home')
 
+def sold(request):
+	Car_data_old.objects.all().filter(user_id = request.session['id'] , car_id= request.GET.get('car_id',-1)).update(status = 'sold')
+	return HttpResponseRedirect("/auth/view?type=sell")
+
+def delete(request):
+	Car_data_old.objects.all().filter(user_id = request.session['id'] , car_id= request.GET.get('car_id',-1)).delete()
+	return HttpResponseRedirect("/auth/view?type=sell")
+
+
+def details(request):
+	user_id = request.session['id']
+	if(user_id == ''):return HttpResponseRedirect("/home")
+	data = User_Account.objects.all().filter(user_id = user_id)	
+	car = Car_data_old.objects.all().filter(user_id = user_id)
+	dat = {}
+	sell = 0
+	sold = 0
+	sell_l= []
+	sold_l = []
+	for c in car:
+		if(c.status == 'sell'):sell+=1;sell_l.append({"name" : (c.brand  + " "  + c.name)})
+		elif(c.status == 'sold'):sold+=1;sold_l.append({"name" : (c.brand  + " "  + c.name)})
+	dat['sold'] = sold
+	dat['sell'] = sell
+	dat['sold_l'] = sold_l
+	dat['sell_l'] = sell_l
+	dat['total'] = sell + sold
+	for i in data:
+		dat['name'] = i.name
+		dat['email'] = i.email
+		dat['phone'] = i.phone_no
+		dat['photo'] = i.photo
+		dat['vericode'] = i.vericode
+	return render(request,"userdet.html",dat)
+
+def changephoto(request):
+	return HttpResponseRedirect("/auth/details")
+
 def view(request):
 	try:
 		user_id = request.session['id']
 		if(user_id == '' ):return HttpResponseRedirect("/home")
 	except:
 		return HttpResponseRedirect("/home")
-	data = Car_data_old.objects.all().filter(user_id = user_id)
-	oldcar = {}
+	if(request.GET.get("type",'') == 'sell'):
+		data = Car_data_old.objects.all().filter(user_id = user_id , status = 'sell')
+	else:
+		data = Car_data_old.objects.all().filter(user_id = user_id , status = 'sold')
 	o = []
+	oldcar = {}
+	for n in User_Account.objects.all().filter(user_id = user_id):
+		user_name = n.name
 	for i in data:
 		oldcar['name'] = i.brand + " " + i.name
 		if(i.general_information == None):i.general_information = ""
@@ -203,6 +253,8 @@ def view(request):
 		oldcar['year'] = i.year
 		oldcar['pic'] = i.photolinks
 		oldcar['trans'] = i.transmission 
+		oldcar['sold'] = "/auth/sold?car_id=" + str(i.car_id)
+		oldcar['delete'] = "/auth/delete?car_id=" + str(i.car_id)
 		o.append(oldcar)
 		oldcar={}
-	return render(request,"usercar.html",{"car" : o , "len" : len(o)})
+	return render(request,"usercar.html",{"car" : o , "len" : len(o) , "name" : user_name})

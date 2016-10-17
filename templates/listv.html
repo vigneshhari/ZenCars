@@ -19,6 +19,82 @@
 		<link rel="alternate stylesheet" type="text/css" href="{%static 'assets/switcher/css/color5.css'%}" title="color5" media="all" />
 		<link rel="alternate stylesheet" type="text/css" href="{%static 'assets/switcher/css/color6.css'%}" title="color6" media="all" />
 
+
+
+
+        <script type="text/javascript">
+
+var regiondb = new Object()
+
+regiondb["Maserati"] = [{value:"Ghibli", text:"Ghibli"},{value:"Gran Cabrio", text:"Gran Cabrio"},{value:"Gran Turismo", text:"Gran Turismo"},{value:"Quattroporte", text:"Quattroporte"}];
+regiondb["Chevrolet"] = [{value:"Beat", text:"Beat"},{value:"Cruze", text:"Cruze"},{value:"Enjoy", text:"Enjoy"},{value:"Sail", text:"Sail"},{value:"Sail Hatchback", text:"Sail Hatchback"},{value:"Spark", text:"Spark"},{value:"Tavera", text:"Tavera"},{value:"Trailblazer", text:"Trailblazer"}];
+regiondb["Porsche"] = [{value:"911", text:"911"},{value:"Boxster", text:"Boxster"},{value:"Cayenne", text:"Cayenne"},{value:"Cayman", text:"Cayman"},{value:"Macan", text:"Macan"},{value:"Panamera", text:"Panamera"}];
+regiondb["Tata"] = [{value:"Aria", text:"Aria"},{value:"Bolt", text:"Bolt"},{value:"Indica eV2", text:"Indica eV2"},{value:"Indigo eCS", text:"Indigo eCS"},{value:"Nano", text:"Nano"},{value:"Safari", text:"Safari"},{value:"Safari Storme", text:"Safari Storme"},{value:"Sumo", text:"Sumo"},{value:"Tiago", text:"Tiago"},{value:"Xenon XT", text:"Xenon XT"},{value:"Zest", text:"Zest"}];
+regiondb["DC"] = [{value:"Avanti", text:"Avanti"}];
+regiondb["Maruti"] = [{value:"Alto 800", text:"Alto 800"},{value:"Alto K10", text:"Alto K10"},{value:"Baleno", text:"Baleno"},{value:"Celerio", text:"Celerio"},{value:"Ciaz", text:"Ciaz"},{value:"Eeco", text:"Eeco"},{value:"Ertiga", text:"Ertiga"},{value:"Gypsy", text:"Gypsy"},{value:"Omni", text:"Omni"},{value:"Ritz", text:"Ritz"},{value:"Swift", text:"Swift"},{value:"Swift Dzire", text:"Swift Dzire"},{value:"S-Cross", text:"S-Cross"},{value:"Vitara Brezza", text:"Vitara Brezza"},{value:"Wagon R", text:"Wagon R"},{value:"Wagon R Stingray", text:"Wagon R Stingray"}];
+regiondb["Mercedes-Benz"] = [{value:"A-Class", text:"A-Class"},{value:"AMG GT", text:"AMG GT"},{value:"B-Class", text:"B-Class"},{value:"CLA", text:"CLA"},{value:"CLS", text:"CLS"},{value:"E-Class", text:"E-Class"},{value:"G-Class", text:"G-Class"},{value:"GL-Class", text:"GL-Class"},{value:"GLA 45 AMG", text:"GLA 45 AMG"},{value:"GLA Class", text:"GLA Class"},{value:"GLC", text:"GLC"},{value:"GLE", text:"GLE"},{value:"GLS", text:"GLS"},{value:"M-Class", text:"M-Class"},{value:"C-Class", text:"C-Class"},{value:"S-Class", text:"S-Class"},{value:"SLC", text:"SLC"}];
+regiondb["Ford"] = [{value:"EcoSport", text:"EcoSport"},{value:"Endeavour", text:"Endeavour"},{value:"Figo", text:"Figo"},{value:"Aspire", text:"Aspire"},{value:"Mustang", text:"Mustang"}];
+regiondb["Rolls-Royce"] = [{value:"Dawn", text:"Dawn"},{value:"Ghost", text:"Ghost"},{value:"Phantom", text:"Phantom"},{value:"Wraith", text:"Wraith"}];
+regiondb["Isuzu"] = [{value:"D-Max V-Cross", text:"D-Max V-Cross"},{value:"MU 7", text:"MU 7"}];
+regiondb["Honda"] = [{value:"Amaze", text:"Amaze"},{value:"BRV", text:"BRV"},{value:"Brio", text:"Brio"},{value:"City", text:"City"},{value:"CR-V", text:"CR-V"},{value:"Jazz", text:"Jazz"},{value:"Mobilio", text:"Mobilio"}];
+regiondb["Hyundai"] = [{value:"Creta", text:"Creta"},{value:"Elantra", text:"Elantra"},{value:"EON", text:"EON"},{value:"Grand i10", text:"Grand i10"},{value:"i10", text:"i10"},{value:"Elite i20", text:"Elite i20"},{value:"i20 Active", text:"i20 Active"},{value:"Santa Fe", text:"Santa Fe"},{value:"Verna", text:"Verna"},{value:"Xcent", text:"Xcent"}];
+regiondb["Volkswagen"] = [{value:"Ameo", text:"Ameo"},{value:"Beetle", text:"Beetle"},{value:"CrossPolo", text:"CrossPolo"},{value:"Jetta", text:"Jetta"},{value:"Polo", text:"Polo"},{value:"Vento", text:"Vento"}];
+regiondb["Land Rover"] = [{value:"Discovery 4", text:"Discovery 4"},{value:"Discovery Sport", text:"Discovery Sport"},{value:"Range Rover", text:"Range Rover"},{value:"Range Rover Evoque", text:"Range Rover Evoque"},{value:"Range Rover Sport", text:"Range Rover Sport"}];
+regiondb["Datsun"] = [{value:"GO", text:"GO"},{value:"GO Plus", text:"GO Plus"},{value:"Redi GO", text:"Redi GO"}];
+regiondb["Mitsubishi"] = [{value:"Pajero Sport", text:"Pajero Sport"}];
+regiondb["BMW"] = [{value:"1 Series", text:"1 Series"},{value:"3 Series", text:"3 Series"},{value:"5 Series", text:"5 Series"},{value:"6 Series", text:"6 Series"},{value:"7 Series", text:"7 Series"},{value:"i8", text:"i8"},{value:"M Series", text:"M Series"},{value:"X1", text:"X1"},{value:"X3", text:"X3"},{value:"X5", text:"X5"},{value:"X6", text:"X6"},{value:"Z4", text:"Z4"}];
+regiondb["Fiat"] = [{value:"500", text:"500"},{value:"Abarth Avventura", text:"Abarth Avventura"},{value:"Avventura", text:"Avventura"},{value:"Avventura Urban Cross", text:"Avventura Urban Cross"},{value:"Punto EVO", text:"Punto EVO"},{value:"Linea", text:"Linea"},{value:"Linea Classic", text:"Linea Classic"},{value:"Abarth Punto", text:"Abarth Punto"},{value:"Punto Pure", text:"Punto Pure"}];
+regiondb["Lamborghini"] = [{value:"Aventador", text:"Aventador"},{value:"Huracan", text:"Huracan"}];
+regiondb["Jaguar"] = [{value:"F-Type", text:"F-Type"},{value:"XE", text:"XE"},{value:"XF", text:"XF"},{value:"XJ", text:"XJ"}];
+regiondb["Renault"] = [{value:"Duster", text:"Duster"},{value:"KWID", text:"KWID"},{value:"Lodgy", text:"Lodgy"},{value:"Pulse", text:"Pulse"},{value:"Scala", text:"Scala"}];
+regiondb["ICML"] = [{value:"Extreme", text:"Extreme"}];
+regiondb["Jeep"] = [{value:"Grand Cherokee", text:"Grand Cherokee"},{value:"Wrangler Unlimited", text:"Wrangler Unlimited"}];
+regiondb["Aston Martin"] = [{value:"DB11", text:"DB11"},{value:"Rapide", text:"Rapide"},{value:"Vanquish", text:"Vanquish"},{value:"Vantage", text:"Vantage"}];
+regiondb["Nissan"] = [{value:"Micra Active", text:"Micra Active"},{value:"Micra", text:"Micra"},{value:"Sunny", text:"Sunny"},{value:"Terrano", text:"Terrano"}];
+regiondb["Toyota"] = [{value:"Camry", text:"Camry"},{value:"Corolla Altis", text:"Corolla Altis"},{value:"Platinum Etios", text:"Platinum Etios"},{value:"Etios Cross", text:"Etios Cross"},{value:"Etios Liva", text:"Etios Liva"},{value:"Fortuner", text:"Fortuner"},{value:"Innova", text:"Innova"},{value:"Innova Crysta", text:"Innova Crysta"},{value:"Land Cruiser", text:"Land Cruiser"},{value:"Land Cruiser Prado", text:"Land Cruiser Prado"},{value:"Prius", text:"Prius"}];
+regiondb["Mahindra"] = [{value:"Bolero", text:"Bolero"},{value:"E Verito", text:"E Verito"},{value:"e2o", text:"e2o"},{value:"KUV100", text:"KUV100"},{value:"NuvoSport", text:"NuvoSport"},{value:"Quanto", text:"Quanto"},{value:"Scorpio", text:"Scorpio"},{value:"Supro", text:"Supro"},{value:"Thar", text:"Thar"},{value:"TUV 300", text:"TUV 300"},{value:"Verito", text:"Verito"},{value:"Verito Vibe", text:"Verito Vibe"},{value:"XUV500", text:"XUV500"},{value:"Xylo", text:"Xylo"}];
+regiondb["Volvo"] = [{value:"S80", text:"S80"},{value:"S60 Cross Country", text:"S60 Cross Country"},{value:"S60", text:"S60"},{value:"V40 Cross Country", text:"V40 Cross Country"},{value:"V40", text:"V40"},{value:"XC90", text:"XC90"},{value:"XC60", text:"XC60"}];
+regiondb["Ferrari"] = [{value:"458 Speciale", text:"458 Speciale"},{value:"488", text:"488"},{value:"California T", text:"California T"},{value:"F12berlinetta", text:"F12berlinetta"},{value:"FF", text:"FF"}];
+regiondb["Mahindra Ssangyong"] = [{value:"Rexton", text:"Rexton"}];
+regiondb["Mini"] = [{value:"3 DOOR", text:"3 DOOR"},{value:"5 DOOR", text:"5 DOOR"},{value:"Cooper Convertible", text:"Cooper Convertible"},{value:"Countryman", text:"Countryman"}];
+regiondb["Force"] = [{value:"Gurkha", text:"Gurkha"},{value:"One SUV", text:"One SUV"}];
+regiondb["Bentley"] = [{value:"Bentayga", text:"Bentayga"},{value:"Continental", text:"Continental"},{value:"Flying Spur", text:"Flying Spur"},{value:"Mulsanne", text:"Mulsanne"}];
+regiondb["Skoda"] = [{value:"Octavia", text:"Octavia"},{value:"Rapid", text:"Rapid"},{value:"Superb", text:"Superb"},{value:"Yeti", text:"Yeti"}];
+regiondb["Conquest"] = [{value:"Evade", text:"Evade"}];
+regiondb["Premier"] = [{value:"Rio", text:"Rio"}];
+regiondb["Bugatti"] = [{value:"Veyron", text:"Veyron"}];
+regiondb["Audi"] = [{value:"A3", text:"A3"},{value:"A3 cabriolet", text:"A3 cabriolet"},{value:"A4", text:"A4"},{value:"A6", text:"A6"},{value:"A8", text:"A8"},{value:"Q3", text:"Q3"},{value:"Q5", text:"Q5"},{value:"Q7", text:"Q7"},{value:"R8", text:"R8"},{value:"RS6 Avant", text:"RS6 Avant"},{value:"RS7", text:"RS7"},{value:"S5", text:"S5"},{value:"TT", text:"TT"}];
+
+
+function setCities(chooser) {
+    var newElem;
+    var where = (navigator.appName == "Microsoft Internet Explorer") ? -1 : null;
+    var cityChooser = chooser.form.elements["name"];
+    while (cityChooser.options.length) {
+        cityChooser.remove(0);
+    }
+    var choice = chooser.options[chooser.selectedIndex].value;
+    var db = regiondb[choice];
+    newElem = document.createElement("option");
+	newElem.text = "Any Model";
+    newElem.value = "Any Model";
+    cityChooser.add(newElem, where);
+    if (choice != "") {
+        for (var i = 0; i < db.length; i++) {
+            newElem = document.createElement("option");
+            newElem.text = db[i].text;
+            newElem.value = db[i].value;
+            cityChooser.add(newElem, where);
+        }
+    }
+    
+}
+
+
+</script>
+
+
+
 		<!--[if lt IE 9]>
 		<script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 		<script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -259,11 +335,8 @@
 						{% if len > 0 %}
 						<div class="b-items__pagination wow zoomInUp" data-wow-delay="0.5s">
 							<div class="b-items__pagination-main">
-								<a data-toggle="modal" data-target="#myModal" href="#" class="m-left"><span class="fa fa-angle-left"></span></a>
-								<span class="m-active"><a href="#">1</a></span>
-								<span><a href="#">2</a></span>
-								<span><a href="#">3</a></span>
-								<span><a href="#">4</a></span>
+								<a href='javascript:;' onclick="getSearchParameters();" class="m-left"><span class="fa fa-angle-left"></span></a>
+								&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 								<a href="#" class="m-right"><span class="fa fa-angle-right"></span></a>    
 							</div>
 						</div>
@@ -276,26 +349,75 @@
 						{%endif%}
 					</div>
 
+
 					<div class="col-lg-3 col-sm-4 col-xs-12">
 						<aside class="b-items__aside">
 							<h2 class="s-title wow zoomInUp" data-wow-delay="0.5s">REFINE YOUR SEARCH</h2>
 							<div class="b-items__aside-main wow zoomInUp" data-wow-delay="0.5s">
-								<form>
+								<form action="" action="/car/search" method="GET">
+								<input type="hidden" id="brand" name="brand" >
+								<input type="hidden" id="model" name="model" >
+								<input type="hidden" id="min" name="min" >
+								<input type="hidden" id="max" name="min" >
+								<input type="hidden" id="type" name="type" >
+								<input type="hidden" id="status" name="status">
+								<input type="hidden" id="page" name="page" >
+
+								<input type="submit" id="np" style="display: none" name="">
+								</form>
 									<div class="b-items__aside-main-body">
 										<div class="b-items__aside-main-body-item">
 											<label>SELECT A MAKE</label>
 											<div>
-												<select name="select1" class="m-select">
-													<option value="" selected="">Any Make</option>
-												</select>
+												<select name="brand" id="car" class="m-select" onclick="setCities(this)">
+													<option value="Any Make" selected="selected">Any Make</option>
+													<option value="Aston Martin">Aston Martin</option>
+													<option value="Audi">Audi</option>
+													<option value="BMW">BMW</option>
+													<option value="Bentley">Bentley</option>
+													<option value="Bugatti">Bugatti</option>
+													<option value="Chevrolet">Chevrolet</option>
+													<option value="Conquest">Conquest</option>
+													<option value="DC">DC</option>
+													<option value="Datsun">Datsun</option>
+													<option value="Ferrari">Ferrari</option>
+													<option value="Fiat">Fiat</option>
+													<option value="Force">Force</option>
+													<option value="Ford">Ford</option>
+													<option value="Honda">Honda</option>
+													<option value="Hyundai">Hyundai</option>
+													<option value="ICML">ICML</option>
+													<option value="Isuzu">Isuzu</option>
+													<option value="Jaguar">Jaguar</option>
+													<option value="Jeep">Jeep</option>
+													<option value="Lamborghini">Lamborghini</option>
+													<option value="Land Rover">Land Rover</option>
+													<option value="Mahindra">Mahindra</option>
+													<option value="Mahindra Ssangyong">Mahindra Ssangyong</option>
+													<option value="Maruti">Maruti</option>
+													<option value="Maserati">Maserati</option>
+													<option value="Mercedes-Benz">Mercedes-Benz</option>
+													<option value="Mini">Mini</option>
+													<option value="Mitsubishi">Mitsubishi</option>
+													<option value="Nissan">Nissan</option>
+													<option value="Porsche">Porsche</option>
+													<option value="Premier">Premier</option>
+													<option value="Renault">Renault</option>
+													<option value="Rolls-Royce">Rolls-Royce</option>
+													<option value="Skoda">Skoda</option>
+													<option value="Tata">Tata</option>
+													<option value="Toyota">Toyota</option>
+													<option value="Volkswagen">Volkswagen</option>
+													<option value="Volvo">Volvo</option>
+										</select>
 												<span class="fa fa-caret-down"></span>
 											</div>
 										</div>
 										<div class="b-items__aside-main-body-item">
 											<label>SELECT A MODEL</label>
 											<div>
-												<select name="select1" class="m-select">
-													<option value="" selected="">Any Make</option>
+												<select name="model" class="m-select" id="name">
+											<option value="Any Model" selected="">Any Model</option>
 												</select>
 												<span class="fa fa-caret-down"></span>
 											</div>
@@ -303,14 +425,20 @@
 										<div class="b-items__aside-main-body-item">
 											<label>PRICE RANGE</label>
 											<div class="slider"></div>
-											<input type="hidden" name="min" value="100" class="j-min" />
-											<input type="hidden" name="max" value="1000" class="j-max" />
+											<input type="hidden" name="min" value="10" class="j-min" />
+											<input type="hidden" name="max" value="50" class="j-max" />
 										</div>
 										<div class="b-items__aside-main-body-item">
 											<label>VEHICLE TYPE</label>
 											<div>
-												<select name="select1" class="m-select">
-													<option value="" selected="">Any Type</option>
+											<select class="m-select" name="type">
+													<option>Any</option>
+													<option>Pickup</option>
+													<option>SUV</option>
+													<option>Coupe</option>
+													<option>Convertible</option>
+													<option>Sedan</option>
+													<option>Hatchback</option>
 												</select>
 												<span class="fa fa-caret-down"></span>
 											</div>
@@ -318,25 +446,19 @@
 										<div class="b-items__aside-main-body-item">
 											<label>VEHICLE STATUS</label>
 											<div>
-												<select name="select1" class="m-select">
-													<option value="" selected="">Any Status</option>
-												</select>
-												<span class="fa fa-caret-down"></span>
-											</div>
-										</div>
-										<div class="b-items__aside-main-body-item">
-											<label>FUEL TYPE</label>
-											<div>
-												<select name="select1" class="m-select">
-													<option value="" selected="">All Fuel Types</option>
-												</select>
+												<select name="status" class ="m-select">
+											<option value="Any">Any</option>
+											<option value="New">New</option>
+											<option value="Used">Used</option>
+										</select>
 												<span class="fa fa-caret-down"></span>
 											</div>
 										</div>
 									</div>
 									<footer class="b-items__aside-main-footer">
 										<button type="submit" class="btn m-btn">FILTER VEHICLES<span class="fa fa-angle-right"></span></button><br />
-										<a href="">RESET ALL FILTERS</a>
+										<input type="reset" id="clear" style="display:none" name="">
+										<a href='javascript:;' onclick='document.getElementById("clear").click();'>RESET ALL FILTERS</a>
 									</footer>
 								</form>
 							</div>

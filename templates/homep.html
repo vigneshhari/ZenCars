@@ -412,7 +412,8 @@ function setCities(chooser) {
 										<a class="dropdown-toggle" data-toggle='dropdown' href="#">Account<span class="fa fa-caret-down"></span></a>
 										<ul class="dropdown-menu h-nav">
 											<li><a href="/auth/details">Details</a></li>
-											<li><a href="/auth/view">View Cars</a></li>
+											<li><a href="/auth/view?type=sell">View Listed Cars</a></li>
+											<li><a href="/auth/view?type=sold">View Sold Cars</a></li>
 											<li><a href="/car/add">Add Car</a></li>
 										</ul>
 									</li>
@@ -762,46 +763,45 @@ function setCities(chooser) {
 								<div class="m-firstSelects">
 									<div class="col-xs-4">
 										<select name="brand" id="car" onclick="setCities(this)">
-													<option value="Any Make">Any Make</option>
-													<option value="Maserati">Maserati</option>
+													<option value="Any Make" selected="selected">Any Make</option>
+													<option value="Aston Martin">Aston Martin</option>
+													<option value="Audi">Audi</option>
+													<option value="BMW">BMW</option>
+													<option value="Bentley">Bentley</option>
+													<option value="Bugatti">Bugatti</option>
 													<option value="Chevrolet">Chevrolet</option>
-													<option value="Porsche">Porsche</option>
-													<option value="Tata">Tata</option>
+													<option value="Conquest">Conquest</option>
 													<option value="DC">DC</option>
-													<option value="Maruti">Maruti</option>
-													<option value="Mercedes-Benz">Mercedes-Benz</option>
+													<option value="Datsun">Datsun</option>
+													<option value="Ferrari">Ferrari</option>
+													<option value="Fiat">Fiat</option>
+													<option value="Force">Force</option>
 													<option value="Ford">Ford</option>
-													<option value="Rolls-Royce">Rolls-Royce</option>
-													<option value="Isuzu">Isuzu</option>
 													<option value="Honda">Honda</option>
 													<option value="Hyundai">Hyundai</option>
-													<option value="Volkswagen">Volkswagen</option>
-													<option value="Land Rover">Land Rover</option>
-													<option value="Datsun">Datsun</option>
-													<option value="Mitsubishi">Mitsubishi</option>
-													<option value="BMW">BMW</option>
-													<option value="Fiat">Fiat</option>
-													<option value="Lamborghini">Lamborghini</option>
-													<option value="Jaguar">Jaguar</option>
-													<option value="Renault">Renault</option>
 													<option value="ICML">ICML</option>
+													<option value="Isuzu">Isuzu</option>
+													<option value="Jaguar">Jaguar</option>
 													<option value="Jeep">Jeep</option>
-													<option value="Aston Martin">Aston Martin</option>
-													<option value="Nissan">Nissan</option>
-													<option value="Toyota">Toyota</option>
+													<option value="Lamborghini">Lamborghini</option>
+													<option value="Land Rover">Land Rover</option>
 													<option value="Mahindra">Mahindra</option>
-													<option value="Volvo">Volvo</option>
-													<option value="Ferrari">Ferrari</option>
 													<option value="Mahindra Ssangyong">Mahindra Ssangyong</option>
+													<option value="Maruti">Maruti</option>
+													<option value="Maserati">Maserati</option>
+													<option value="Mercedes-Benz">Mercedes-Benz</option>
 													<option value="Mini">Mini</option>
-													<option value="Force">Force</option>
-													<option value="Bentley">Bentley</option>
-													<option value="Skoda">Skoda</option>
-													<option value="Conquest">Conquest</option>
+													<option value="Mitsubishi">Mitsubishi</option>
+													<option value="Nissan">Nissan</option>
+													<option value="Porsche">Porsche</option>
 													<option value="Premier">Premier</option>
-													<option value="Bugatti">Bugatti</option>
-													<option value="Audi">Audi</option>
-
+													<option value="Renault">Renault</option>
+													<option value="Rolls-Royce">Rolls-Royce</option>
+													<option value="Skoda">Skoda</option>
+													<option value="Tata">Tata</option>
+													<option value="Toyota">Toyota</option>
+													<option value="Volkswagen">Volkswagen</option>
+													<option value="Volvo">Volvo</option>
 										</select>
 										<span class="fa fa-caret-down"></span>
 									</div>

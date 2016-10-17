@@ -10,7 +10,7 @@ class Car_data_new(models.Model):
 	price = models.CharField(max_length = 50) # its a charecter because its a range of values most commonly :)
 	features = models.TextField()
 	milege = models.CharField(max_length=10) # Vehicle Milege ** Seperatly Stored For Easy Acess
-	Body_type = models.CharField(max_length=20) #Sedan ,Suv ,Muv Etc ..
+	body_type = models.CharField(max_length=20) #Sedan ,Suv ,Muv Etc ..
 	specifications = models.TextField()
 	general_information = models.TextField()
 	dealer_number = models.IntegerField()
@@ -24,7 +24,7 @@ class Car_data_old(models.Model):
 	brand = models.CharField(max_length=100)
 	name = models.CharField(max_length = 100) # Name of the Car
 	year = models.IntegerField(null=True)
-	photolinks = models.FileField(upload_to = 'carsell/', default = 'carsell/None/no-img.jpg')
+	photolinks = models.FileField(upload_to = 'carsell/', default = 'carsell/nocar.jpg')
 	videolink = models.CharField(max_length=100 , null=True)
 	price = models.CharField(max_length = 50, null=True) # its a charecter because its a range of values most commonly :)
 	features = models.TextField(null=True)
@@ -57,9 +57,9 @@ class Varient_data(models.Model):
 
 class Car_review(models.Model):
 	car_id = models.IntegerField()
+	car_type = models.CharField(max_length = 10)
 	content = models.TextField()
 	user_id = models.IntegerField()
-	user_name = models.CharField(max_length=500)
 	date = models.DateTimeField()
 
 	
