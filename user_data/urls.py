@@ -13,4 +13,6 @@ urlpatterns = [
     url(r'sold' , views.sold , name='sold'),
     url(r'delete' , views.delete , name='delete'),
     url(r'details' , views.details , name='details'),
+    url(r'photo' , views.photo , name='photo'),
+
     ]

@@ -223,7 +223,12 @@ def details(request):
 		dat['vericode'] = i.vericode
 	return render(request,"userdet.html",dat)
 
-def changephoto(request):
+def photo(request):
+	user_id = request.session.get("id",'')
+	if(user_id == ''):HttpResponseRedirect("/home")
+	temp = User_Account.objects.get(user_id = user_id)
+	temp.photo = request.FILES['photolinks']
+	temp.save()
 	return HttpResponseRedirect("/auth/details")
 
 def view(request):
