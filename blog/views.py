@@ -1,11 +1,40 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from .models import content,comment
+from user_data.models import User_Account
+import datetime
+
 # Create your views here.
 
 def blog(request):
-
-	return render(request,"blog.html")
+	id = request.GET.get('id','')
+	if(id == ''):return HttpResponseRedirect('/home')
+	data = content.objects.all().filter(blog_id=id)
+	user_id = request.session.get('id','')
+	blog = {}
+	pic = []
+	temp = 0;
+	for i in data:
+		for img in i.photo.split(","):
+			pic.append({"link" : img , "ind" : temp});temp+=1
+		blog['title'] = i.title
+		blog['photo'] = pic
+		blog['author'] = i.author
+		blog['date'] = i.date.date()
+		blog['content'] = i.content
+		blog['category'] = i.category
+	review = comment.objects.all().filter(blog_id = id )
+	re = []
+	for r in review:
+		for jj in User_Account.objects.all().filter(user_id = r.user_id):
+			re.append({'name' : jj.name , 'content' : r.content ,'photo' : jj.photo})
+	blog['rev'] = re
+	blog['user_id'] = user_id
+	for u in User_Account.objects.all().filter(user_id = user_id):
+		blog['username'] = u.name 
+	blog['revlen'] = len(re)
+	blog['blog_id'] = id
+	return render(request,"blog.html" , blog)
 
 def list(request):
 	data = {}
@@ -27,4 +56,5 @@ def list(request):
 	return render(request,"bloglist.html",data)
 
 def comm(request):
-	return 0 ;
+	comment(blog_id = request.POST.get('id','') , user_id = request.POST.get('user','') , content = request.POST.get('text') ,date = datetime.datetime.now() ).save()
+	return HttpResponseRedirect(request.META['HTTP_REFERER'])

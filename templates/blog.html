@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html>
-	<head>
+<head>
+		{% load static %}
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<title>Auto Club</title>
+		<title>Zen Cars</title>
 
-		<link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
+		<link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.png'%}" />
 
-		<link href="css/master.css" rel="stylesheet">
+		<link href="{% static 'css/master.css' %}" rel="stylesheet">
 
 		<!-- SWITCHER -->
-		<link rel="stylesheet" id="switcher-css" type="text/css" href="assets/switcher/css/switcher.css" media="all" />
-		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/color1.css" title="color1" media="all" data-default-color="true" />
-		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/color2.css" title="color2" media="all" />
-		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/color3.css" title="color3" media="all" />
-		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/color4.css" title="color4" media="all" />
-		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/color5.css" title="color5" media="all" />
-		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/color6.css" title="color6" media="all" />
+		<link rel="stylesheet" id="switcher-css" type="text/css" href="{%static 'assets/switcher/css/switcher.css' %}" media="all" />
+		<link rel="alternate stylesheet" type="text/css" href="{%static 'assets/switcher/css/color1.css' %}" title="color1" media="all" data-default-color="true" />
+		<link rel="alternate stylesheet" type="text/css" href="{%static 'assets/switcher/css/color2.css' %}" title="color2" media="all" />
+		<link rel="alternate stylesheet" type="text/css" href="{%static 'assets/switcher/css/color3.css'%}" title="color3" media="all" />
+		<link rel="alternate stylesheet" type="text/css" href="{%static 'assets/switcher/css/color4.css'%}" title="color4" media="all" />
+		<link rel="alternate stylesheet" type="text/css" href="{%static 'assets/switcher/css/color5.css'%}" title="color5" media="all" />
+		<link rel="alternate stylesheet" type="text/css" href="{%static 'assets/switcher/css/color6.css'%}" title="color6" media="all" />
 
 		<!--[if lt IE 9]>
 		<script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -181,233 +182,122 @@
 											<div class="b-blog__posts-one-author-img">
 
 											</div>
-											<div class="b-blog__posts-one-share s-lineDownCenter">SHARE THIS</div>
-											<div class="b-blog__posts-one-social">
-												<div>
-													<a href="#"><span class="fa fa-google-plus-square "></span></a>
-													<a href="#"><span class="fa  fa-facebook-square"></span></a>
-												</div>
-												<div>
-													<a href="#"><span class="fa fa-twitter-square "></span></a>
-													<a href="#"><span class="fa fa-pinterest-square"></span></a>
-												</div>
-											</div>
+
 										</div>
 									</div>
 									<div class="col-sm-11 col-xs-10">
 										<div class="b-blog__posts-one-body">
 											<header class="b-blog__posts-one-body-head wow zoomInUp" data-wow-delay="0.5s">
-												<h2 class="s-titleDet">Redesigned 2016 Nissan Maxima Introduced</h2>
+												<h2 class="s-titleDet">{{title}}</h2>
 												<div class="b-blog__posts-one-body-head-notes">
-													<span class="b-blog__posts-one-body-head-notes-note"><span class="fa fa-user"></span>Our Admin</span>
-													<span class="b-blog__posts-one-body-head-notes-note"><span class="fa fa-calendar-o"></span>20th May 2015</span>
-													<span class="b-blog__posts-one-body-head-notes-note"><span class="fa fa-comment"></span>5 Comments</span>
-													<span class="b-blog__posts-one-body-head-notes-note"><span class="fa fa-pencil"></span>AutoMarket, Tips &amp; Advice</span>
+													<span class="b-blog__posts-one-body-head-notes-note"><span class="fa fa-user"></span>{{author}}</span>
+													<span class="b-blog__posts-one-body-head-notes-note"><span class="fa fa-calendar-o"></span>{{date}}</span>
+													<span class="b-blog__posts-one-body-head-notes-note"><span class="fa fa-pencil"></span>{{category}}</span>
 												</div>
 											</header>
 											<div class="b-blog__posts-one-body-main wow zoomInUp" data-wow-delay="0.5s">
 												<div class="b-blog__posts-one-body-main-img">
 													<ul class="bxslider enable-bx-slider" data-pager-custom="#bx-pager" data-mode="fade" data-pager-slide="false" data-mode-pager="horizontal" data-pager-qty="0">
-														<li><img class="img-responsive" src="media/750x300/blogBig1.jpg" alt="jaguar" /></li>
-														<li><img class="img-responsive" src="media/750x300/blogBig2.jpg" alt="jaguar" /></li>
-														<li><img class="img-responsive" src="media/750x300/blogBig3.jpg" alt="jaguar" /></li>
+														{%for i in photo%}
+														<li><img class="img-responsive" src="{{i.link}}" alt="jaguar" /></li>
+													{%endfor%}
 													</ul>
 													<div class="b-blog__posts-one-body-main-img-small" id="bx-pager">
-														<a href="#" data-slide-index="0"><img src="media/90x65/smallBlog1.jpg" alt="car" /></a>
-														<a href="#" data-slide-index="1"><img src="media/90x65/smallBlog2.jpg" alt="car" /></a>
-														<a href="#" data-slide-index="2"><img src="media/90x65/smallBlog3.jpg" alt="car" /></a>
+													{%for i in photo%}
+														<a href="#" data-slide-index="{{i.ind}}"><img src="{{i.link}}" style="max-height: 90px;max-width: 65px" alt="car" /></a>
+													{%endfor%}
 													</div>
 												</div>
-												<p>Et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo con equat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaec cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque <a href="#">laudantium totam rem aperiam, eaque ipsa</a> quae ab illo inventore veritatis quas architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. </p>
-												<blockquote>
-													Curabitur libero. Donec facilisis velit eu est. Phasellus cons quat. Aenean vitae quam. Vivamus nunc. Nunc conseq usemd veld metus imperdiet lacinia. In viverra dolor non justo. Proin molest erat inder rhoncus posuere de nibh quam  onsectet uer lectus acwl vulputate ligula lorem dolor. Donec nunc. Suspendisse potent.
-												</blockquote>
-												<p>Curabitur libero. Donec facilisis velit eu est. Phasellus cons quat. Aenean vitae quam. Vivamus etdu nunc. Nunc conseq sem velde metus imperdiet lacinia. Cras ornare pretium tortor.<a href="#">Donec sed augue sed nunc rutrum egestas.</a> Bulum ante ipsum mis in faucibus orci luctus et ultrices posuere.</p>
-											</div>
-											<div class="b-blog__posts-one-body-why wow zoomInUp" data-wow-delay="0.5s">
-												<div class="s-lineDownLeft  s-titleLeft">
-													<div>
-														<h2 class="s-titleDet">WHY NISSAN maxima is top the line</h2>
-													</div>
-												</div>
-												<div class="clearfix"></div>
-												<p>Curabitur libero. Donec facilisis velit eu est. Phasellus cons quat. Aenean vitae quam. Vivamus etdug nunc. Nunc conseq sem velde metus imperdiet lacinia. Cras ornare pretium tortor. Donec sed augue sed nunc rutrum egestas. Bulum ante ipsum mis in faucibus orci luctus et ultrices posuere.</p>
-												<ul class="s-list">
-													<li><span class="fa fa-check"></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor </li>
-													<li><span class="fa fa-check"></span>ncididunt ut labore et dolore magna aliqua. Ut enim ad minim </li>
-													<li><span class="fa fa-check"></span>Veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea  </li>
-													<li><span class="fa fa-check"></span>Commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse Billum </li>
-													<li><span class="fa fa-check"></span>dolore eu fugiat nulla pariatur. Excepteur sint occaecat  </li>
-													<li><span class="fa fa-check"></span>Mupidatat non proident sunt in culpa qui officia deserun </li>
-												</ul>
-												<div class="row">
-													<div class="col-sm-6 col-xs-12">
-														<img src="media/articles/article.jpg" class="img-responsive"  alt="nissan"/>
-													</div>
-													<div class="col-sm-6 col-xs-12">
-														<p class="m-smallMargin">Lorem ipsum dolor sit amet, consectetur adipisic aing elit sed do eiusmod tempor incididunt ut labore etern dolore magna aliqua. Ut enim ad minim veniam, quis nost ruder exercitation ullamco laboris nisi ut aliquip ex commod oil consequat. Duis aute irure do reprehenderit ind voluptat velit esse cillum dolore fugiat nulla pariatur. </p>
-														<p>Excepteur sint occaecat cupidatat non proident sunter in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
-													</div>
-												</div>
-												<p>Totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo en
-													ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magn dolores eos qu rat voluptatem
-													sequi nesciunt. Neque porro quisquam est qui dolorem ipsum quia dolor sit amet consectet derur adipisci velit sed quia non
-													numquam eius modi tempora incidunt ut labore et dolore magnam.</p>
-											</div>
-											<div class="b-blog__posts-one-body-tags wow zoomInUp" data-wow-delay="0.5s">
-												<span class="fa fa-tags"></span>
-												TAGS:
-												<a href="#">bmw</a>
-												<a href="#">comparison</a>
-												<a href="#">comparison test</a>
-												<a href="#">coupe</a>
-												<a href="#">f-type</a>
-												<a href="#">jaguar</a>
-												<a href="#">m4</a>
-												<a href="#">slideshow</a>
+												{{content | linebreaks }}
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 							<div class="b-article__main-related s-shadow">
-								<div class="s-lineDownLeft  s-titleLeft">
-									<div>
-										<h2 class="s-titleDet wow zoomInUp" data-wow-delay="0.5s">More Related Articles</h2>
-									</div>
-								</div>
-								<div class="clearfix"></div>
-								<div class="row">
-									<div class="col-sm-6 col-xs-12">
-										<div class="b-article__main-related-item wow zoomInUp" data-wow-delay="0.5s">
-											<div class="row m-smallPadding">
-												<div class="col-xs-4">
-													<img class="center-block img-responsive" src="media/100x80/related1.jpg" alt="related" />       
-												</div>
-												<div class="col-xs-8">
-													<h5><a href="article.html">2015 Jaguar F-Type Coupe in the Spanish Pyrenees</a></h5>  
-													<div class="b-blog__posts-one-body-head-notes">
-														<span class="b-blog__posts-one-body-head-notes-note"><span class="fa fa-user"></span>Our Admin</span>
-														<span class="b-blog__posts-one-body-head-notes-note"><span class="fa fa-calendar-o"></span>20th May 2015</span>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-6 col-xs-12">
-										<div class="b-article__main-related-item wow zoomInUp" data-wow-delay="0.5s">
-											<div class="row m-smallPadding">
-												<div class="col-xs-4">
-													<img class="center-block img-responsive" src="media/100x80/related2.jpg" alt="related" />       
-												</div>
-												<div class="col-xs-8">
-													<h5><a href="article.html">Used 2008 to 2014 Mercedes-Benz C-Class Review</a></h5>  
-													<div class="b-blog__posts-one-body-head-notes">
-														<span class="b-blog__posts-one-body-head-notes-note"><span class="fa fa-user"></span>Our Admin</span>
-														<span class="b-blog__posts-one-body-head-notes-note"><span class="fa fa-calendar-o"></span>20th May 2015</span>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>  
+								
 							</div>
 							<div class="b-article__main-author wow zoomInUp" data-wow-delay="0.5s">
 								<div class="row">
-									<div class="col-xs-2 pull-right">
-										<div class="b-blog__posts-one-author-img pull-right"></div>
-									</div>
-									<div class="col-xs-10 pull-right">
-										<h3><span>AUTHOR: </span> JOHN SMITH</h3>
+
+										<h3><span>AUTHOR: </span> {{author}}</h3>
 										<div class="b-article__main-author-social">
 											<a href="#" class=""><span class="fa fa-facebook"></span></a>
 											<a href="#" class=""><span class="fa fa-twitter"></span></a>
 											<a href='#' class=""><span class="fa fa-google-plus"></span></a>
 										</div>
-										<div class="clearfix"></div>
-										<p>Totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. 
-											Neen ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntu mag dolores eo quv
-											ol up tatem sequi nesciunt. Neque porro quisquam est qui dolorem ipsum quia dolor.</p>
-									</div>
 								</div>
 							</div>
 							
 
 							<div class="b-article__main-comments">
+								<div class=" wow zoomInUp" data-wow-delay="0.5s">
+								{%if revlen == 0%}
 								<div class="s-lineDownLeft  s-titleLeft">
-									<div class=" wow zoomInUp" data-wow-delay="0.5s">
+										<h2 class="s-titleDet">No Comments Avaliable. Be The First To Comment</h2>
+									</div>
+								{%else%}
+								<div class="s-lineDownLeft  s-titleLeft">
 										<h2 class="s-titleDet">COMMENTS</h2>
 									</div>
+								{%endif%}
 								</div>
 								<div class="clearfix"></div>
 								<div class="row">
+									
+								{%for e in rev%}
 									<div class="col-xs-12">
 										<div class="b-article__main-comments-one wow zoomInUp" data-wow-delay="0.5s">
 											<div class="b-article__main-comments-one-person">
-												<div class="b-blog__posts-one-author-img"></div>
-											</div>
+											  <img src="{{e.photo.url}}" class="img-responsive img-thumbnail" style ="max-height:125px;width: 80px;height: auto;"  alt="{{username}}" width="304" height="236"> 						
+											 </div>
 											<div class="b-article__main-comments-one-text">
 												<header class="b-article__main-comments-one-text-head">
-													<h6>William Shane</h6>
-													<div class="b-article__main-comments-one-text-head-date">
-														<span>30 MAY 2015</span>
-														<span>Posted at 12:25 AM</span>
-													</div>
-													<a class="b-article__main-comments-one-text-head-answer  pull-right" href="#"><span class="fa fa-long-arrow-left"></span></a>
+													<h6>{{e.name}}</h6>
 												</header>
 												<p>
-													In eget dolor. Lorem ipsum dolor sit amet consectetuer adipiscing elit. Ut ornare cursus nibh. Sed lorem volutpat purus scel erisque dapibus. Etiam adipiscing ante nec nibh. In in felis in metus mollis blandit.
+													{{e.content}}
 												</p>
 											</div>
 										</div>
 									</div>
-									<div class="col-xs-12">
-										<div class="b-article__main-comments-one m-second wow zoomInUp" data-wow-delay="0.5s">
-											<div class="b-article__main-comments-one-person">
-												<div class="b-blog__posts-one-author-img m-woomen"></div>
-											</div>
-											<div class="b-article__main-comments-one-text">
-												<header class="b-article__main-comments-one-text-head">
-													<h6>Martina Kathrine</h6>
-													<div class="b-article__main-comments-one-text-head-date">
-														<span>30 MAY 2015</span>
-														<span>Posted at 12:25 AM</span>
-													</div>
-													<a class="b-article__main-comments-one-text-head-answer  pull-right" href="#"><span class="fa fa-long-arrow-left"></span></a>
-												</header>
-												<p>
-													In eget dolor. Lorem ipsum dolor sit amet consectetuer adipiscing elit. Ut ornare cursus nibh. Sed lorem volutpat purus scel erisque dapibus. Etiam adipiscing ante nec nibh. In in felis in metus mollis blandit.
-												</p>
-											</div>
-										</div>
-									</div>
+									{% endfor %}
 								</div>
 							</div>
+							
+							{% if user_id > 0 %}
 							<div class="b-article__main-add wow zoomInUp" data-wow-delay="0.5s">
 								<div class="s-lineDownLeft  s-titleLeft">
 									<div>
-										<h2 class="s-titleDet">ADD A REPLY</h2>
+										<h2 class="s-titleDet">COMMENT AS {{username}}</h2>
 									</div>
 								</div>
-								<div class="clearfix"></div>
-								<form action="/" method="POST">
+
 									<div class="row">
-										<div class="col-xs-4">
-											<input placeholder="YOUR NAME" type="text" name="name" />
-										</div>
-										<div class="col-xs-4">
-											<input placeholder="EMAIL ADDRESS" type="text" name="email" />
-										</div>
-										<div class="col-xs-4">
-											<input placeholder="WEBSITE" type="text" name="website" />
-										</div>
-									</div>
-									<textarea name="text" placeholder="MESSAGE"></textarea>
-									<button type="submit" class="btn m-btn">SEND COMMENT<span class="fa fa-angle-right"></span></button>
+									<form action="/blog/comm" method="POST" id="comm">
+										
+									<textarea name="text" style="color: black" id="comm" placeholder="MESSAGE"></textarea>
+																		{%csrf_token%}
+									 <input type="hidden" name="user" value="{{user_id}}">
+									  <input type="hidden" name="id" value="{{blog_id}}">
+									<button type="submit" class="btn m-btn" >SEND COMMENT<span class="fa fa-angle-right"></span></button>
 								</form>
 							</div>
+							</div>
+							{%else%}
+							<div class="b-article__main-add wow zoomInUp" data-wow-delay="0.5s">
+								<div class="s-lineDownLeft  s-titleLeft">
+									<div>
+										<h2 class="s-titleDet">Please Login To Post Comments</h2>
+									</div>
+								</div>					
+							</div>
+							{%endif%}
+
+
+							</div>
 						</div>
-					</div>
+
 					<div class="col-md-3 col-xs-12">
 						<aside class="b-blog__aside">
 							<form class="b-blog__aside-search wow zoomInUp" data-wow-delay="0.5s" action="/" method="post">
@@ -422,30 +312,10 @@
 								</header>
 								<nav>
 									<ul class="b-blog__aside-categories-list">
-										<li><a href="#">Auto Buying Tips &amp; Advice</a></li>
-										<li><a href="#">Latest Models News</a></li>
-										<li class="m-active"><a href="#">Test Drives</a></li>
-										<li><a href="#">Video Reviews</a></li>
-										<li><a href="#">Analysis &amp; Features</a></li>
+										<li><a href="/blog/list?category=tip">Auto Buying Tips &amp; Advice</a></li>
+										<li><a href="/blog/list?category=car">Latest Models News</a></li>
 									</ul>
 								</nav>
-							</div>
-							<div class="b-blog__aside-popular wow zoomInUp" data-wow-delay="0.5s">
-								<header class="s-lineDownLeft">
-									<h2 class="s-titleDet">POPULAR POSTS</h2>
-								</header>
-								<div class="b-blog__aside-popular-posts">
-									<div class="b-blog__aside-popular-posts-one">
-										<img class="img-responsive" src="media/270x150/mercBlog.png" alt="merc" />
-										<h4><a href="article.html">2016 Mercedes-Benz GLE-Class Debuts</a></h4>
-										<div class="b-blog__aside-popular-posts-one-date"><span class="fa fa-calendar-o"></span>20th May 2015</div>
-									</div>
-									<div class="b-blog__aside-popular-posts-one">
-										<img class="img-responsive" src="media/270x150/outlander.png" alt="outlander" />
-										<h4><a href="article.html">Refreshed 2016 Mitsubishi Outlander</a></h4>
-										<div class="b-blog__aside-popular-posts-one-date"><span class="fa fa-calendar-o"></span>20th May 2015</div>
-									</div>
-								</div>
 							</div>
 							<div class="b-blog__aside-text wow zoomInUp" data-wow-delay="0.5s">
 								<header class="s-lineDownLeft">
@@ -459,92 +329,7 @@
 									egestas. Bulum ante ipsum primisn faucibus
 									orci luctus et ultrices posuere.</p>
 							</div>
-							<div class="b-blog__aside-reviews wow zoomInUp" data-wow-delay="0.5s">
-								<header class="s-lineDownLeft">
-									<h2 class="s-titleDet">LATEST REVIEWS</h2>
-								</header>
-								<div class="b-blog__aside-reviews-posts">
-									<div class="b-blog__aside-reviews-posts-one">
-										<div class="row m-smallPadding">
-											<div class="col-xs-5">
-												<img src="media/100x80/audiRev.jpg" alt="audi" class="img-responsive pull-right" />
-											</div>
-											<div class="col-xs-7">
-												<div class="b-blog__aside-reviews-posts-one-info">
-													<p>First Drive:<br/>2016 Audi Q3</p>
-													<div class="b-world__item-val">
-														<div class="b-world__item-val-circles">
-															<span></span>
-															<span></span>
-															<span></span>
-															<span></span>
-															<span class="m-empty"></span>
-														</div>
-														<span class="b-world__item-num">4.1</span>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="b-blog__aside-reviews-posts-one">
-										<div class="row m-smallPadding">
-											<div class="col-xs-5">
-												<img src="media/100x80/mercRev.jpg" alt="merc" class="img-responsive  pull-right" />
-											</div>
-											<div class="col-xs-7">
-												<div class="b-blog__aside-reviews-posts-one-info">
-													<p>Mercedes-Benz GLA Class 2015 Hottest Hatch</p>
-													<div class="b-world__item-val">
-														<div class="b-world__item-val-circles">
-															<span></span>
-															<span></span>
-															<span></span>
-															<span></span>
-															<span class="m-empty"></span>
-														</div>
-														<span class="b-world__item-num">4.1</span>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="b-blog__aside-reviews-posts-one">
-										<div class="row m-smallPadding">
-											<div class="col-xs-5">
-												<img src="media/100x80/mazdaRev.jpg" alt="" class="img-responsive  pull-right" />
-											</div>
-											<div class="col-xs-7">
-												<div class="b-blog__aside-reviews-posts-one-info">
-													<p>First Look: <br />2016 Mazda CX-3</p>
-													<div class="b-world__item-val">
-														<div class="b-world__item-val-circles">
-															<span></span>
-															<span></span>
-															<span></span>
-															<span></span>
-															<span class="m-empty"></span>
-														</div>
-														<span class="b-world__item-num">4.1</span>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="b-blog__aside-archives wow zoomInUp" data-wow-delay="0.5s">
-								<header class="s-lineDownLeft">
-									<h2 class="s-titleDet">ARCHIVES</h2>
-								</header>
-								<nav>
-									<ul class="b-blog__aside-categories-list">
-										<li><a href="#">April 2015</a></li>
-										<li><a href="#">March 2015</a></li>
-										<li class="m-active"><a href="#">February 2015</a></li>
-										<li><a href="#">January 2105</a></li>
-									</ul>
-								</nav>
-							</div>
+							
 							<div class="b-items__aside-sell wow zoomInUp" data-wow-delay="0.5s">
 								<div class="b-items__aside-sell-img">
 									<h3>SELL YOUR CAR</h3>
@@ -716,29 +501,29 @@
 			</footer><!--b-footer-->
 		</div>
 		<!--Main-->   
-		<script src="js/jquery-1.11.3.min.js"></script>
-		<script src="js/jquery-ui.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="js/modernizr.custom.js"></script>
+		<script src="{% static 'js/jquery-1.11.3.min.js'%}"></script>
+		<script src="{% static 'js/jquery-ui.min.js'%}"></script>
+		<script src="{% static 'js/bootstrap.min.js'%}"></script>
+		<script src="{% static 'js/modernizr.custom.js'%}"></script>
 
-		<script src="assets/rendro-easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
-		<script src="js/waypoints.min.js"></script>
-		<script src="js/jquery.easypiechart.min.js"></script>
-		<script src="js/classie.js"></script>
+		<script src="{% static 'assets/rendro-easy-pie-chart/dist/jquery.easypiechart.min.js'%}"></script>
+		<script src="{% static 'js/waypoints.min.js'%}"></script>
+		<script src="{% static 'js/jquery.easypiechart.min.js'%}"></script>
+		<script src="{% static 'js/classie.js'%}"></script>
 
 		<!--Switcher-->
-		<script src="assets/switcher/js/switcher.js"></script>
+		<script src="{% static 'assets/switcher/js/switcher.js'%}"></script>
 		<!--Owl Carousel-->
-		<script src="assets/owl-carousel/owl.carousel.min.js"></script>
+		<script src="{% static 'assets/owl-carousel/owl.carousel.min.js'%}"></script>
 		<!--bxSlider-->
-		<script src="assets/bxslider/jquery.bxslider.js"></script>
+		<script src="{% static 'assets/bxslider/jquery.bxslider.js'%}"></script>
 		<!-- jQuery UI Slider -->
-		<script src="assets/slider/jquery.ui-slider.js"></script>
+		<script src="{% static 'assets/slider/jquery.ui-slider.js'%}"></script>
 
 		<!--Theme-->
-		<script src="js/jquery.smooth-scroll.js"></script>
-		<script src="js/wow.min.js"></script>
-		<script src="js/jquery.placeholder.min.js"></script>
-		<script src="js/theme.js"></script>
+		<script src="{% static 'js/jquery.smooth-scroll.js'%}"></script>
+		<script src="{% static 'js/wow.min.js'%}"></script>
+		<script src="{% static 'js/jquery.placeholder.min.js'%}"></script>
+		<script src="{% static 'js/theme.js'%}"></script>
 	</body>
 </html>

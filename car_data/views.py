@@ -4,12 +4,13 @@ from .forms import DocumentForm
 from django.http import JsonResponse
 from .models import Car_data_new,Car_data_old, Varient_data , Car_review
 from user_data.models import User_Account
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import datetime
 
 # Fields in Car_Details ... General Information/Review --> Features/Specs --> User Reviews --> Estimated Fuel Cost --> Gallery
 
 def search(request):
-	oldcar,new = {},{}
+	oldcar,newcar = {},{}
 	new = Car_data_new.objects.all()
 	old = Car_data_old.objects.all().filter(status = 'sell' , confirmed = 1)
 	if(str(request.GET.get('brand',"Any Make")) != "Any Make" ):
@@ -19,16 +20,29 @@ def search(request):
 		if(str(request.GET.get('model',"Any Model")) != "Any Model"):
 			new = new.filter(name__contains =request.GET.get('model'))
 			old = old.filter(name__contains =request.GET.get('model'))
-	if(request.GET.get('type','') != ''):
+	if(request.GET.get('type','Any') != "Any"):
 		new = new.filter(body_type__iexact = request.GET.get('type'))
 		old = old.filter(body_type__iexact = request.GET.get('type'))
-	if(request.GET.get('status') != "Any"):
+	if(request.GET.get('status',"Any") != "Any"):
 		if(request.GET.get('status') == "New"):old =[]
 		if(request.GET.get('status') == "Used"):new =[]
-	if(request.GET.get('min') != '' or request.GET.get('max') != ''):
-		pass
-	o = []
+	if(request.GET.get('min','') != '' or request.GET.get('max','') != ''):
+		new = new.filter(price__gte = (int(request.GET.get('min')) * 100000) , price__lte = ((int(request.GET.get('max')) - 20)) * 100000)
+		old = old.filter(price__gte = (int(request.GET.get('min')) * 100000) , price__lte = ((int(request.GET.get('max')) - 20)) * 100000)
+		
+	n = []
+	for j in new:
+		newcar['car'] = 'new'
+		newcar['name'] = j.name
+		newcar['milege'] = j.milege
+		newcar['info'] = ' '.join(j.general_information.split("\n"))[:100]
+		newcar['det'] = "/car/view?type=new&id=" + str(j.car_id)
+		newcar['price'] = j.price
+		newcar['pic'] = j.photolinks.split(",")[0]
+		n.append(newcar)
+		newcar={}
 	for i in old:
+		oldcar['car'] = 'old'
 		oldcar['name'] = i.brand + " " + i.name
 		oldcar['info'] = ' '.join(i.general_information.split("\n"))[:100]
 		oldcar['det'] = "/car/view?type=old&id=" + str(i.car_id)
@@ -38,10 +52,18 @@ def search(request):
 		oldcar['year'] = i.year
 		oldcar['pic'] = i.photolinks
 		oldcar['trans'] = i.transmission 
-		o.append(oldcar)
+		n.append(oldcar)
 		oldcar={}
-	print o
-	return render(request,"listv.html",{"old":o , "len" :len(o)})
+
+	paginator = Paginator(n, 8)
+	page = request.GET.get('page')
+	try:
+		car = paginator.page(page)
+	except PageNotAnInteger:
+		car = paginator.page(1)
+	except EmptyPage:
+		car = paginator.page(paginator.num_pages)
+	return render(request,"listv.html",{"len" :(len(n)) , "car" : car})
 
 def viewadd(request):
 	print "hi there"

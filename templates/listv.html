@@ -22,6 +22,7 @@
 
 
 
+
         <script type="text/javascript">
 
 var regiondb = new Object()
@@ -92,7 +93,6 @@ function setCities(chooser) {
 
 
 </script>
-
 
 
 		<!--[if lt IE 9]>
@@ -247,10 +247,10 @@ function setCities(chooser) {
 			<div class="container">
 				<h1 class=" wow zoomInLeft" data-wow-delay="0.5s">Auto Listings</h1>
 				<div class="b-pageHeader__search wow zoomInRight" data-wow-delay="0.5s">
-					{% if resultlen == None %}
+					{% if len == 0 %}
 					<h3>Your search returned No results</h3>
 					{% else %}
-					<h3>Your search returned {{resultlen}} results</h3>
+					<h3>Your search returned {{len}} results</h3>
 					{%endif%}
 				</div>
 			</div>
@@ -297,7 +297,39 @@ function setCities(chooser) {
 				<div class="row">		
 					<div class="col-lg-9 col-sm-8 col-xs-12">
 						<div class="b-items__cars">
-						{%for e in old%}
+						
+						{%for e in car%}
+							{%if e.car == 'new'%}
+							<div class="b-items__cars-one wow zoomInUp" data-wow-delay="0.5s">
+								<div class="b-items__cars-one-img">
+									<img class="img-responsive" src={{e.pic}} style="max-height: 230px ;max-width: 270px ;"  alt='nissan'/>
+									<span class="b-items__cars-one-img-type m-premium">new</span>
+									<form action="/" method="post">
+										<input type="checkbox" name="check1" id='check1'/>
+										<label for="check1" class="b-items__cars-one-img-check"><span class="fa fa-check"></span></label>
+									</form>
+								</div>
+								<div class="b-items__cars-one-info">
+									<header class="b-items__cars-one-info-header s-lineDownLeft">
+										<h2>{{e.name}}</h2>
+										<span>{{e.price}} Rs</span>
+									</header>
+									<p>
+										{{e.info}}
+									</p>
+									<div class="b-items__cars-one-info-details">
+										<div class="b-featured__item-links">
+											<a href="#">Latest Model</a>
+											<a href="#">New</a>
+											<a href="#">{{e.milege}} Km/L</a>
+										</div>
+										<a href="{{e.det}}" class="btn m-btn">VIEW DETAILS<span class="fa fa-angle-right"></span></a>
+									</div>
+								</div>
+								</div>
+							{%endif%}
+
+							{%if e.car == 'old'%}
 							<div class="b-items__cars-one wow zoomInUp" data-wow-delay="0.5s">
 								<div class="b-items__cars-one-img">
 									<img class="img-responsive" src={{e.pic.url}}  alt='nissan'/>
@@ -329,15 +361,22 @@ function setCities(chooser) {
 									</div>
 								</div>
 								</div>
+							{%endif%}
 							{%endfor%}
 						
-						</div>									
+						</div>		
+
 						{% if len > 0 %}
 						<div class="b-items__pagination wow zoomInUp" data-wow-delay="0.5s">
-							<div class="b-items__pagination-main">
-								<a href='javascript:;' onclick="getSearchParameters();" class="m-left"><span class="fa fa-angle-left"></span></a>
-								&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-								<a href="#" class="m-right"><span class="fa fa-angle-right"></span></a>    
+ 							<div class="b-items__pagination-main">
+							 {% if car.has_previous %}
+								<a href='?page={{ car.previous_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&{{ key }}={{ value }}{% endifnotequal %}{% endfor %}' class="m-left"><span class="fa fa-angle-left"></span></a>
+								{% endif %}
+					            <span class="m-active"><a href="#">Page {{ car.number }} of {{ car.paginator.num_pages }}</a></span>
+							{% if car.has_next %}
+							<a href="?page={{ car.next_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&{{ key }}={{ value }}{% endifnotequal %}{% endfor %}"
+									class="m-right"><span class="fa fa-angle-right"></span></a>    
+							{% endif %}
 							</div>
 						</div>
 						{%else%}
@@ -347,30 +386,20 @@ function setCities(chooser) {
 							</div>
 						</div>
 						{%endif%}
+					
 					</div>
-
 
 					<div class="col-lg-3 col-sm-4 col-xs-12">
 						<aside class="b-items__aside">
 							<h2 class="s-title wow zoomInUp" data-wow-delay="0.5s">REFINE YOUR SEARCH</h2>
 							<div class="b-items__aside-main wow zoomInUp" data-wow-delay="0.5s">
-								<form action="" action="/car/search" method="GET">
-								<input type="hidden" id="brand" name="brand" >
-								<input type="hidden" id="model" name="model" >
-								<input type="hidden" id="min" name="min" >
-								<input type="hidden" id="max" name="min" >
-								<input type="hidden" id="type" name="type" >
-								<input type="hidden" id="status" name="status">
-								<input type="hidden" id="page" name="page" >
-
-								<input type="submit" id="np" style="display: none" name="">
-								</form>
+									<form action="/car/search" type="get">
 									<div class="b-items__aside-main-body">
 										<div class="b-items__aside-main-body-item">
 											<label>SELECT A MAKE</label>
 											<div>
 												<select name="brand" id="car" class="m-select" onclick="setCities(this)">
-													<option value="Any Make" selected="selected">Any Make</option>
+													<option value="Any Make"  selected="selected">Any Make</option>
 													<option value="Aston Martin">Aston Martin</option>
 													<option value="Audi">Audi</option>
 													<option value="BMW">BMW</option>
@@ -417,7 +446,7 @@ function setCities(chooser) {
 											<label>SELECT A MODEL</label>
 											<div>
 												<select name="model" class="m-select" id="name">
-											<option value="Any Model" selected="">Any Model</option>
+											<option value="Any Model">Any Model</option>
 												</select>
 												<span class="fa fa-caret-down"></span>
 											</div>
@@ -425,8 +454,8 @@ function setCities(chooser) {
 										<div class="b-items__aside-main-body-item">
 											<label>PRICE RANGE</label>
 											<div class="slider"></div>
-											<input type="hidden" name="min" value="10" class="j-min" />
-											<input type="hidden" name="max" value="50" class="j-max" />
+											<input type="hidden" name="min" value="0" class="j-min" />
+											<input type="hidden" name="max" value="100" class="j-max" />
 										</div>
 										<div class="b-items__aside-main-body-item">
 											<label>VEHICLE TYPE</label>
