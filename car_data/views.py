@@ -211,6 +211,7 @@ def view(request):
 		data['status'] = 'new'
 		details = Car_data_new.objects.all().filter(car_id = id)
 		for i in details:
+			data['dname'] = i.name.split(" ")[0]
 			data['de'] = i.dealer_email
 			data['dn'] = i.dealer_number
 			data['content'] = i.general_information
@@ -218,17 +219,24 @@ def view(request):
 			data['name'] = i.name
 			data['type'] = i.body_type
 			data['price'] = i.price
+			data['cc'],data['city'],data['highway'] = "-","-","-"
 			pic = i.photolinks
 			picture,spec = [],[]
 			temp = 0
 			for k in pic.split(","):
+				if(temp == 11):break
 				picture.append({"link" : k ,'no' : temp})
 				temp +=1
 			data['picture'] = picture
 			for j in i.specifications.split(","):
 				if(len(j.split(":")) == 2):
 					n,m = j.split(":")
-					spec.append({'ind' : n  , 'val' :m})
+					if(m.strip() == "False" or m.strip() == "-" ):continue
+					if(n.strip() == "Engine Displacement(cc)"):
+						data['cc'] = m
+					if(n.strip() == "City / Highway Mileage"):
+						data['city'],data['highway'] = m.split("/")
+					spec.append({'ind' : n.strip()  , 'val' : m.strip()})
 			data['spec'] = spec
 			data['info'] = i.general_information
 		return render(request,'newcar.html',data)

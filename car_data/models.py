@@ -5,7 +5,7 @@ from django.db import models
 class Car_data_new(models.Model):
 	car_id = models.AutoField(primary_key=True)
 	name = models.CharField(max_length = 100) # Name of the Car
-	photolinks = models.CharField(max_length=1000)
+	photolinks = models.TextField()
 	videolinks = models.CharField(max_length=100)
 	price = models.IntegerField() # its a charecter because its a range of values most commonly :)
 	milege = models.CharField(max_length=10) # Vehicle Milege ** Seperatly Stored For Easy Acess
