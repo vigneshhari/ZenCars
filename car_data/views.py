@@ -208,6 +208,7 @@ def view(request):
 			data['f1'] = f1;data['f2'] = f2;data['f3'] = f3
 		return render(request,'varicar.html',data)
 	elif(type == "new"):
+		data['compare'] = "/car/compare?c=" + id
 		data['status'] = 'new'
 		details = Car_data_new.objects.all().filter(car_id = id)
 		for i in details:
@@ -244,3 +245,107 @@ def view(request):
 def comm(request):
 	Car_review(car_id = request.POST.get('car','') , user_id = request.POST.get('user','') , car_type = request.POST.get('type','') , content = request.POST.get('text') ,date = datetime.datetime.now() ).save()
 	return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+def destroy(request):
+	request.session['c1'] = -1
+	request.session['c2'] = -1
+	return HttpResponseRedirect("/home")
+
+def compare(request):
+	data = {}
+	c = request.GET.get('c',-1)
+	if(c == '' or c == -1):
+		if(request.session.get('c1',-1) == '' or request.session.get('c1',-1) == -1):return HttpResponseRedirect("/home")
+	if(request.session.get('c1',-1) == '' or request.session.get('c1',-1) == -1 ):
+		request.session['c1'] = c
+		data1 = Car_data_new.objects.all().filter(car_id = c )
+		for i in data1:
+			data['name1'] = i.name
+			data['price1'] = i.price
+			data['pic1'] = i.photolinks.split(",")[1]
+			spec = []
+			for j in i.specifications.split(","):
+				if(len(j.split(":")) == 2):
+					n,m = j.split(":")
+					if(m.strip() == "HEADING"):continue
+					spec.append({'ind' : n.strip()  , 'val1' : m.strip()})
+			data['spec'] = spec
+			data['url1'] = "/car/view?type=new&id=" + c
+
+	elif(request.session.get('c2',-1) == '' or request.session.get('c2',-1) == -1 ):	
+		request.session['c2'] = c
+		data1 = Car_data_new.objects.all().filter(car_id = request.session.get('c1'))
+		for i in data1:
+			data['name1'] = i.name
+			data['price1'] = i.price
+			data['pic1'] = i.photolinks.split(",")[1]
+			spec1={}
+			for j in i.specifications.split(","):
+				if(len(j.split(":")) == 2):
+					n,m = j.split(":")
+					if(m.strip() == "HEADING"):continue
+					spec1[n.strip()] = m.strip()
+		data2 = Car_data_new.objects.all().filter(car_id = c)
+		for i in data2:
+			data['name2'] = i.name
+			data['price2'] = i.price
+			data['pic2'] = i.photolinks.split(",")[1]
+			spec2 = {}
+			for j in i.specifications.split(","):
+				if(len(j.split(":")) == 2):
+					n,m = j.split(":")
+					if(m.strip() == "HEADING"):continue
+					spec2[n.strip()] = m.strip()
+		inter = set(spec2.keys()) & set(spec1.keys())
+		spec = []
+		for i in inter:
+			spec.append({"ind" : i , "val1" : spec1[i] , "val2" : spec2[i]})
+		data['spec'] = spec	
+		data['url1'] = "/car/view?type=new&id=" + request.session.get('c1')
+		data['url2'] = "/car/view?type=new&id=" + c
+		
+	else:
+		data1 = Car_data_new.objects.all().filter(car_id = request.session.get('c1'))
+		for i in data1:
+			data['name1'] = i.name
+			data['price1'] = i.price
+			data['pic1'] = i.photolinks.split(",")[1]
+			spec1={}
+			for j in i.specifications.split(","):
+				if(len(j.split(":")) == 2):
+					n,m = j.split(":")
+					if(m.strip() == "HEADING"):continue
+					spec1[n.strip()] = m.strip()
+		data2 = Car_data_new.objects.all().filter(car_id = request.session['c2'])
+		for i in data2:
+			data['name2'] = i.name
+			data['price2'] = i.price
+			data['pic2'] = i.photolinks.split(",")[1]
+			spec2 = {}
+			for j in i.specifications.split(","):
+				if(len(j.split(":")) == 2):
+					n,m = j.split(":")
+					if(m.strip() == "HEADING"):continue
+					spec2[n.strip()] = m.strip()
+		data3 = Car_data_new.objects.all().filter(car_id = c)
+		for i in data3:
+			data['name3'] = i.name
+			data['price3'] = i.price
+			data['pic3'] = i.photolinks.split(",")[1]
+			spec3 = {}
+			for j in i.specifications.split(","):
+				if(len(j.split(":")) == 2):
+					n,m = j.split(":")
+					if(m.strip() == "HEADING"):continue
+					spec3[n.strip()] = m.strip()
+
+		inter = set(spec2.keys()) & set(spec1.keys()) & set(spec3.keys())
+		spec = []
+		for i in inter:
+			spec.append({"ind" : i , "val1" : spec1[i] , "val2" : spec2[i] , "val3" : spec3[i]})
+		data['spec'] = spec
+		data['url1'] = "/car/view?type=new&id=" + request.session.get('c1')
+		data['url2'] = "/car/view?type=new&id=" + request.session.get('c2')
+		data['url3'] = "/car/view?type=new&id=" + c
+
+	return render(request,"compare.html",data)
