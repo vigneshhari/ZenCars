@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		{%load static%}
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<title>Auto Club</title>
+		<title>Zen Cars</title>
 
-		<link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
+		<link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.png'%}" />
 
-		<link href="css/master.css" rel="stylesheet">
+		<link href="{% static 'css/master.css' %}" rel="stylesheet">
 
 		<!-- SWITCHER -->
-		<link rel="stylesheet" id="switcher-css" type="text/css" href="assets/switcher/css/switcher.css" media="all" />
-		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/color1.css" title="color1" media="all" data-default-color="true" />
-		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/color2.css" title="color2" media="all" />
-		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/color3.css" title="color3" media="all" />
-		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/color4.css" title="color4" media="all" />
-		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/color5.css" title="color5" media="all" />
-		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/color6.css" title="color6" media="all" />
+		<link rel="stylesheet" id="switcher-css" type="text/css" href="{%static 'assets/switcher/css/switcher.css' %}" media="all" />
+		<link rel="alternate stylesheet" type="text/css" href="{%static 'assets/switcher/css/color1.css' %}" title="color1" media="all" data-default-color="true" />
+		<link rel="alternate stylesheet" type="text/css" href="{%static 'assets/switcher/css/color2.css' %}" title="color2" media="all" />
+		<link rel="alternate stylesheet" type="text/css" href="{%static 'assets/switcher/css/color3.css'%}" title="color3" media="all" />
+		<link rel="alternate stylesheet" type="text/css" href="{%static 'assets/switcher/css/color4.css'%}" title="color4" media="all" />
+		<link rel="alternate stylesheet" type="text/css" href="{%static 'assets/switcher/css/color5.css'%}" title="color5" media="all" />
+		<link rel="alternate stylesheet" type="text/css" href="{%static 'assets/switcher/css/color6.css'%}" title="color6" media="all" />
+
 
 		<!--[if lt IE 9]>
 		<script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -179,7 +181,7 @@
 
 		<div class="b-breadCumbs s-shadow wow zoomInUp" data-wow-delay="0.5s">
 			<div class="container">
-				<a href="home.html" class="b-breadCumbs__page">Home</a><span class="fa fa-angle-right"></span><a href="listings.html" class="b-breadCumbs__page">Luxury Cars</a><span class="fa fa-angle-right"></span><a href="listingsTwo.html" class="b-breadCumbs__page">Nissan</a><span class="fa fa-angle-right"></span><a href="detail.html" class="b-breadCumbs__page m-active">Nissan Maxima</a>
+				<a href="home.html" class="b-breadCumbs__page">Home</a><span class="fa fa-angle-right"></span><a href="listings.html" class="b-breadCumbs__page">Luxury Cars</a><span class="fa fa-angle-right"></span><a href="listingsTwo.html" class="b-breadCumbs__page">{{name}}</a>
 			</div>
 		</div><!--b-breadCumbs-->
 
@@ -187,14 +189,11 @@
 			<div class="container">
 				<div class="row wow zoomInUp" data-wow-delay="0.5s">
 					<div class="col-xs-3">
-						<div class="b-infoBar__premium">Premium Listing</div>
+						<div class="b-infoBar__premium">New Car</div>
 					</div>
 					<div class="col-xs-9">
 						<div class="b-infoBar__btns">
-							<a href="#" class="btn m-btn m-infoBtn">SHARE THIS VEHICLE<span class="fa fa-angle-right"></span></a>
-							<a href="#" class="btn m-btn m-infoBtn">ADD TO FAVOURITES<span class="fa fa-angle-right"></span></a>
 							<a href="#" class="btn m-btn m-infoBtn">PRINT THIS PAGE<span class="fa fa-angle-right"></span></a>
-							<a href="#" class="btn m-btn m-infoBtn">DOWNLOAD MANUAL<span class="fa fa-angle-right"></span></a>
 						</div>
 					</div>
 				</div>
@@ -207,14 +206,14 @@
 					<div class="row">
 						<div class="col-sm-9 col-xs-12">
 							<div class="b-detail__head-title">
-								<h1>Nissan Maxima SV Premium 2016</h1>
-								<h3>Fully Redesigned Upscale Midsize Car</h3>
+								<h1>{{name}}</h1>
+								<h3>2016 model</h3>
 							</div>
 						</div>
 						<div class="col-sm-3 col-xs-12">
 							<div class="b-detail__head-price">
-								<div class="b-detail__head-price-num">$44,380</div>
-								<p>Included Taxes &amp; Checkup</p>
+								<div class="b-detail__head-price-num">{{price}} Rs</div>
+								<p>Ex Showroom Price Alappuzha</p>
 							</div>
 						</div>
 					</div>
@@ -227,72 +226,27 @@
 									<div class="row m-smallPadding">
 										<div class="col-xs-10">
 											<ul class="b-detail__main-info-images-big bxslider enable-bx-slider" data-pager-custom="#bx-pager" data-mode="horizontal" data-pager-slide="true" data-mode-pager="vertical" data-pager-qty="5">
+												{%for e in picture%}
 												<li class="s-relative">                                        
 													<a data-toggle="modal" data-target="#myModal" href="#" class="b-items__cars-one-img-video"><span class="fa fa-film"></span>VIDEO</a>
-													<img class="img-responsive center-block" src="media/620x485/big1.jpg" alt="nissan" />
+													<img class="img-responsive center-block" src="{{e.link}}" alt="nissan" />
 												</li>
-												<li class="s-relative">                                        
-													<a data-toggle="modal" data-target="#myModal" href="#" class="b-items__cars-one-img-video"><span class="fa fa-film"></span>VIDEO</a>
-													<img class="img-responsive center-block" src="media/620x485/big2.jpg" alt="nissan" />
-												</li>
-												<li class="s-relative">                                        
-													<a data-toggle="modal" data-target="#myModal" href="#" class="b-items__cars-one-img-video"><span class="fa fa-film"></span>VIDEO</a>
-													<img class="img-responsive center-block" src="media/620x485/big3.jpg" alt="nissan" />
-												</li>
-												<li class="s-relative">                                        
-													<a data-toggle="modal" data-target="#myModal" href="#" class="b-items__cars-one-img-video"><span class="fa fa-film"></span>VIDEO</a>
-													<img class="img-responsive center-block" src="media/620x485/big4.jpg" alt="nissan" />
-												</li>
-												<li class="s-relative">                                        
-													<a data-toggle="modal" data-target="#myModal" href="#" class="b-items__cars-one-img-video"><span class="fa fa-film"></span>VIDEO</a>
-													<img class="img-responsive center-block" src="media/620x485/big5.jpg" alt="nissan" />
-												</li>
-												<li class="s-relative">                                        
-													<a data-toggle="modal" data-target="#myModal" href="#" class="b-items__cars-one-img-video"><span class="fa fa-film"></span>VIDEO</a>
-													<img class="img-responsive center-block" src="media/620x485/big1.jpg" alt="nissan" />
-												</li>
-												<li class="s-relative">                                        
-													<a data-toggle="modal" data-target="#myModal" href="#" class="b-items__cars-one-img-video"><span class="fa fa-film"></span>VIDEO</a>
-													<img class="img-responsive center-block" src="media/620x485/big2.jpg" alt="nissan" />
-												</li>
-												<li class="s-relative">                                        
-													<a data-toggle="modal" data-target="#myModal" href="#" class="b-items__cars-one-img-video"><span class="fa fa-film"></span>VIDEO</a>
-													<img class="img-responsive center-block" src="media/620x485/big3.jpg" alt="nissan" />
-												</li>
-												
+												{%endfor%}
 											</ul>
 										</div>
 										<div class="col-xs-2 pagerSlider pagerVertical">
 											<div class="b-detail__main-info-images-small" id="bx-pager">
-												<a href="#" data-slide-index="0" class="b-detail__main-info-images-small-one">
-													<img class="img-responsive" src="media/115x85/small1.jpg" alt="nissan" />
+												{%for e in picture%}
+												<a href="#" data-slide-index="{{e.no}}" class="b-detail__main-info-images-small-one">
+													<img class="img-responsive" src="{{e.link}}" alt="nissan" />
 												</a>
-												<a href="#" data-slide-index="1" class="b-detail__main-info-images-small-one">
-													<img class="img-responsive" src="media/115x85/small2.jpg" alt="nissan" />
-												</a>
-												<a href="#" data-slide-index="2" class="b-detail__main-info-images-small-one">
-													<img class="img-responsive" src="media/115x85/small3.jpg" alt="nissan" />
-												</a>
-												<a href="#" data-slide-index="3" class="b-detail__main-info-images-small-one">
-													<img class="img-responsive" src="media/115x85/small4.jpg" alt="nissan" />
-												</a>
-												<a href="#" data-slide-index="4" class="b-detail__main-info-images-small-one">
-													<img class="img-responsive" src="media/115x85/small5.jpg" alt="nissan" />
-												</a>
-												<a href="#" data-slide-index="5" class="b-detail__main-info-images-small-one">
-													<img class="img-responsive" src="media/115x85/small1.jpg" alt="nissan" />
-												</a>
-												<a href="#" data-slide-index="6" class="b-detail__main-info-images-small-one">
-													<img class="img-responsive" src="media/115x85/small2.jpg" alt="nissan" />
-												</a>
-												<a href="#" data-slide-index="7" class="b-detail__main-info-images-small-one">
-													<img class="img-responsive" src="media/115x85/small3.jpg" alt="nissan" />
-												</a>
+												{%endfor%}
 												
 											</div>
 										</div>
 									</div>
 								</div>
+
 								<div class="b-detail__main-info-characteristics wow zoomInUp" data-wow-delay="0.5s">
 									<div class="b-detail__main-info-characteristics-one">
 										<div class="b-detail__main-info-characteristics-one-top">
@@ -315,10 +269,10 @@
 									<div class="b-detail__main-info-characteristics-one">
 										<div class="b-detail__main-info-characteristics-one-top">
 											<div><span class="fa fa-at"></span></div>
-											<p>Auto</p>
+											<p>{{type}}</p>
 										</div>
 										<div class="b-detail__main-info-characteristics-one-bottom">
-											Transmission
+											Body Type
 										</div>
 									</div>
 									<div class="b-detail__main-info-characteristics-one">
@@ -992,29 +946,29 @@
 			</div>
 		</footer><!--b-footer-->
 		<!--Main-->   
-		<script src="js/jquery-1.11.3.min.js"></script>
-		<script src="js/jquery-ui.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="js/modernizr.custom.js"></script>
+		<script src="{% static 'js/jquery-1.11.3.min.js'%}"></script>
+		<script src="{% static 'js/jquery-ui.min.js'%}"></script>
+		<script src="{% static 'js/bootstrap.min.js'%}"></script>
+		<script src="{% static 'js/modernizr.custom.js'%}"></script>
 
-		<script src="assets/rendro-easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
-		<script src="js/waypoints.min.js"></script>
-		<script src="js/jquery.easypiechart.min.js"></script>
-		<script src="js/classie.js"></script>
+		<script src="{% static 'assets/rendro-easy-pie-chart/dist/jquery.easypiechart.min.js'%}"></script>
+		<script src="{% static 'js/waypoints.min.js'%}"></script>
+		<script src="{% static 'js/jquery.easypiechart.min.js'%}"></script>
+		<script src="{% static 'js/classie.js'%}"></script>
 
 		<!--Switcher-->
-		<script src="assets/switcher/js/switcher.js"></script>
+		<script src="{% static 'assets/switcher/js/switcher.js'%}"></script>
 		<!--Owl Carousel-->
-		<script src="assets/owl-carousel/owl.carousel.min.js"></script>
+		<script src="{% static 'assets/owl-carousel/owl.carousel.min.js'%}"></script>
 		<!--bxSlider-->
-		<script src="assets/bxslider/jquery.bxslider.js"></script>
+		<script src="{% static 'assets/bxslider/jquery.bxslider.js'%}"></script>
 		<!-- jQuery UI Slider -->
-		<script src="assets/slider/jquery.ui-slider.js"></script>
+		<script src="{% static 'assets/slider/jquery.ui-slider.js'%}"></script>
 
 		<!--Theme-->
-		<script src="js/jquery.smooth-scroll.js"></script>
-		<script src="js/wow.min.js"></script>
-		<script src="js/jquery.placeholder.min.js"></script>
-		<script src="js/theme.js"></script>
+		<script src="{% static 'js/jquery.smooth-scroll.js'%}"></script>
+		<script src="{% static 'js/wow.min.js'%}"></script>
+		<script src="{% static 'js/jquery.placeholder.min.js'%}"></script>
+		<script src="{% static 'js/theme.js'%}"></script>
 	</body>
 </html>

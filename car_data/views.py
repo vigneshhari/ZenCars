@@ -23,12 +23,12 @@ def search(request):
 	if(request.GET.get('type','Any') != "Any"):
 		new = new.filter(body_type__iexact = request.GET.get('type'))
 		old = old.filter(body_type__iexact = request.GET.get('type'))
-	if(request.GET.get('status',"Any") != "Any"):
-		if(request.GET.get('status') == "New"):old =[]
-		if(request.GET.get('status') == "Used"):new =[]
 	if(request.GET.get('min','') != '' or request.GET.get('max','') != ''):
 		new = new.filter(price__gte = (int(request.GET.get('min')) * 100000) , price__lte = ((int(request.GET.get('max')) - 20)) * 100000)
 		old = old.filter(price__gte = (int(request.GET.get('min')) * 100000) , price__lte = ((int(request.GET.get('max')) - 20)) * 100000)
+	if(request.GET.get('status',"Any") != "Any"):
+		if(request.GET.get('status') == "New"):old =[]
+		if(request.GET.get('status') == "Used"):new =[]
 		
 	n = []
 	for j in new:
@@ -209,10 +209,17 @@ def view(request):
 		return render(request,'varicar.html',data)
 	elif(type == "new"):
 		data['status'] = 'new'
-		details = Varient_data.objects.all().filter(varient_id = id)
+		details = Car_data_new.objects.all().filter(car_id = id)
 		for i in details:
+			data['de'] = i.dealer_email
+			data['dn'] = i.dealer_number
+			data['content'] = i.general_information
+			data['milege'] = i.milege
+			data['name'] = i.name
+			data['type'] = i.body_type
+			data['price'] = i.price
 			pic = i.photolinks
-			picture,spec,feat = [],[],[]
+			picture,spec = [],[]
 			temp = 0
 			for k in pic.split(","):
 				picture.append({"link" : k ,'no' : temp})
@@ -224,17 +231,7 @@ def view(request):
 					spec.append({'ind' : n  , 'val' :m})
 			data['spec'] = spec
 			data['info'] = i.general_information
-			f = i.features
-			f1,f2,f3 = [],[],[]
-			temp = 0;
-			for d in f.split(","):
-				if(temp == 3):temp = 0
-				if(temp == 0):f1.append({"feat" : d})
-				if(temp == 1):f2.append({"feat" : d})
-				if(temp == 2):f3.append({"feat" : d})
-				temp += 1
-			data['f1'] = f1;data['f2'] = f2;data['f3'] = f3
-		return render(request,'varicar.html',data)
+		return render(request,'newcar.html',data)
 
 def comm(request):
 	Car_review(car_id = request.POST.get('car','') , user_id = request.POST.get('user','') , car_type = request.POST.get('type','') , content = request.POST.get('text') ,date = datetime.datetime.now() ).save()
