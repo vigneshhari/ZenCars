@@ -9,6 +9,7 @@ urlpatterns = [
 	url(r'sendvericode' , views.sendveri , name='sendveri'),
     url(r'logout' , views.logout , name='logout'),
     url(r'req' , views.req , name='req'),
+    url(r'reg' , views.reg , name='reg'),
     url(r'view' , views.view , name='view'),
     url(r'sold' , views.sold , name='sold'),
     url(r'delete' , views.delete , name='delete'),

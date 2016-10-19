@@ -55,12 +55,12 @@
 		</div>
 		<!-- End Switcher -->
 
-		<header class="b-topBar wow slideInDown" data-wow-delay="0.7s">
+			<header class="b-topBar wow slideInDown" data-wow-delay="0.7s">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-4 col-xs-6">
 						<div class="b-topBar__addr">
-							<span id="college" class="fa fa-map-marker"></span>
+							<span class="fa fa-map-marker"></span>
 							College Of Engineering Chengannur
 						</div>
 					</div>
@@ -73,8 +73,16 @@
 					<div class="col-md-4 col-xs-6">
 						<nav class="b-topBar__nav">
 							<ul>
-								<li><a href="#">Register</a></li>
-								<li><a href="#">Sign in</a></li>
+								{%if name == null%}
+								<li><a href="#" style ="color:black" data-toggle="modal" data-target="#myModal1" id="signin_top">SIGN IN</a></li>
+								<li><a href="#" style ="color:black" data-toggle="modal" data-target="#myModal2" id="register_top">REGISTER</a></li>		
+								<li><a href="#" style ="visibility: hidden;" data-toggle="modal" data-target="#myModal3" id="forgot_top"></a></li>		
+								<li><a href="#" style ="visibility: hidden;" data-toggle="modal" data-target="#myModal4" id="change_top"></a></li>		
+								{%endif%}
+								{%if name != null%}
+								<li><a href="/auth/logout" style ="color:black">Logout</a></li>
+								<li><a href="#" style ="color:black">Welcome Back {{name}}</a></li>
+								{%endif%}
 							</ul>
 						</nav>
 					</div>
@@ -82,13 +90,14 @@
 				</div>
 			</div>
 		</header><!--b-topBar-->
-		<nav class="b-nav">
+
+				<nav class="b-nav">
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-3 col-xs-4">
 						<div class="b-nav__logo wow slideInLeft" data-wow-delay="0.3s">
 							<h3><a href="/home">Zen<span>Cars</span></a></h3>
-							<h2><a href="/home">Find Your Dream</a></h2>
+							<h2><a href="/home">&nbsp Find Your Dream</a></h2>
 						</div>
 					</div>
 					<div class="col-sm-9 col-xs-8">
@@ -103,42 +112,28 @@
 							</div>
 							<div class="collapse navbar-collapse navbar-main-slide" id="nav">
 								<ul class="navbar-nav-menu">
+									<li><a href="/home">Home</a></li>
+									{%if name != null%}
 									<li class="dropdown">
-										<a class="dropdown-toggle" data-toggle='dropdown' href="home.html">Home <span class="fa fa-caret-down"></span></a>
+										<a class="dropdown-toggle" data-toggle='dropdown' href="#">Account<span class="fa fa-caret-down"></span></a>
 										<ul class="dropdown-menu h-nav">
-											<li><a href="home.html">Home Page 1</a></li>
-											<li><a href="home-2.html">Home Page 2</a></li>
+											<li><a href="/auth/details">Details</a></li>
+											<li><a href="/auth/view?type=sell">View Listed Cars</a></li>
+											<li><a href="/auth/view?type=sold">View Sold Cars</a></li>
+											<li><a href="/car/add">Add Car</a></li>
 										</ul>
 									</li>
-									<li class="dropdown">
-										<a class="dropdown-toggle" data-toggle='dropdown' href="#">Grid <span class="fa fa-caret-down"></span></a>
-										<ul class="dropdown-menu h-nav">
-											<li><a href="listings.html">listing 1</a></li>
-											<li><a href="listingsTwo.html">listing 2</a></li>
-											<li><a href="listTable.html">listing 3</a></li>
-											<li><a href="listTableTwo.html">listing 4</a></li>
-										</ul>
-									</li>
-									<li><a href="compare.html">compare</a></li>
-									<li><a href="about.html">About</a></li>
-									<li><a href="article.html">Services</a></li>
-									<li class="dropdown">
-										<a class="dropdown-toggle" data-toggle='dropdown' href="#">Blog <span class="fa fa-caret-down"></span></a>
-										<ul class="dropdown-menu h-nav">
-											<li><a href="blog.html">Blog 1</a></li>
-											<li><a href="blogTwo.html">Blog 2</a></li>
-											<li><a href="404.html">Page 404</a></li>
-										</ul>
-									</li>
-									<li><a href="submit1.html">Shop</a></li>
-									<li><a href="contacts.html">Contact</a></li>
+									{%endif%}
+									<li><a href="/blog/list?category=tip">Blog</a></li>
+									<li><a href="/about">About</a></li>
+									<li><a href="/contact">Contact Us</a></li>
 								</ul>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</nav><!--b-nav-->
+		</nav><!--b-nav-->  
 
 		<section class="b-pageHeader">
 			<div class="container">
@@ -151,7 +146,7 @@
 
 		<div class="b-breadCumbs s-shadow">
 			<div class="container wow zoomInUp" data-wow-delay="0.3s">
-				<a href="home.html" class="b-breadCumbs__page">Home</a><span class="fa fa-angle-right"></span><a href="submit4.html" class="b-breadCumbs__page m-active">Submit a Vehicle</a>
+				<a href="/home" class="b-breadCumbs__page">Home</a><span class="fa fa-angle-right"></span><a href="#" class="b-breadCumbs__page m-active">Submit a Vehicle</a>
 			</div>
 		</div><!--b-breadCumbs-->
 
@@ -243,7 +238,7 @@
 									</div>
 									<div class="b-submit__aside-step-inner-info">
 										<h4>Contact details</h4>
-										<p>Choose vehicle specifications</p>
+										<p>Add/Confirm Contact Details</p>
 									</div>
 								</div>
 							</div>
@@ -255,7 +250,7 @@
 									</div>
 									<div class="b-submit__aside-step-inner-info">
 										<h4>SUBMIT &amp; PUBLISH</h4>
-										<p>Add images / videos of vehicle</p>
+										<p>View Terms and Publish</p>
 									</div>
 								</div>
 							</div>
@@ -268,7 +263,7 @@
 									<header class="s-headerSubmit s-lineDownLeft">
 										<h2>Tell us your Vehicle's Value</h2>
 									</header>
-									<p>Curabitur libero. Donec facilisis velit eu est. Phasellus cons quat. Aenean vitae quam. Vivamus et nunc. Nunc consequsem velde metus imperdiet lacinia. Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+									<p>The Price guide estimater estimates current value of the car</p>
 									<div class="b-submit__main-contacts-price">
 										<div class="row m-smallPadding">
 											<div class="col-lg-4 col-xs-12">
@@ -279,11 +274,11 @@
 													<span class="fa fa-car"></span>
 													<input type='text' name="price"/>
 													<span class="b-submit__main-contacts-price-input-usd">
-														IN USD $
+														IN Rs 
 													</span>
 												</div>
 												<div class="b-submit__main-contacts-price-note">
-													Price Guide Estimation: 
+													Price Guide Estimation: < {{price}}
 												</div>
 											</div>
 										</div>
@@ -326,152 +321,95 @@
 			</div>
 		</div><!--b-submit-->
 
-		<div class="m-home">
-			<div class="b-info">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-4 col-xs-12">
-							<aside class="b-info__aside wow zoomInLeft" data-wow-delay="0.5s">
-								<article class="b-info__aside-article">
-									<h3>OPENING HOURS</h3>
-									<div class="b-info__aside-article-item">
-										<h6>Sales Department</h6>
-										<p>Mon-Sat : 8:00am - 5:00pm<span>&middot;</span> 
-											Sunday is closed</p>
-									</div>
-									<div class="b-info__aside-article-item">
-										<h6>Service Department</h6>
-										<p>Mon-Sat : 8:00am - 5:00pm<span>&middot;</span> 
-											Sunday is closed</p>
-									</div>
-								</article>
-								<article class="b-info__aside-article">
-									<h3>About us</h3>
-									<p>Vestibulum varius od lio eget conseq
-										uat blandit, lorem auglue comm lodo 
-										nisl non ultricies lectus nibh mas lsa 
-										Duis scelerisque aliquet. Ante donec
-										libero pede porttitor dacu msan esct
-										venenatis quis.</p>
-								</article>
-							</aside>
-						</div>
-						<div class="col-md-4 col-xs-12">
-							<div class="b-info__latest">
-								<h3 class=" wow zoomInUp" data-wow-delay="0.5s">LATEST AUTOS</h3>
-								<div class="b-info__latest-article wow zoomInUp" data-wow-delay="0.5s">
-									<div class="b-info__latest-article-photo m-audi"></div>
-									<div class="b-info__latest-article-info">
-										<h6><a href="detail.html">MERCEDES-AMG GT S</a></h6>
-										<div class="b-featured__item-links m-auto">
-											<a href="#">Used</a>
-											<a href="#">2014</a>
-											<a href="#">Manual</a>
-											<a href="#">Orange</a>
-											<a href="#">Petrol</a>
-										</div>
-										<p><span class="fa fa-tachometer"></span> 35,000 KM</p>
-									</div>
-								</div>
-								<div class="b-info__latest-article wow zoomInUp" data-wow-delay="0.5s">
-									<div class="b-info__latest-article-photo m-audiSpyder"></div>
-									<div class="b-info__latest-article-info">
-										<h6><a href="detail.html">AUDI R8 SPYDER V-8</a></h6>
-										<div class="b-featured__item-links m-auto">
-											<a href="#">Used</a>
-											<a href="#">2014</a>
-											<a href="#">Manual</a>
-											<a href="#">Orange</a>
-											<a href="#">Petrol</a>
-										</div>
-										<p><span class="fa fa-tachometer"></span> 35,000 KM</p>
-									</div>
-								</div>
-								<div class="b-info__latest-article wow zoomInUp" data-wow-delay="0.5s">
-									<div class="b-info__latest-article-photo m-aston"></div>
-									<div class="b-info__latest-article-info">
-										<h6><a href="detail.html">ASTON MARTIN VANTAGE</a></h6>
-										<div class="b-featured__item-links m-auto">
-											<a href="#">Used</a>
-											<a href="#">2014</a>
-											<a href="#">Manual</a>
-											<a href="#">Orange</a>
-											<a href="#">Petrol</a>
-										</div>
-										<p><span class="fa fa-tachometer"></span> 35,000 KM</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-xs-12">
-							<address class="b-info__contacts wow zoomInUp" data-wow-delay="0.5s">
-								<p>contact us</p>
-								<div class="b-info__contacts-item">
-									<span class="fa fa-map-marker"></span>
-									<em>202 W 7th St, Suite 233 Los Angeles,<br />
-										California 90014 USA</em>
-								</div>
-								<div class="b-info__contacts-item">
-									<span class="fa fa-phone"></span>
-									<em>Phone:  1-800- 624-5462</em>
-								</div>
-								<div class="b-info__contacts-item">
-									<span class="fa fa-fax"></span>
-									<em>FAX:  1-800- 624-5462</em>
-								</div>
-								<div class="b-info__contacts-item">
-									<span class="fa fa-envelope"></span>
-									<em>Email:  info@domain.com</em>
-								</div>
-							</address>
-							<address class="b-info__map">
-								<a href="contacts.html">Open Location Map</a>
-							</address>
-						</div>
+<div class="b-features">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-9 col-md-offset-3 col-xs-6 col-xs-offset-6">
+						<ul class="b-features__items">
+							<li class="wow zoomInUp" data-wow-delay="0.3s" data-wow-offset="100">Low Prices, No Haggling</li>
+							<li class="wow zoomInUp" data-wow-delay="0.3s" data-wow-offset="100">Largest Car Dealership</li>
+							<li class="wow zoomInUp" data-wow-delay="0.3s" data-wow-offset="100">24x7 Support</li>
+						</ul>
 					</div>
 				</div>
-			</div><!--b-info-->
+			</div>
+		</div><!--b-features-->
 
-			<footer class="b-footer">
-				<a id="to-top" href="#this-is-top"><i class="fa fa-chevron-up"></i></a>
-				<div class="container">
-					<div class="row">
-						<div class="col-xs-4">
-							<div class="b-footer__company wow zoomInLeft" data-wow-delay="0.5s">
-								<div class="b-nav__logo">
-									<h3><a href="home.html">Auto<span>Club</span></a></h3>
-								</div>
-								<p>&copy; 2015 Designed by Templines &amp; Powered by WordPress.</p>
+	<div class="b-info">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3 col-xs-6">
+						<aside class="b-info__aside wow zoomInLeft" data-wow-delay="0.3s">
+							
+							<article class="b-info__aside-article">
+								<h3>About us</h3>
+							<p>Here At ZenCars we treat each customer with great Care . ZenCar Members get exclusive benefit on upcomming cars and other Bundled offers . Members can also list their vehicle in one of the larget online Pre-Owned Car Markets of the world.</p>
+							<p>Come, Lets Find your Dream Car</p>
+							</article>
+							<a href="/about" class="btn m-btn">About us<span class="fa fa-angle-right"></span></a>
+						</aside>
+					</div>
+					<div class="col-md-3 col-xs-6">
+						
+					</div>
+					<div class="col-md-3 col-xs-6">
+						
+					</div>
+					<div class="col-md-3 col-xs-6">
+						<address class="b-info__contacts wow zoomInUp" data-wow-delay="0.3s">
+							<p>contact us</p>
+							<div class="b-info__contacts-item">
+								<span class="fa fa-map-marker"></span>
+								<em>College of Engineering Chengannur</em>
 							</div>
+							<div class="b-info__contacts-item">
+								<span class="fa fa-phone"></span>
+								<em>Phone:  +91 9562854642</em>
+							</div>
+							<div class="b-info__contacts-item">
+								<span class="fa fa-fax"></span>
+								<em>FAX:  +91 9730763376</em>
+							</div>
+							<div class="b-info__contacts-item">
+								<span class="fa fa-envelope"></span>
+								<em>Email:  vigneshhari@ieee.org</em>
+							</div>
+						</address>
+						<address class="b-info__map">
+							<a href="/contact">Contact Us</a>
+						</address>
+					</div>
+				</div>
+			</div>
+		</div><!--b-info-->
+
+		<footer class="b-footer">
+			<a id="to-top" href="#this-is-top"><i class="fa fa-chevron-up"></i></a>
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-4">
+						<div class="b-footer__company wow fadeInLeft" data-wow-delay="0.3s">
+							<div class="b-nav__logo">
+								<h3><a href="home.html">Zen<span>Cars</span></a></h3>
+							</div>
+							<p>&copy; Design By Zen tech &amp; Powered by Django.</p>
 						</div>
-						<div class="col-xs-8">
-							<div class="b-footer__content wow zoomInRight" data-wow-delay="0.5s">
-								<div class="b-footer__content-social">
-									<a href="#"><span class="fa fa-facebook-square"></span></a>
-									<a href="#"><span class="fa fa-twitter-square"></span></a>
-									<a href="#"><span class="fa fa-google-plus-square"></span></a>
-									<a href="#"><span class="fa fa-instagram"></span></a>
-									<a href="#"><span class="fa fa-youtube-square"></span></a>
-									<a href="#"><span class="fa fa-skype"></span></a>
-								</div>
-								<nav class="b-footer__content-nav">
-									<ul>
-										<li><a href="home.html">Home</a></li>
-										<li><a href="404.html">Pages</a></li>
-										<li><a href="listings.html">Inventory</a></li>
-										<li><a href="about.html">About</a></li>
-										<li><a href="404.html">Services</a></li>
-										<li><a href="blog.html">Blog</a></li>
-										<li><a href="listTable.html">Shop</a></li>
-										<li><a href="contacts.html">Contact</a></li>
-									</ul>
-								</nav>
+					</div>
+					<div class="col-xs-8">
+						<div class="b-footer__content wow fadeInRight" data-wow-delay="0.3s">
+							<div class="b-footer__content-social">
+								<a href="#"><span class="fa fa-facebook-square"></span></a>
+								<a href="#"><span class="fa fa-twitter-square"></span></a>
+								<a href="#"><span class="fa fa-google-plus-square"></span></a>
+								<a href="#"><span class="fa fa-instagram"></span></a>
+								<a href="#"><span class="fa fa-youtube-square"></span></a>
+								<a href="#"><span class="fa fa-skype"></span></a>
 							</div>
 						</div>
 					</div>
 				</div>
-			</footer><!--b-footer-->
-		</div>
+			</div>
+		</footer><!--b-footer-->
 		<!--Main-->   
 		<script src="{% static 'js/jquery-1.11.3.min.js'%}"></script>
 		<script src="{% static 'js/jquery-ui.min.js'%}"></script>
@@ -497,5 +435,6 @@
 		<script src="{% static 'js/wow.min.js'%}"></script>
 		<script src="{% static 'js/jquery.placeholder.min.js'%}"></script>
 		<script src="{% static 'js/theme.js'%}"></script>
+
 	</body>
 </html>

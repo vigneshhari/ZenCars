@@ -9,5 +9,5 @@ urlpatterns = [
     url(r'compare',views.compare , name = 'compare'),
     url(r'destroy',views.destroy , name = 'destroy'),
     url(r'comm',views.comm , name = 'comm'),
-
+    url(r'delete',views.delete , name = 'delete'),
     ]

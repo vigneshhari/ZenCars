@@ -19,11 +19,17 @@ import hashlib
 def req(request):
 		request.session['infomessage'] = "Please Login Here"
 		request.session['open'] = 'login'
-		request.session['redirect'] = request.META['HTTP_REFERER']
+		try:
+			request.session['redirect'] = request.META['HTTP_REFERER']
+		except Exception, e:
+			request.session['redirect'] = '/home'		
 		return HttpResponseRedirect("/home")
 def reg(request):
 		request.session['open'] = 'register'
-		request.session['redirect'] = request.META['HTTP_REFERER']
+		try:
+			request.session['redirect'] = request.META['HTTP_REFERER']
+		except Exception, e:
+			request.session['redirect'] = '/home'
 		return HttpResponseRedirect("/home")
 def login(request):
 	email =  request.POST.get("email","")
@@ -154,7 +160,7 @@ def sendveri(request):
 	if(test):
 			return render(request,"forpass.html",{'sendmessage' : "This Email Does not Exist in our Database"})
 	outer = MIMEMultipart('alternative')
-	outer['Subject'] = "Verify Account For Interstellar"
+	outer['Subject'] = "Verify Account For ZenCars"
 	outer['To'] = email
 	outer['From'] = 'cygnus@cecsummit.org'
 	message = """
@@ -166,9 +172,9 @@ def sendveri(request):
 				<br>	
 				<h3>The verification code is  {}</h3>
 
-					<h4>Cygnus Team :)</h4>
+					<h4> Team ZenCars :)</h4>
 					<br>
-					 DO not Reply To this message 
+					 Do not Reply To this message 
 				""".format(name,vericode)
 	HTML_BODY = MIMEText(message,'html')
 	outer.attach(HTML_BODY)
@@ -181,7 +187,10 @@ def sendveri(request):
 	except Exception, e:
 		print e
 		return render(request,"forpass.html",{'sendmessage' : "Invalid Email Address or Try again Later"})
-	return render(request,"forpass.html",{'sendmessage' : "Verification Code Sent"})
+	request.session['infomessage'] = "Email Sent"
+	request.session['open'] = 'forget'
+	return HttpResponseRedirect("/home")
+
 
 def logout(request):
 	request.session['id'] = '' 

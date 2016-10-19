@@ -66,19 +66,32 @@ def search(request):
 	return render(request,"listv.html",{"len" :(len(n)) , "car" : car})
 
 def viewadd(request):
-	print "hi there"
+	if(request.session.get('id','') == ''):
+		return HttpResponseRedirect('/auth/req')
+	data = User_Account.objects.all().filter(user_id = request.session.get('id'))
+	for i in data:
+		data = {"name" :i.name , "email" :i.email ,"phone_number" :i.phone_no}
 	step = request.session.get('step','1')
-	link = 'a' + str(step) +".html"
 	if(step == '4'):
-		print "here"
-		user_id = request.session.get("id",None)
-		data = User_Account.objects.all().filter(user_id = user_id)
-		for i in data:
-			data = {"name" :i.name , "email" :i.email ,"phone_number" :i.phone_no}
-			return render(request,link,data)
-	return render(request,link)
+		dat = Car_data_old.objects.all().filter(car_id = request.session.get('car_id'))
+		for i in dat:
+			name = i.name
+		for k in Car_data_new.objects.all().filter(name__contains = name):
+			data['price'] = k.price
+	if(step == '5'):
+		dat = Car_data_old.objects.all().filter(car_id = request.session.get('car_id'))
+		for i in dat:
+			data['price'] = i.price
+			data['location'] = i.Location
+			data['vname'] = i.brand + " " + i.name
+	link = 'a' + str(step) +".html"
+	return render(request,link,data)
 
-
+def delete(request):
+	Car_data_old.objects.all().filter(user_id = request.session.get('id') , car_id = request.session.get('car_id')).delete()
+	request.session['step'] = '1'
+	request.session['car_id'] = None
+	return HttpResponseRedirect("/car/add")
 def add(request):
 	#print request.GET.viewkeys() 
 	user_id = request.session.get("id",'1')
@@ -105,7 +118,7 @@ def add(request):
 			print car_id
 			Car_data_old.objects.all().filter(car_id = int(car_id)).update(features = feature)
 			request.session['step'] = '3'
-			return HttpResponseRedirect("car/add")
+			return HttpResponseRedirect("/car/add")
 	if(step =='3' ):
 			temp = Car_data_old.objects.get(car_id = int(car_id))
 			temp.photolinks = request.FILES['photolinks']
@@ -113,15 +126,15 @@ def add(request):
 			temp.general_information = request.POST.get('review','')
 			temp.save()
 			request.session['step'] = '4'
-			return HttpResponseRedirect("car/add")
+			return HttpResponseRedirect("/car/add")
 	if(step == '4'):
 			Car_data_old.objects.all().filter(car_id = car_id).update(price = request.GET.get('price') , Location = request.GET.get("location"))
 			request.session['step'] = '5'
-			return HttpResponseRedirect("car/add")
+			return HttpResponseRedirect("/car/add")
 	if(step == '5'):
 			Car_data_old.objects.all().filter(car_id = car_id).update(hits = 0 , confirmed = 1 ,status = "sell" , date = datetime.datetime.now())
 			request.session['step'] = '1'
-			return HttpResponseRedirect(("car/view?type=old?id="+str(car_id)))
+			return HttpResponseRedirect(("/car/view?type=old?id="+str(car_id)))
 	return 0
 
 def view(request):
@@ -150,6 +163,8 @@ def view(request):
 		data['status'] = 'old'
 		details = Car_data_old.objects.all().filter(car_id = id)
 		for i in details:
+			hit = i.hits + 1
+			Car_data_old.objects.all().filter(car_id = id).update(hits = hit)
 			data['brand'] = i.brand
 			data['name'] = i.brand + " " + i.name
 			data['photo'] = i.photolinks
@@ -180,6 +195,8 @@ def view(request):
 		data['status'] = 'var'
 		details = Varient_data.objects.all().filter(varient_id = id)
 		for i in details:
+			hit = i.hits
+			Varient_data.objects.all().filter(varient_id = id).update(hits =hit)
 			data['name'] = i.name
 			data['price'] = i.price
 			data['brand'] = i.main_car
@@ -220,6 +237,7 @@ def view(request):
 			data['name'] = i.name
 			data['type'] = i.body_type
 			data['price'] = i.price
+			data['brand'] = i.name.split(" ")[0]
 			data['cc'],data['city'],data['highway'] = "-","-","-"
 			pic = i.photolinks
 			picture,spec = [],[]
@@ -240,6 +258,8 @@ def view(request):
 					spec.append({'ind' : n.strip()  , 'val' : m.strip()})
 			data['spec'] = spec
 			data['info'] = i.general_information
+			hit = i.hits + 1
+			Car_data_new.objects.all().filter(car_id = id).update(hits = hit)
 		return render(request,'newcar.html',data)
 
 def comm(request):
@@ -252,6 +272,7 @@ def destroy(request):
 	return HttpResponseRedirect("/home")
 
 def compare(request):
+	if(request.GET.get('c',-1) == -1 or request.GET.get('c',-1) == '' ):return HttpResponseRedirect('/car/search?brand=Any+Make&model=Any+Model&status=Any&min=&max=')
 	data = {}
 	c = request.GET.get('c',-1)
 	if(c == '' or c == -1):

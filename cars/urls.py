@@ -12,4 +12,7 @@ urlpatterns = [
     url(r'^car' , include('car_data.urls')),
     url(r'^blog' , include('blog.urls')),
  	url(r'^home/', views.home),   
+ 	url(r'^about/', views.about),   
+ 	url(r'^contact/', views.contact),   
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

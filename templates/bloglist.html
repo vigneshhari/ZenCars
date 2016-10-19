@@ -54,61 +54,37 @@
 			</div>
 		</div>
 		<!-- End Switcher -->
-		<section class="b-modal">
-			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-							<h4 class="modal-title" id="myModalLabel">Video</h4>
-						</div>
-						<div class="modal-body">
-							<iframe width="560" height="315" src="https://www.youtube.com/embed/a_ugz7GoHwY" allowfullscreen></iframe>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section><!--b-modal-->
-		<header class="b-topBar wow slideInDown" data-wow-delay="0.7s">
+		
+			<header class="b-topBar wow slideInDown" data-wow-delay="0.7s">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-4 col-xs-6">
 						<div class="b-topBar__addr">
 							<span class="fa fa-map-marker"></span>
-							202 W 7TH ST, LOS ANGELES, CA 90014
+							College Of Engineering Chengannur
 						</div>
 					</div>
 					<div class="col-md-2 col-xs-6">
 						<div class="b-topBar__tel">
 							<span class="fa fa-phone"></span>
-							1-800- 624-5462
+							+91 9562854642
 						</div>
 					</div>
 					<div class="col-md-4 col-xs-6">
 						<nav class="b-topBar__nav">
 							<ul>
-								<li><a href="#">Cart</a></li>
-								<li><a href="#">Register</a></li>
-								<li><a href="#">Sign in</a></li>
+								{%if name == null%}
+								<li><a href="/auth/req" style ="color:black" id="signin_top">SIGN IN</a></li>
+								<li><a href="/auth/reg" style ="color:black" id="register_top">REGISTER</a></li>		
+								{%endif%}
+								{%if name != null%}
+								<li><a href="/auth/logout" style ="color:black">Logout</a></li>
+								<li><a href="#" style ="color:black">Welcome Back {{name}}</a></li>
+								{%endif%}
 							</ul>
 						</nav>
 					</div>
-					<div class="col-md-2 col-xs-6">
-						<div class="b-topBar__lang">
-							<div class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle='dropdown'>Language</a>
-								<a class="m-langLink dropdown-toggle" data-toggle='dropdown' href="#"><span class="b-topBar__lang-flag m-en"></span>EN<span class="fa fa-caret-down"></span></a>
-								<ul class="dropdown-menu h-lang">
-									<li><a class="m-langLink dropdown-toggle" data-toggle='dropdown' href="#"><span class="b-topBar__lang-flag m-en"></span>EN</a></li>
-									<li><a class="m-langLink dropdown-toggle" data-toggle='dropdown' href="#"><span class="b-topBar__lang-flag m-es"></span>ES</a></li>
-									<li><a class="m-langLink dropdown-toggle" data-toggle='dropdown' href="#"><span class="b-topBar__lang-flag m-de"></span>DE</a></li>
-									<li><a class="m-langLink dropdown-toggle" data-toggle='dropdown' href="#"><span class="b-topBar__lang-flag m-fr"></span>FR</a></li>
-								</ul>
-							</div>
-						</div>
+					
 					</div>
 				</div>
 			</div>
@@ -119,8 +95,8 @@
 				<div class="row">
 					<div class="col-sm-3 col-xs-4">
 						<div class="b-nav__logo wow slideInLeft" data-wow-delay="0.3s">
-							<h3><a href="home.html">Auto<span>Club</span></a></h3>
-							<h2><a href="home.html">AUTO DEALER TEMPLATE</a></h2>
+							<h3><a href="/home">Zen<span>Cars</span></a></h3>
+							<h2><a href="/home">&nbsp Find Your Dream</a></h2>
 						</div>
 					</div>
 					<div class="col-sm-9 col-xs-8">
@@ -135,35 +111,21 @@
 							</div>
 							<div class="collapse navbar-collapse navbar-main-slide" id="nav">
 								<ul class="navbar-nav-menu">
+									<li><a href="/home">Home</a></li>
+									{%if name != null%}
 									<li class="dropdown">
-										<a class="dropdown-toggle" data-toggle='dropdown' href="home.html">Home <span class="fa fa-caret-down"></span></a>
+										<a class="dropdown-toggle" data-toggle='dropdown' href="#">Account<span class="fa fa-caret-down"></span></a>
 										<ul class="dropdown-menu h-nav">
-											<li><a href="home.html">Home Page 1</a></li>
-											<li><a href="home-2.html">Home Page 2</a></li>
+											<li><a href="/auth/details">Details</a></li>
+											<li><a href="/auth/view?type=sell">View Listed Cars</a></li>
+											<li><a href="/auth/view?type=sold">View Sold Cars</a></li>
+											<li><a href="/car/add">Add Car</a></li>
 										</ul>
 									</li>
-									<li class="dropdown">
-										<a class="dropdown-toggle" data-toggle='dropdown' href="#">Grid <span class="fa fa-caret-down"></span></a>
-										<ul class="dropdown-menu h-nav">
-											<li><a href="listings.html">listing 1</a></li>
-											<li><a href="listingsTwo.html">listing 2</a></li>
-											<li><a href="listTable.html">listing 3</a></li>
-											<li><a href="listTableTwo.html">listing 4</a></li>
-										</ul>
-									</li>
-									<li><a href="compare.html">compare</a></li>
-									<li><a href="about.html">About</a></li>
-									<li><a href="article.html">Services</a></li>
-									<li class="dropdown">
-										<a class="dropdown-toggle" data-toggle='dropdown' href="#">Blog <span class="fa fa-caret-down"></span></a>
-										<ul class="dropdown-menu h-nav">
-											<li><a href="blog.html">Blog 1</a></li>
-											<li><a href="blogTwo.html">Blog 2</a></li>
-											<li><a href="404.html">Page 404</a></li>
-										</ul>
-									</li>
-									<li><a href="submit1.html">Shop</a></li>
-									<li><a href="contacts.html">Contact</a></li>
+									{%endif%}
+									<li><a href="/blog/list?category=tip">Blog</a></li>
+									<li><a href="/about">About</a></li>
+									<li><a href="/contact">Contact Us</a></li>
 								</ul>
 							</div>
 						</div>
@@ -174,7 +136,7 @@
 
 		<section class="b-pageHeader">
 			<div class="container">
-				<h1 class=" wow zoomInLeft" data-wow-delay="0.5s">AutoClub Blog</h1>
+				<h1 class=" wow zoomInLeft" data-wow-delay="0.5s">ZenCars Blog</h1>
 				<div class="b-pageHeader__search wow zoomInRight" data-wow-delay="0.5s">
 					<h3>Read Latest Auto News &amp; Reviews</h3>
 				</div>
@@ -183,7 +145,7 @@
 
 		<div class="b-breadCumbs s-shadow">
 			<div class="container wow zoomInUp" data-wow-delay="0.5s">
-				<a href="home.html" class="b-breadCumbs__page">Home</a><span class="fa fa-angle-right"></span><a href="blog.html" class="b-breadCumbs__page m-active">Blog Style 1</a>
+				<a href="/home" class="b-breadCumbs__page">Home</a><span class="fa fa-angle-right"></span><a href="/blog/list?category=tip" class="b-breadCumbs__page m-active">Articles</a>
 			</div>
 		</div><!--b-breadCumbs-->
 
@@ -241,21 +203,23 @@
 							{%endfor%}
 													
 
-							</div>
+							{%if len == 0 %}
+							<h3>Your Search Did not Give any Results</h3>
+							{%else%} 
 							<div class="b-items__pagination-main text-center pull-right wow zoomInUp" data-wow-delay="0.3s">
 								<a href="#" class="m-left"><span class="fa fa-angle-left"></span></a>
 								&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 								<a href="#" class="m-right"><span class="fa fa-angle-right"></span></a>    
-							</div>	
-					</div>
+							</div>
+							{%endif%}	
 
-
+							</div></div>
 
 
 
 					<div class="col-md-3 col-xs-12">
 						<aside class="b-blog__aside">
-							<form class="b-blog__aside-search wow zoomInUp" data-wow-delay="0.3s" action="/" method="post">
+							<form class="b-blog__aside-search wow zoomInUp" data-wow-delay="0.3s" action="/blog/list" method="get">
 								<div>
 									<input type="text" name="search" value="" placeholder="Search" />
 									<button type="submit"><span class="fa fa-search"></span></button>
@@ -267,8 +231,8 @@
 								</header>
 								<nav>
 									<ul class="b-blog__aside-categories-list">
-										<li><a href="#">Auto Buying Tips &amp; Advice</a></li>
-										<li><a href="#" class="m-active">Latest Models News &amp; Reviews</a></li>
+										<li><a href="/blog/list?category=tip">Auto Buying Tips &amp; Advice</a></li>
+										<li><a href="/blog/list?category=car" class="m-active">Latest Models News &amp; Reviews</a></li>
 									</ul>
 								</nav>
 							</div>
@@ -280,16 +244,14 @@
 								</div>
 								<div class="b-items__aside-sell-info">
 									<p>
-										Nam tellus enimds eleifend dignis lsim
-										biben edum tristique sed metus fusce
-										Maecenas lobortis.
+										Add your Car to the worlds leading Pre-Owned Cars Listing
 									</p>
-									<a href="submit1.html" class="btn m-btn">REGISTER NOW<span class="fa fa-angle-right"></span></a>
+									<a href="/car/add" class="btn m-btn">Add Now<span class="fa fa-angle-right"></span></a>
 								</div>
 							</div>
 							<div class="b-detail__main-aside-about-call wow zoomInUp" data-wow-delay="0.3s">
 								<span class="fa fa-phone"></span>
-								<div>1-888-378-4027</div>
+								<div>+91 9562854642</div>
 								<p>QUESTIONS? CALL US 24/7</p>
 							</div>
 						</aside>
@@ -297,126 +259,62 @@
 				</div>
 			</div>
 		</section><!--b-blog-->
-
-		<div class="b-features">
+<div class="b-features">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-9 col-md-offset-3 col-xs-6 col-xs-offset-6">
 						<ul class="b-features__items">
 							<li class="wow zoomInUp" data-wow-delay="0.3s" data-wow-offset="100">Low Prices, No Haggling</li>
 							<li class="wow zoomInUp" data-wow-delay="0.3s" data-wow-offset="100">Largest Car Dealership</li>
-							<li class="wow zoomInUp" data-wow-delay="0.3s" data-wow-offset="100">Multipoint Safety Check</li>
+							<li class="wow zoomInUp" data-wow-delay="0.3s" data-wow-offset="100">24x7 Support</li>
 						</ul>
 					</div>
 				</div>
 			</div>
 		</div><!--b-features-->
 
-		<div class="b-info">
+	<div class="b-info">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-3 col-xs-6">
 						<aside class="b-info__aside wow zoomInLeft" data-wow-delay="0.3s">
-							<article class="b-info__aside-article">
-								<h3>OPENING HOURS</h3>
-								<div class="b-info__aside-article-item">
-									<h6>Sales Department</h6>
-									<p>Mon-Sat : 8:00am - 5:00pm<br />
-										Sunday is closed</p>
-								</div>
-								<div class="b-info__aside-article-item">
-									<h6>Service Department</h6>
-									<p>Mon-Sat : 8:00am - 5:00pm<br />
-										Sunday is closed</p>
-								</div>
-							</article>
+							
 							<article class="b-info__aside-article">
 								<h3>About us</h3>
-								<p>Vestibulum varius od lio eget conseq
-									uat blandit, lorem auglue comm lodo 
-									nisl non ultricies lectus nibh mas lsa 
-									Duis scelerisque aliquet. Ante donec
-									libero pede porttitor dacu msan esct
-									venenatis quis.</p>
+							<p>Here At ZenCars we treat each customer with great Care . ZenCar Members get exclusive benefit on upcomming cars and other Bundled offers . Members can also list their vehicle in one of the larget online Pre-Owned Car Markets of the world.</p>
+							<p>Come, Lets Find your Dream Car</p>
 							</article>
-							<a href="about.html" class="btn m-btn">Read More<span class="fa fa-angle-right"></span></a>
+							<a href="/about" class="btn m-btn">About us<span class="fa fa-angle-right"></span></a>
 						</aside>
 					</div>
 					<div class="col-md-3 col-xs-6">
-						<div class="b-info__latest">
-							<h3>LATEST AUTOS</h3>
-							<div class="b-info__latest-article wow zoomInUp" data-wow-delay="0.3s">
-								<div class="b-info__latest-article-photo m-audi"></div>
-								<div class="b-info__latest-article-info">
-									<h6><a href="detail.html">MERCEDES-AMG GT S</a></h6>
-									<p><span class="fa fa-tachometer"></span> 35,000 KM</p>
-								</div>
-							</div>
-							<div class="b-info__latest-article wow zoomInUp" data-wow-delay="0.3s">
-								<div class="b-info__latest-article-photo m-audiSpyder"></div>
-								<div class="b-info__latest-article-info">
-									<h6><a href="#">AUDI R8 SPYDER V-8</a></h6>
-									<p><span class="fa fa-tachometer"></span> 35,000 KM</p>
-								</div>
-							</div>
-							<div class="b-info__latest-article wow zoomInUp" data-wow-delay="0.3s">
-								<div class="b-info__latest-article-photo m-aston"></div>
-								<div class="b-info__latest-article-info">
-									<h6><a href="#">ASTON MARTIN VANTAGE</a></h6>
-									<p><span class="fa fa-tachometer"></span> 35,000 KM</p>
-								</div>
-							</div>
-						</div>
+						
 					</div>
 					<div class="col-md-3 col-xs-6">
-						<div class="b-info__twitter">
-							<h3>from twitter</h3>
-							<div class="b-info__twitter-article wow zoomInUp" data-wow-delay="0.3s">
-								<div class="b-info__twitter-article-icon"><span class="fa fa-twitter"></span></div>
-								<div class="b-info__twitter-article-content">
-									<p>Duis scelerisque aliquet ante donec libero pede porttitor dacu</p>
-									<span>20 minutes ago</span>
-								</div>
-							</div>
-							<div class="b-info__twitter-article wow zoomInUp" data-wow-delay="0.3s">
-								<div class="b-info__twitter-article-icon"><span class="fa fa-twitter"></span></div>
-								<div class="b-info__twitter-article-content">
-									<p>Duis scelerisque aliquet ante donec libero pede porttitor dacu</p>
-									<span>20 minutes ago</span>
-								</div>
-							</div>
-							<div class="b-info__twitter-article wow zoomInUp" data-wow-delay="0.3s">
-								<div class="b-info__twitter-article-icon"><span class="fa fa-twitter"></span></div>
-								<div class="b-info__twitter-article-content">
-									<p>Duis scelerisque aliquet ante donec libero pede porttitor dacu</p>
-									<span>20 minutes ago</span>
-								</div>
-							</div>
-						</div>
+						
 					</div>
 					<div class="col-md-3 col-xs-6">
 						<address class="b-info__contacts wow zoomInUp" data-wow-delay="0.3s">
 							<p>contact us</p>
 							<div class="b-info__contacts-item">
 								<span class="fa fa-map-marker"></span>
-								<em>202 W 7th St, Suite 233 Los Angeles,
-									California 90014 USA</em>
+								<em>College of Engineering Chengannur</em>
 							</div>
 							<div class="b-info__contacts-item">
 								<span class="fa fa-phone"></span>
-								<em>Phone:  1-800- 624-5462</em>
+								<em>Phone:  +91 9562854642</em>
 							</div>
 							<div class="b-info__contacts-item">
 								<span class="fa fa-fax"></span>
-								<em>FAX:  1-800- 624-5462</em>
+								<em>FAX:  +91 9730763376</em>
 							</div>
 							<div class="b-info__contacts-item">
 								<span class="fa fa-envelope"></span>
-								<em>Email:  info@domain.com</em>
+								<em>Email:  vigneshhari@ieee.org</em>
 							</div>
 						</address>
 						<address class="b-info__map">
-							<a href="contacts.html">Open Location Map</a>
+							<a href="/contact">Contact Us</a>
 						</address>
 					</div>
 				</div>
@@ -430,9 +328,9 @@
 					<div class="col-xs-4">
 						<div class="b-footer__company wow fadeInLeft" data-wow-delay="0.3s">
 							<div class="b-nav__logo">
-								<h3><a href="home.html">Auto<span>Club</span></a></h3>
+								<h3><a href="home.html">Zen<span>Cars</span></a></h3>
 							</div>
-							<p>&copy; 2015 Designed by Templines &amp; Powered by WordPress.</p>
+							<p>&copy; Design By Zen tech &amp; Powered by Django.</p>
 						</div>
 					</div>
 					<div class="col-xs-8">
@@ -445,18 +343,6 @@
 								<a href="#"><span class="fa fa-youtube-square"></span></a>
 								<a href="#"><span class="fa fa-skype"></span></a>
 							</div>
-							<nav class="b-footer__content-nav">
-								<ul>
-									<li><a href="home.html">Home</a></li>
-									<li><a href="404.html">Pages</a></li>
-									<li><a href="listings.html">Inventory</a></li>
-									<li><a href="about.html">About</a></li>
-									<li><a href="404.html">Services</a></li>
-									<li><a href="blog.html">Blog</a></li>
-									<li><a href="listTable.html">Shop</a></li>
-									<li><a href="contacts.html">Contact</a></li>
-								</ul>
-							</nav>
 						</div>
 					</div>
 				</div>
@@ -487,5 +373,6 @@
 		<script src="{% static 'js/wow.min.js'%}"></script>
 		<script src="{% static 'js/jquery.placeholder.min.js'%}"></script>
 		<script src="{% static 'js/theme.js'%}"></script>
+
 	</body>
 </html>

@@ -7,11 +7,12 @@ import datetime
 # Create your views here.
 
 def blog(request):
+	blog = {}
 	id = request.GET.get('id','')
 	if(id == ''):return HttpResponseRedirect('/home')
 	data = content.objects.all().filter(blog_id=id)
 	user_id = request.session.get('id','')
-	blog = {}
+	if(user_id == ''):user_id = -1
 	pic = []
 	temp = 0;
 	for i in data:
@@ -39,20 +40,37 @@ def blog(request):
 def list(request):
 	data = {}
 	blog = []
-	category = request.GET.get('category','nil')
-	print category
-	if category == 'nil':return HttpResponseRedirect("/home")
-	for i in content.objects.all().filter(category = category):
-		comm = 0
-		for c in comment.objects.all().filter(blog_id = i.blog_id):
-			comm+=1
-		pic = []
-		temp = 0
-		for img in i.photo.split(","):
-			pic.append({"link" : img , "ind" : temp});temp+=1
-		link = "/blog/blog?id=" + str(i.blog_id)
-		blog.append({"link" : link , "title" : i.title , "photo" : pic , 'count' : comm , 'author' : i.author , 'date' : i.date.date() , 'content' : (''.join(i.content.split("\n")))[:150] , "category" : category  } )
-	data['blog'] = blog
+	temp = 0
+	user_id = request.session.get('id',-1)
+	if(user_id != ''):
+		for n in User_Account.objects.all().filter(user_id = user_id):
+			data['name'] = n.name
+	if(request.GET.get('search','') != ''):
+		for i in content.objects.all().filter(title__contains = request.GET.get('search')):
+			comm = 0
+			for c in comment.objects.all().filter(blog_id = i.blog_id):
+				comm+=1
+			pic = []
+			for img in i.photo.split(","):
+				pic.append({"link" : img , "ind" : temp});temp+=1
+			link = "/blog/blog?id=" + str(i.blog_id)
+			blog.append({"link" : link , "title" : i.title , "photo" : pic , 'count' : comm , 'author' : i.author , 'date' : i.date.date() , 'content' : (''.join(i.content.split("\n")))[:150] , "category" : i.category  } )
+		data['blog'] = blog
+		data['len'] = len(blog)
+	else:
+		category = request.GET.get('category','nil')
+		print category
+		if category == 'nil':return HttpResponseRedirect("/home")
+		for i in content.objects.all().filter(category = category):
+			comm = 0
+			for c in comment.objects.all().filter(blog_id = i.blog_id):
+				comm+=1
+			pic = []
+			for img in i.photo.split(","):
+				pic.append({"link" : img , "ind" : temp});temp+=1
+			link = "/blog/blog?id=" + str(i.blog_id)
+			blog.append({"link" : link , "title" : i.title , "photo" : pic , 'count' : comm , 'author' : i.author , 'date' : i.date.date() , 'content' : (''.join(i.content.split("\n")))[:150] , "category" : category  } )
+		data['blog'] = blog
 	return render(request,"bloglist.html",data)
 
 def comm(request):
