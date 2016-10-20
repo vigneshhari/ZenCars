@@ -243,39 +243,10 @@ function setCities(chooser) {
 
 		<div class="b-breadCumbs s-shadow">
 			<div class="container wow zoomInUp" data-wow-delay="0.5s">
-				<a href="home.html" class="b-breadCumbs__page">Home</a><span class="fa fa-angle-right"></span><a href="listings.html" class="b-breadCumbs__page m-active">Search Results</a>
+				<a href="/home" class="b-breadCumbs__page">Home</a><span class="fa fa-angle-right"></span><a href="#" class="b-breadCumbs__page m-active">Search Results</a>
 			</div>
 		</div><!--b-breadCumbs-->
 
-		<div class="b-infoBar">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-4 col-xs-12">
-						<div class="b-infoBar__compare wow zoomInUp" data-wow-delay="0.5s">
-							<a href="compare.html" class="b-infoBar__compare-item"><span class="fa fa-compress"></span>Comapre Selected Vehicles</a>
-						</div>
-					</div>
-					<div class="col-lg-8 col-xs-12">
-						<div class="b-infoBar__select">
-							<form method="post" action="/">
-								<div class="b-infoBar__select-one wow zoomInUp" data-wow-delay="0.5s">
-									<span class="b-infoBar__select-one-title">SELECT VIEW</span>
-									<a href="listingsTwo.html" class="m-list m-active"><span class="fa fa-list"></span></a>
-									<a href="listTable.html" class="m-table"><span class="fa fa-table"></span></a>
-								</div>
-								<div class="b-infoBar__select-one wow zoomInUp" data-wow-delay="0.5s">
-									<span class="b-infoBar__select-one-title">SORT BY</span>
-									<select name="select2" class="m-select">
-										<option value="" selected="">Last Added</option>
-									</select>
-									<span class="fa fa-caret-down"></span>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div><!--b-infoBar-->
 
 		<section class="b-items s-shadow">
 			<div class="container">
@@ -289,10 +260,6 @@ function setCities(chooser) {
 								<div class="b-items__cars-one-img">
 									<img class="img-responsive" src={{e.pic}} style="max-height: 230px ;max-width: 270px ;"  alt='nissan'/>
 									<span class="b-items__cars-one-img-type m-premium">new</span>
-									<form action="/" method="post">
-										<input type="checkbox" name="check1" id='check1'/>
-										<label for="check1" class="b-items__cars-one-img-check"><span class="fa fa-check"></span></label>
-									</form>
 								</div>
 								<div class="b-items__cars-one-info">
 									<header class="b-items__cars-one-info-header s-lineDownLeft">
@@ -468,6 +435,17 @@ function setCities(chooser) {
 												<span class="fa fa-caret-down"></span>
 											</div>
 										</div>
+										<div class="b-items__aside-main-body-item">
+											<label>Order By Price ?</label>
+											<div>
+												<select name="order" class ="m-select">
+											<option value="">No</option>
+											<option value="asc">Ascending</option>
+											<option value="dsc">Descending</option>
+										</select>
+												<span class="fa fa-caret-down"></span>
+											</div>
+										</div>
 									</div>
 									<footer class="b-items__aside-main-footer">
 										<button type="submit" class="btn m-btn">FILTER VEHICLES<span class="fa fa-angle-right"></span></button><br />
@@ -482,9 +460,7 @@ function setCities(chooser) {
 								</div>
 								<div class="b-items__aside-sell-info">
 									<p>
-										Nam tellus enimds eleifend dignis lsim
-										biben edum tristique sed metus fusce
-										Maecenas lobortis.
+										Add your Car to the worlds leading Pre-Owned Cars Listing 
 									</p>
 									<a href="submit1.html" class="btn m-btn">REGISTER NOW<span class="fa fa-angle-right"></span></a>
 								</div>

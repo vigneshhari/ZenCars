@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+		{% load static %}
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<title>Zen Cars</title>
+
+		<link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.png'%}" />
+
+		<link href="{% static 'css/master.css' %}" rel="stylesheet">
+
+		<!-- SWITCHER -->
+		<link rel="stylesheet" id="switcher-css" type="text/css" href="{%static 'assets/switcher/css/switcher.css' %}" media="all" />
+		<link rel="alternate stylesheet" type="text/css" href="{%static 'assets/switcher/css/color1.css' %}" title="color1" media="all" data-default-color="true" />
+		<link rel="alternate stylesheet" type="text/css" href="{%static 'assets/switcher/css/color2.css' %}" title="color2" media="all" />
+		<link rel="alternate stylesheet" type="text/css" href="{%static 'assets/switcher/css/color3.css'%}" title="color3" media="all" />
+		<link rel="alternate stylesheet" type="text/css" href="{%static 'assets/switcher/css/color4.css'%}" title="color4" media="all" />
+		<link rel="alternate stylesheet" type="text/css" href="{%static 'assets/switcher/css/color5.css'%}" title="color5" media="all" />
+		<link rel="alternate stylesheet" type="text/css" href="{%static 'assets/switcher/css/color6.css'%}" title="color6" media="all" />
+
+		<!--[if lt IE 9]>
+		<script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+	</head>
+	<body class="m-about" data-scrolling-animations="true">
+
+		<!-- Loader -->
+		<div id="page-preloader"><span class="spinner"></span></div>
+		<!-- Loader end -->
+		<!-- Start Switcher -->
+		<div class="switcher-wrapper">	
+			<div class="demo_changer">
+				<div class="demo-icon customBgColor"><i class="fa fa-cog fa-spin fa-2x"></i></div>
+				<div class="form_holder">
+					<div class="row">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="predefined_styles">
+								<div class="skin-theme-switcher">
+									<h4>Color</h4>
+									<a href="#" data-switchcolor="color1" class="styleswitch" style="background-color:#f76d2b;"> </a>
+									<a href="#" data-switchcolor="color2" class="styleswitch" style="background-color:#de483d;"> </a>
+									<a href="#" data-switchcolor="color3" class="styleswitch" style="background-color:#228dcb;"> </a>
+									<a href="#" data-switchcolor="color4" class="styleswitch" style="background-color:#00bff3;"> </a>
+									<a href="#" data-switchcolor="color5" class="styleswitch" style="background-color:#2dcc70;"> </a>
+									<a href="#" data-switchcolor="color6" class="styleswitch" style="background-color:#6054c2;"> </a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Switcher -->
+
+			<header class="b-topBar wow slideInDown" data-wow-delay="0.7s">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4 col-xs-6">
+						<div class="b-topBar__addr">
+							<span class="fa fa-map-marker"></span>
+							College Of Engineering Chengannur
+						</div>
+					</div>
+					<div class="col-md-2 col-xs-6">
+						<div class="b-topBar__tel">
+							<span class="fa fa-phone"></span>
+							+91 9562854642
+						</div>
+					</div>
+					<div class="col-md-4 col-xs-6">
+						<nav class="b-topBar__nav">
+						</nav>
+					</div>
+					
+					</div>
+				</div>
+			</div>
+		</header><!--b-topBar-->
+
+		<nav class="b-nav">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-3 col-xs-4">
+						<div class="b-nav__logo wow slideInLeft" data-wow-delay="0.3s">
+							<h3><a href="/home">Zen<span>Cars</span></a></h3>
+							<h2><a href="/home">&nbsp Find Your Dream</a></h2>
+						</div>
+					</div>
+					<div class="col-sm-9 col-xs-8">
+						<div class="b-nav__list wow slideInRight" data-wow-delay="0.3s">
+							<div class="navbar-header">
+								<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav">
+									<span class="sr-only">Toggle navigation</span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+								</button>
+							</div>
+							<div class="collapse navbar-collapse navbar-main-slide" id="nav">
+								<ul class="navbar-nav-menu">
+									<li><a href="/home">Home</a></li>
+									{%if name != null%}
+									<li class="dropdown">
+										<a class="dropdown-toggle" data-toggle='dropdown' href="#">Account<span class="fa fa-caret-down"></span></a>
+										<ul class="dropdown-menu h-nav">
+											<li><a href="/auth/details">Details</a></li>
+											<li><a href="/auth/view?type=sell">View Listed Cars</a></li>
+											<li><a href="/auth/view?type=sold">View Sold Cars</a></li>
+											<li><a href="/car/add">Add Car</a></li>
+										</ul>
+									</li>
+									{%endif%}
+									<li><a href="/blog/list?category=tip">Blog</a></li>
+									<li><a href="/about">About</a></li>
+									<li><a href="/contact">Contact Us</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav><!--b-nav-->
+
+		<section class="b-pageHeader">
+			<div class="container">
+				<h1 class=" wow zoomInLeft" data-wow-delay="0.5s">Contact Us</h1>
+				<div class="b-pageHeader__search wow zoomInRight" data-wow-delay="0.5s">
+					<h3>Get In Touch With Us Now</h3>
+				</div>
+			</div>
+		</section><!--b-pageHeader-->
+
+		<div class="b-breadCumbs s-shadow wow zoomInUp" data-wow-delay="0.5s">
+			<div class="container">
+				<a href="/home" class="b-breadCumbs__page">Home</a><span class="fa fa-angle-right"></span><a href="#" class="b-breadCumbs__page m-active">Contact Us</a>
+			</div>
+		</div><!--b-breadCumbs-->
+
+		<section class="b-contacts s-shadow">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-6">
+						<div class="b-contacts__form">
+							<header class="b-contacts__form-header s-lineDownLeft wow zoomInUp" data-wow-delay="0.5s">
+								<h2 class="s-titleDet">Contact Form</h2> 
+							</header>
+							<p class=" wow zoomInUp" data-wow-delay="0.5s">Enter your comments through the form below, and our customer service professionals will contact you as soon as possible.</p>
+							<div id="success"></div>
+							<form id="contactForm" novalidate class="s-form wow zoomInUp" data-wow-delay="0.5s">
+								
+								<input type="text" placeholder="YOUR NAME" value="" name="user-name" id="user-name" />
+								<input type="text" placeholder="EMAIL ADDRESS " value="" name="user-email" id="user-email" />
+								<input type="text" placeholder="PHONE NO" value="" name="user-phone" id="user-phone" />
+								<textarea id="user-message" name="user-message" placeholder="COMMENT/SUGGESTIONS/FEEDBACK"></textarea>
+								<button type="submit" class="btn m-btn">SUBMIT NOW<span class="fa fa-angle-right"></span></button>
+							</form>
+						</div>
+					</div>
+					<div class="col-xs-6">
+						<div class="b-contacts__address">
+							<div class="b-contacts__address-hours">
+								<h2 class="s-titleDet wow zoomInUp" data-wow-delay="0.5s">opening hours</h2>
+								<div class="b-contacts__address-hours-main wow zoomInUp" data-wow-delay="0.5s">
+									<div class="row">
+										<div class="col-md-6 col-xs-12">
+											<h5>Sales Department</h5>
+											<p>Mon-Sat : 8:00am - 5:00pm <br/>Sunday is closed</p>
+										</div>
+										<div class="col-md-6 col-xs-12">
+											<h5>Service Department</h5>
+											<p>Mon-Sat : 8:00am - 5:00pm <br/>Sunday is closed</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="b-contacts__address-info">
+								<h2 class="s-titleDet wow zoomInUp" data-wow-delay="0.5s">opening hours</h2>
+								<address class="b-contacts__address-info-main wow zoomInUp" data-wow-delay="0.5s">
+									<div class="b-contacts__address-info-main-item">
+										<span class="fa fa-home"></span>
+										ADDRESS
+										<p>College of Engineering Chengannur</p>
+									</div>
+									<div class="b-contacts__address-info-main-item">
+										<div class="row">
+											<div class="col-lg-3 col-md-4 col-xs-12">
+												<span class="fa fa-phone"></span>
+												PHONE
+											</div>
+											<div class="col-lg-9 col-md-8 col-xs-12">
+												<em>+91 9562854642</em>
+											</div>
+										</div>
+									</div>
+									<div class="b-contacts__address-info-main-item">
+										<div class="row">
+											<div class="col-lg-3 col-md-4 col-xs-12">
+												<span class="fa fa-envelope"></span>
+												EMAIL
+											</div>
+											<div class="col-lg-9 col-md-8 col-xs-12">
+												<em>vigneshhari@ieee.org</em>
+											</div>
+										</div>
+									</div>
+								</address>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section><!--b-contacts-->
+
+			<div class="b-features">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-9 col-md-offset-3 col-xs-6 col-xs-offset-6">
+						<ul class="b-features__items">
+							<li class="wow zoomInUp" data-wow-delay="0.3s" data-wow-offset="100">Low Prices, No Haggling</li>
+							<li class="wow zoomInUp" data-wow-delay="0.3s" data-wow-offset="100">Largest Car Dealership</li>
+							<li class="wow zoomInUp" data-wow-delay="0.3s" data-wow-offset="100">24x7 Support</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div><!--b-features-->
+
+	<div class="b-info">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3 col-xs-6">
+						<aside class="b-info__aside wow zoomInLeft" data-wow-delay="0.3s">
+							
+							<article class="b-info__aside-article">
+								<h3>About us</h3>
+							<p>Here At ZenCars we treat each customer with great Care . ZenCar Members get exclusive benefit on upcomming cars and other Bundled offers . Members can also list their vehicle in one of the larget online Pre-Owned Car Markets of the world.</p>
+							<p>Come, Lets Find your Dream Car</p>
+							</article>
+							<a href="/about" class="btn m-btn">About us<span class="fa fa-angle-right"></span></a>
+						</aside>
+					</div>
+					<div class="col-md-3 col-xs-6">
+						
+					</div>
+					<div class="col-md-3 col-xs-6">
+						
+					</div>
+					<div class="col-md-3 col-xs-6">
+						<address class="b-info__contacts wow zoomInUp" data-wow-delay="0.3s">
+							<p>contact us</p>
+							<div class="b-info__contacts-item">
+								<span class="fa fa-map-marker"></span>
+								<em>College of Engineering Chengannur</em>
+							</div>
+							<div class="b-info__contacts-item">
+								<span class="fa fa-phone"></span>
+								<em>Phone:  +91 9562854642</em>
+							</div>
+							<div class="b-info__contacts-item">
+								<span class="fa fa-fax"></span>
+								<em>FAX:  +91 9730763376</em>
+							</div>
+							<div class="b-info__contacts-item">
+								<span class="fa fa-envelope"></span>
+								<em>Email:  vigneshhari@ieee.org</em>
+							</div>
+						</address>
+						<address class="b-info__map">
+							<a href="/contact">Contact Us</a>
+						</address>
+					</div>
+				</div>
+			</div>
+		</div><!--b-info-->
+
+		<footer class="b-footer">
+			<a id="to-top" href="#this-is-top"><i class="fa fa-chevron-up"></i></a>
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-4">
+						<div class="b-footer__company wow fadeInLeft" data-wow-delay="0.3s">
+							<div class="b-nav__logo">
+								<h3><a href="home.html">Zen<span>Cars</span></a></h3>
+							</div>
+							<p>&copy; Design By Zen tech &amp; Powered by Django.</p>
+						</div>
+					</div>
+					<div class="col-xs-8">
+						<div class="b-footer__content wow fadeInRight" data-wow-delay="0.3s">
+							<div class="b-footer__content-social">
+								<a href="#"><span class="fa fa-facebook-square"></span></a>
+								<a href="#"><span class="fa fa-twitter-square"></span></a>
+								<a href="#"><span class="fa fa-google-plus-square"></span></a>
+								<a href="#"><span class="fa fa-instagram"></span></a>
+								<a href="#"><span class="fa fa-youtube-square"></span></a>
+								<a href="#"><span class="fa fa-skype"></span></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer><!--b-footer-->
+		<!--Main-->   
+		<script src="{% static 'js/jquery-1.11.3.min.js'%}"></script>
+		<script src="{% static 'js/jquery-ui.min.js'%}"></script>
+		<script src="{% static 'js/bootstrap.min.js'%}"></script>
+		<script src="{% static 'js/modernizr.custom.js'%}"></script>
+
+		<script src="{% static 'assets/rendro-easy-pie-chart/dist/jquery.easypiechart.min.js'%}"></script>
+		<script src="{% static 'js/waypoints.min.js'%}"></script>
+		<script src="{% static 'js/jquery.easypiechart.min.js'%}"></script>
+		<script src="{% static 'js/classie.js'%}"></script>
+
+		<!--Switcher-->
+		<script src="{% static 'assets/switcher/js/switcher.js'%}"></script>
+		<!--Owl Carousel-->
+		<script src="{% static 'assets/owl-carousel/owl.carousel.min.js'%}"></script>
+		<!--bxSlider-->
+		<script src="{% static 'assets/bxslider/jquery.bxslider.js'%}"></script>
+		<!-- jQuery UI Slider -->
+		<script src="{% static 'assets/slider/jquery.ui-slider.js'%}"></script>
+
+		<!--Theme-->
+		<script src="{% static 'js/jquery.smooth-scroll.js'%}"></script>
+		<script src="{% static 'js/wow.min.js'%}"></script>
+		<script src="{% static 'js/jquery.placeholder.min.js'%}"></script>
+		<script src="{% static 'js/theme.js'%}"></script>
+
+	</body>
+</html>

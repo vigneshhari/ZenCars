@@ -14,7 +14,6 @@ def search(request):
 	new = Car_data_new.objects.all()
 	old = Car_data_old.objects.all().filter(status = 'sell' , confirmed = 1)
 	if(str(request.GET.get('brand',"Any Make")) != "Any Make" ):
-		print "Reached"
 		new = new.filter(name__contains = request.GET.get('brand'))
 		old = old.filter(brand__contains = request.GET.get('brand'))
 		if(str(request.GET.get('model',"Any Model")) != "Any Model"):
@@ -26,11 +25,24 @@ def search(request):
 	if(request.GET.get('min','') != '' or request.GET.get('max','') != ''):
 		new = new.filter(price__gte = (int(request.GET.get('min')) * 100000) , price__lte = ((int(request.GET.get('max')) - 20)) * 100000)
 		old = old.filter(price__gte = (int(request.GET.get('min')) * 100000) , price__lte = ((int(request.GET.get('max')) - 20)) * 100000)
+	if(request.GET.get('order','') != ''):
+		if(request.GET.get('order','') == 'asc'):
+			new = new.order_by('price')
+			old = old.order_by('price')
+		if(request.GET.get('order','') == 'dsc'):
+			new = new.order_by('-price')
+			old = old.order_by('-price')	
 	if(request.GET.get('status',"Any") != "Any"):
 		if(request.GET.get('status') == "New"):old =[]
 		if(request.GET.get('status') == "Used"):new =[]
 		
+	user_name = None
 	n = []
+	user = {}
+	id = request.session.get('id',-1)
+	if(id != ''):
+		for i in User_Account.objects.all().filter(user_id = id):
+			user_name = i.name 
 	for j in new:
 		newcar['car'] = 'new'
 		newcar['name'] = j.name
@@ -63,7 +75,7 @@ def search(request):
 		car = paginator.page(1)
 	except EmptyPage:
 		car = paginator.page(paginator.num_pages)
-	return render(request,"listv.html",{"len" :(len(n)) , "car" : car})
+	return render(request,"listv.html",{"name" : user_name ,"len" :(len(n)) , "car" : car})
 
 def viewadd(request):
 	if(request.session.get('id','') == ''):
@@ -204,6 +216,7 @@ def view(request):
 			picture,spec,feat = [],[],[]
 			temp = 0
 			for k in pic.split(","):
+				if(temp == 15):break
 				picture.append({"link" : k ,'no' : temp})
 				temp +=1
 			data['picture'] = picture
@@ -212,7 +225,7 @@ def view(request):
 					n,m = j.split(":")
 					spec.append({'ind' : n  , 'val' :m})
 			data['spec'] = spec
-			data['info'] = i.general_information
+			data['info'] = i.general_information[3:-16]
 			f = i.features
 			f1,f2,f3 = [],[],[]
 			temp = 0;
@@ -256,6 +269,11 @@ def view(request):
 					if(n.strip() == "City / Highway Mileage"):
 						data['city'],data['highway'] = m.split("/")
 					spec.append({'ind' : n.strip()  , 'val' : m.strip()})
+			varient = []
+			for var in Varient_data.objects.all().filter(car_id = id):
+				link = "/car/view?type=var?id="+str(id)
+				varient.append({"name" : var.name , "link" : link , "price" : var.price , "milege" : var.milege})
+			data['varient'] = varient
 			data['spec'] = spec
 			data['info'] = i.general_information
 			hit = i.hits + 1

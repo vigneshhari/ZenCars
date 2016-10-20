@@ -48,6 +48,7 @@ class Varient_data(models.Model):
 	main_car = models.CharField(max_length = 500)
 	price = models.IntegerField()
 	features = models.TextField()
+	milege = models.CharField(max_length =10)
 	body_type = models.CharField(max_length=20) #Sedan ,Suv ,Muv Etc ..
 	specifications = models.TextField()
 	general_information = models.TextField()

@@ -2,6 +2,7 @@ from django.shortcuts import render
 from user_data.models import User_Account
 from car_data.models import Car_data_new,Car_data_old
 from blog.models import content
+from django.http import HttpResponseRedirect
 
 
 def home(request):
@@ -36,4 +37,6 @@ def about(request):
 	return render(request,"about.html")
 
 def contact(request):
-	return 0
+	return render(request,"contact.html")
+def red(request):
+	return HttpResponseRedirect('/home')
