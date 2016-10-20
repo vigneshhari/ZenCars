@@ -304,39 +304,45 @@
 									<div id="info2">
 										
 
-
-										<div class="b-compare__block wow zoomInUp" data-wow-delay="0.3s">
+						{%for e in varient%}
+								<div class="b-compare__block wow zoomInUp" data-wow-delay="0.3s">
 					<div class="b-compare__block-title s-whiteShadow">
-						<h3 class="s-titleDet">Specifications</h3>
+						<h3 class="s-titleDet">{{e.name}}</h3>
 						<a class="j-more" href="#"><span class="fa fa-angle-left"></span></a>
 					</div>
 					<div class="b-compare__block-inside j-inside">
 						<div class="row">
 							<div class="col-xs-3">
 								<div class="b-compare__block-inside-title">
-									
+									Price / Mileage
 								</div>
 							</div>
 							<div class="col-xs-3">
 								<div class="b-compare__block-inside-value">
-									
+									{{e.price}}
 								</div>
 							</div>
 							<div class="col-xs-3">
 								<div class="b-compare__block-inside-value">
-									
+									{{e.milege}}
 								</div>
 							</div>
 							<div class="col-xs-3">
 								<div class="b-compare__block-inside-value">
-									
+							<a href="{{e.link}}" class="btn m-btn">More Details</a>      
 								</div>
 							</div>
 						</div>
 						
 					</div>
-					
-				</div>
+					</div>
+					{%endfor%}
+				
+				<br>
+
+
+
+
 									</div>
 							</div>
 									<br>

@@ -271,7 +271,7 @@ def view(request):
 					spec.append({'ind' : n.strip()  , 'val' : m.strip()})
 			varient = []
 			for var in Varient_data.objects.all().filter(car_id = id):
-				link = "/car/view?type=var?id="+str(id)
+				link = "/car/view?type=var&id="+str(var.varient_id)
 				varient.append({"name" : var.name , "link" : link , "price" : var.price , "milege" : var.milege})
 			data['varient'] = varient
 			data['spec'] = spec
