@@ -141,9 +141,9 @@
 										</ul>
 									</li>
 									{%endif%}
-									<li><a href="about.html">Blog</a></li>
-									<li><a href="about.html">About</a></li>
-									<li><a href="contacts.html">Contact Us</a></li>
+									<li><a href="/blog/list?category=tip">Blog</a></li>
+									<li><a href="/about">About</a></li>
+									<li><a href="/contact">Contact Us</a></li>
 								</ul>
 							</div>
 						</div>
@@ -163,7 +163,7 @@
 
 		<div class="b-breadCumbs s-shadow">
 			<div class="container wow zoomInUp" data-wow-delay="0.5s">
-				<a href="home.html" class="b-breadCumbs__page">Home</a><span class="fa fa-angle-right"></span><a href="listTable.html" class="b-breadCumbs__page m-active">Your Cars</a>
+				<a href="/home" class="b-breadCumbs__page">Home</a><span class="fa fa-angle-right"></span><a href="#" class="b-breadCumbs__page m-active">Your Cars</a>
 			</div>
 		</div><!--b-breadCumbs-->
 
@@ -203,7 +203,7 @@
 													<li>{{e.trans}}</li>
 													<li>{{e.fuel}}</li>
 												</ul>
-												<h5 class="b-items__cell-info-price">{{e.price}} Rs</h5>
+												<h5 class="b-items__cell-info-price"> <i class="fa fa-inr"></i>&nbsp{{e.price}}</h5>
 											</div>
 											<div class="col-xs-6">
 												<div class="b-items__cell-info-km">
@@ -306,7 +306,7 @@
 					<div class="col-xs-4">
 						<div class="b-footer__company wow fadeInLeft" data-wow-delay="0.3s">
 							<div class="b-nav__logo">
-								<h3><a href="home.html">Zen<span>Cars</span></a></h3>
+								<h3><a href="/home">Zen<span>Cars</span></a></h3>
 							</div>
 							<p>&copy; Design By Zen tech &amp; Powered by Django.</p>
 						</div>

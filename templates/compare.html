@@ -111,7 +111,7 @@
 							</div>
 							<div class="collapse navbar-collapse navbar-main-slide" id="nav">
 								<ul class="navbar-nav-menu">
-									<li><a href="compare.html">Home</a></li>
+									<li><a href="/home">Home</a></li>
 									{%if name != null%}
 									<li class="dropdown">
 										<a class="dropdown-toggle" data-toggle='dropdown' href="#">Account<span class="fa fa-caret-down"></span></a>
@@ -173,7 +173,7 @@
 							<div class="b-compare__images-item s-lineDownCenter wow zoomInUp" data-wow-delay="0.3s">
 								<h3>{{name1}}</h3>
 								<img class="img-responsive center-block" src="{{pic1}}" alt="jaguar" />
-								<div class="b-compare__images-item-price m-right"><div class="b-compare__images-item-price-vs">vs</div>{{price1}}</div>
+								<div class="b-compare__images-item-price m-right"><div class="b-compare__images-item-price-vs">vs</div><i class="fa fa-inr"></i>&nbsp{{price1}}</div>
 							</div>
 						</div>
 						{%if name2 != null%}
@@ -181,7 +181,7 @@
 							<div class="b-compare__images-item s-lineDownCenter wow zoomInUp" data-wow-delay="0.3s">
 								<h3>{{name2}}</h3>
 								<img class="img-responsive center-block" src="{{pic2}}" alt="merc" />
-								<div class="b-compare__images-item-price m-right m-left"><div class="b-compare__images-item-price-vs">vs</div>{{price2}}</div>
+								<div class="b-compare__images-item-price m-right m-left"><div class="b-compare__images-item-price-vs">vs</div><i class="fa fa-inr"></i>&nbsp{{price2}}</div>
 							</div>
 						</div>
 						{%endif%}
@@ -190,7 +190,7 @@
 							<div class="b-compare__images-item s-lineDownCenter wow zoomInUp" data-wow-delay="0.3s">
 								<h3>{{name3}}</h3>
 								<img class="img-responsive center-block" src="{{pic3}}" alt="lexus" />
-								<div class="b-compare__images-item-price m-left">{{price3}}</div>
+								<div class="b-compare__images-item-price m-left"><i class="fa fa-inr"></i>&nbsp{{price3}}</div>
 							</div>
 						</div>
 						{%endif%}
@@ -320,7 +320,7 @@
 					<div class="col-xs-4">
 						<div class="b-footer__company wow fadeInLeft" data-wow-delay="0.3s">
 							<div class="b-nav__logo">
-								<h3><a href="home.html">Zen<span>Cars</span></a></h3>
+								<h3><a href="/home">Zen<span>Cars</span></a></h3>
 							</div>
 							<p>&copy; Design By Zen tech &amp; Powered by Django.</p>
 						</div>

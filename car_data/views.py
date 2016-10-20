@@ -49,7 +49,7 @@ def search(request):
 		newcar['milege'] = j.milege
 		newcar['info'] = ' '.join(j.general_information.split("\n"))[:100]
 		newcar['det'] = "/car/view?type=new&id=" + str(j.car_id)
-		newcar['price'] = j.price
+		newcar['price'] = format(int(j.price),',d')
 		newcar['pic'] = j.photolinks.split(",")[0]
 		n.append(newcar)
 		newcar={}
@@ -58,7 +58,7 @@ def search(request):
 		oldcar['name'] = i.brand + " " + i.name
 		oldcar['info'] = ' '.join(i.general_information.split("\n"))[:100]
 		oldcar['det'] = "/car/view?type=old&id=" + str(i.car_id)
-		oldcar['price'] = i.price
+		oldcar['price'] = format(int(i.price),',d')
 		oldcar['reading'] = i.reading
 		oldcar['fuel'] = i.fuel
 		oldcar['year'] = i.year
@@ -180,7 +180,7 @@ def view(request):
 			data['brand'] = i.brand
 			data['name'] = i.brand + " " + i.name
 			data['photo'] = i.photolinks
-			data['price'] = i.price
+			data['price'] = format(int(i.price),',d')
 			data['video'] = i.videolink
 			data['read'] = i.reading
 			data['general'] = i.general_information
@@ -210,7 +210,7 @@ def view(request):
 			hit = i.hits
 			Varient_data.objects.all().filter(varient_id = id).update(hits =hit)
 			data['name'] = i.name
-			data['price'] = i.price
+			data['price'] = format(int(i.price),',d')
 			data['brand'] = i.main_car
 			pic = i.photolinks
 			picture,spec,feat = [],[],[]
@@ -249,7 +249,7 @@ def view(request):
 			data['milege'] = i.milege
 			data['name'] = i.name
 			data['type'] = i.body_type
-			data['price'] = i.price
+			data['price'] = format(int(i.price),',d')
 			data['brand'] = i.name.split(" ")[0]
 			data['cc'],data['city'],data['highway'] = "-","-","-"
 			pic = i.photolinks
@@ -272,7 +272,7 @@ def view(request):
 			varient = []
 			for var in Varient_data.objects.all().filter(car_id = id):
 				link = "/car/view?type=var&id="+str(var.varient_id)
-				varient.append({"name" : var.name , "link" : link , "price" : var.price , "milege" : var.milege})
+				varient.append({"name" : var.name , "link" : link , "price" : format(int(var.price),',d') , "milege" : var.milege})
 			data['varient'] = varient
 			data['spec'] = spec
 			data['info'] = i.general_information
@@ -300,7 +300,7 @@ def compare(request):
 		data1 = Car_data_new.objects.all().filter(car_id = c )
 		for i in data1:
 			data['name1'] = i.name
-			data['price1'] = i.price
+			data['price1'] = format(int(i.price),',d')
 			data['pic1'] = i.photolinks.split(",")[1]
 			spec = []
 			for j in i.specifications.split(","):
@@ -316,7 +316,7 @@ def compare(request):
 		data1 = Car_data_new.objects.all().filter(car_id = request.session.get('c1'))
 		for i in data1:
 			data['name1'] = i.name
-			data['price1'] = i.price
+			data['price1'] = format(int(i.price),',d')
 			data['pic1'] = i.photolinks.split(",")[1]
 			spec1={}
 			for j in i.specifications.split(","):
@@ -327,7 +327,7 @@ def compare(request):
 		data2 = Car_data_new.objects.all().filter(car_id = c)
 		for i in data2:
 			data['name2'] = i.name
-			data['price2'] = i.price
+			data['price2'] = format(int(i.price),',d')
 			data['pic2'] = i.photolinks.split(",")[1]
 			spec2 = {}
 			for j in i.specifications.split(","):
@@ -347,7 +347,7 @@ def compare(request):
 		data1 = Car_data_new.objects.all().filter(car_id = request.session.get('c1'))
 		for i in data1:
 			data['name1'] = i.name
-			data['price1'] = i.price
+			data['price1'] = format(int(i.price),',d')
 			data['pic1'] = i.photolinks.split(",")[1]
 			spec1={}
 			for j in i.specifications.split(","):
@@ -358,7 +358,7 @@ def compare(request):
 		data2 = Car_data_new.objects.all().filter(car_id = request.session['c2'])
 		for i in data2:
 			data['name2'] = i.name
-			data['price2'] = i.price
+			data['price2'] = format(int(i.price),',d')
 			data['pic2'] = i.photolinks.split(",")[1]
 			spec2 = {}
 			for j in i.specifications.split(","):
@@ -369,7 +369,7 @@ def compare(request):
 		data3 = Car_data_new.objects.all().filter(car_id = c)
 		for i in data3:
 			data['name3'] = i.name
-			data['price3'] = i.price
+			data['price3'] =format(int(i.price),',d')
 			data['pic3'] = i.photolinks.split(",")[1]
 			spec3 = {}
 			for j in i.specifications.split(","):

@@ -205,7 +205,7 @@ function setCities(chooser) {
 							</div>
 							<div class="collapse navbar-collapse navbar-main-slide" id="nav">
 								<ul class="navbar-nav-menu">
-									<li><a href="compare.html">Home</a></li>
+									<li><a href="/home">Home</a></li>
 									{%if name != null%}
 									<li class="dropdown">
 										<a class="dropdown-toggle" data-toggle='dropdown' href="#">Account<span class="fa fa-caret-down"></span></a>
@@ -264,7 +264,7 @@ function setCities(chooser) {
 								<div class="b-items__cars-one-info">
 									<header class="b-items__cars-one-info-header s-lineDownLeft">
 										<h2>{{e.name}}</h2>
-										<span>{{e.price}} Rs</span>
+										<span><i class="fa fa-inr"></i>&nbsp{{e.price}} </span>
 									</header>
 									<p>
 										{{e.info}}
@@ -294,7 +294,7 @@ function setCities(chooser) {
 								<div class="b-items__cars-one-info">
 									<header class="b-items__cars-one-info-header s-lineDownLeft">
 										<h2>{{e.name}}</h2>
-										<span>{{e.price}} Rs</span>
+										<span><i class="fa fa-inr"></i> &nbsp{{e.price}}</span>
 									</header>
 									<p>
 										{{e.info}}
@@ -462,7 +462,7 @@ function setCities(chooser) {
 									<p>
 										Add your Car to the worlds leading Pre-Owned Cars Listing 
 									</p>
-									<a href="submit1.html" class="btn m-btn">REGISTER NOW<span class="fa fa-angle-right"></span></a>
+									<a href="/car/add" class="btn m-btn">REGISTER NOW<span class="fa fa-angle-right"></span></a>
 								</div>
 							</div>
 						</aside>
@@ -540,7 +540,7 @@ function setCities(chooser) {
 					<div class="col-xs-4">
 						<div class="b-footer__company wow fadeInLeft" data-wow-delay="0.3s">
 							<div class="b-nav__logo">
-								<h3><a href="home.html">Zen<span>Cars</span></a></h3>
+								<h3><a href="/home">Zen<span>Cars</span></a></h3>
 							</div>
 							<p>&copy; Design By Zen tech &amp; Powered by Django.</p>
 						</div>

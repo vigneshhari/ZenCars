@@ -20,8 +20,22 @@ def home(request):
 	new_first = []
 	for i in new_car:
 		link = "/car/view?type=new&id=" + str(i.car_id)
-		new_first.append({"photo" : i.photolinks.split(",")[0] ,"url" : link, "name" : i.name , "milege" : i.milege , "price" : i.price})
+		new_first.append({"photo" : i.photolinks.split(",")[0] ,"url" : link, "name" : i.name , "milege" : i.milege , "price" : format(i.price,',d') })
 	data['first'] = new_first
+	new_car = Car_data_new.objects.all().order_by('-hits')[0:6];
+	new_first = []
+	for i in new_car:
+		link = "/car/view?type=new&id=" + str(i.car_id)
+		new_first.append({"photo" : i.photolinks.split(",")[0] ,"url" : link, "name" : i.name , "milege" : i.milege , "price" : format(i.price,',d') })
+	data['second'] = new_first
+	new_car = Car_data_old.objects.all().order_by('-hits')[0:6];
+	new_first = []
+	for i in new_car:
+		link = "/car/view?type=old&id=" + str(i.car_id)
+		new_first.append({"photo" : i.photolinks ,"url" : link, "name" : i.brand + i.name , "milege" : i.milege , "price" : format(int(i.price),',d') })
+	data['third'] = new_first
+	
+
 
 	blog = []
 	for b in content.objects.all().order_by('-date')[0:3]:
