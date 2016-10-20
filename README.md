@@ -12,4 +12,4 @@ sudo pip install -r requirements.txt
 python manage.py runserver
 
 once the server is started visit
-127.0.0.1:8080 to launch the website 
+127.0.0.1:8000/home to launch the website 
