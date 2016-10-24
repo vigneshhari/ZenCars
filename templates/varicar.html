@@ -94,10 +94,9 @@
 						<nav class="b-topBar__nav">
 							<ul>
 								{%if username == null%}
-								<li><a href="#" style ="color:black" data-toggle="modal" data-target="#myModal1" id="signin_top">SIGN IN</a></li>
-								<li><a href="#" style ="color:black" data-toggle="modal" data-target="#myModal2" id="register_top">REGISTER</a></li>		
-								<li><a href="#" style ="visibility: hidden;" data-toggle="modal" data-target="#myModal3" id="forgot_top"></a></li>		
-								<li><a href="#" style ="visibility: hidden;" data-toggle="modal" data-target="#myModal4" id="change_top"></a></li>		
+								<li><a href="/auth/req" style ="color:black" data-toggle="modal" data-target="#myModal1" id="signin_top">SIGN IN</a></li>
+								<li><a href="/auth/reg" style ="color:black" data-toggle="modal" data-target="#myModal2" id="register_top">REGISTER</a></li>		
+								
 								{%endif%}
 								{%if username != null%}
 								<li><a href="/auth/logout" style ="color:black">Logout</a></li>
