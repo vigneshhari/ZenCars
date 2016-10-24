@@ -1016,18 +1016,20 @@ function setCities(chooser) {
 		</section><!--b-asks-->
 
 		<section class="b-auto">
+			
 			<div class="container">
 				<h5 class="s-titleBg wow zoomInLeft" data-wow-delay="0.3s" data-wow-offset="100">GIVING OUR CUSTOMERS BEST DEALS</h5><br />
 				<h2 class="s-title wow zoomInRight" data-wow-delay="0.3s" data-wow-offset="100">BEST OFFERS FROM AUTOCLUB</h2>
 				<div class="row">
-					
+					<div class="col-xs-5 col-sm-4 col-md-3">
+						
+					</div>
+
 					<div class="col-md-13 col-sm-80 col-xs-7">
 						<div class="b-auto__main">
 							<div class="col-md-11 col-md-offset-1 col-xs-12">
 								<a href="#"  class="b-auto__main-toggle s-lineDownCenter m-active j-tab wow zoomInLeft" data-wow-delay="0.3s" data-wow-offset="100" data-to="#first">MOST RESEARCHED MANUFACTURERS</a>
 								<a href="#" class="b-auto__main-toggle j-tab wow zoomInRight" data-wow-delay="0.3s" data-wow-offset="100" data-to="#second">LATEST VEHICLES ON SALE</a>
-							</div>
-							<div class="clearfix"></div>
 							<div class="row m-margin" id="first">
 								
 							{%for e in second%}
@@ -1053,26 +1055,23 @@ function setCities(chooser) {
 								{%endfor%}
 								
 							</div>
-							<div class="clearfix"></div>
 							<div class="row m-margin" id="second">
 								
 
-								{%for e in third%}
+								{%for k in third%}
 								<div class="col-md-4 col-sm-6 col-xs-12">
 									<div class="b-auto__main-item wow slideInUp" data-wow-delay="0.3s" data-wow-offset="100">
-										<img class="img-responsive"  src="{{e.photo.url}}" alt="mazda" />
+										<img class="img-responsive"  src="{{k.photo.url}}" style="height : 100px ; width : 130px ;max-height: 100px max-width: 150px" alt="mazda" />
 										
-										<h2><a href="{{e.url}}">{{e.name}}</a></h2>
+										<h2><a href="{{k.url}}">{{k.name}}</a></h2>
 										<div class="b-auto__main-item-info">
 											<span class="m-price">
-												<i class="fa fa-inr"></i>&nbsp{{e.price}} 
+												<i class="fa fa-inr"></i>&nbsp{{k.price}} 
 											</span>
 											
 										</div>
 										<div class="b-featured__item-links m-auto">
-											<a href="#">New</a>
-											<a href="#">2016</a>
-											<a href="#">{{e.milege}} Kmpl</a>
+											<a href="#">{{k.milege}} Kmpl</a>
 
 										</div>
 									</div>
@@ -1081,7 +1080,6 @@ function setCities(chooser) {
 								
 
 							</div>
-
 						</div>
 					</div>
 				</div>
@@ -1120,10 +1118,10 @@ function setCities(chooser) {
 									<div class="b-count__item-circle">
 										<span class="fa fa-building-o"></span>
 									</div>
-									<div class="chart" data-percent="54">
-										More than<h2  class="percent">than 54</h2>
+									<div class="chart" data-percent="30">
+										More than<h2  class="percent">30</h2>
 									</div>
-									<h5>DEALER BRANCHES</h5>
+									<h5>DEALERS</h5>
 								</div>
 							</div>
 							<div class="col-sm-3 col-xs-6">

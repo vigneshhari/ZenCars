@@ -182,14 +182,16 @@
 											
 											<div class="b-blog__posts-one-body-main">
 												<div class="b-blog__posts-one-body-main-img">
-													<ul class="bxslider enable-bx-slider" data-pager-custom="#bx-pager" data-mode="fade" data-pager-slide="false" data-mode-pager="horizontal" data-pager-qty="0">
+													<ul class="bxslider enable-bx-slider" data-pager-custom="#{{e.id}}" data-mode="fade" data-pager-slide="false" data-mode-pager="horizontal" data-pager-qty="0">
+													
 													{%for i in e.photo%}
 														<li><img class="img-responsive" src="{{i.link}}" alt="jaguar" /></li>
 													{%endfor%}
 													</ul>
-													<div class="b-blog__posts-one-body-main-img-small" id="bx-pager">
+													<div class="b-blog__posts-one-body-main-img-small" id="{{e.id}}">
 													{%for i in e.photo%}
-														<a href="#" data-slide-index="{{i.ind}}"><img src="{{i.link}}" style="max-height: 90px;max-width: 65px" alt="car" /></a>
+														 {{i.ind}}
+														<a href="#" data-slide-index={{i.ind}}><img src="{{i.link}}" style="max-height: 90px;max-width: 65px" alt="car" /></a>
 													{%endfor%}
 													</div>
 												</div>
@@ -205,12 +207,6 @@
 
 							{%if len == 0 %}
 							<h3>Your Search Did not Give any Results</h3>
-							{%else%} 
-							<div class="b-items__pagination-main text-center pull-right wow zoomInUp" data-wow-delay="0.3s">
-								<a href="#" class="m-left"><span class="fa fa-angle-left"></span></a>
-								&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-								<a href="#" class="m-right"><span class="fa fa-angle-right"></span></a>    
-							</div>
 							{%endif%}	
 
 							</div></div>

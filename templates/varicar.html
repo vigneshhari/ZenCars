@@ -9,6 +9,8 @@
 		<link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.png'%}" />
 
 		<link href="{% static 'css/master.css' %}" rel="stylesheet">
+		<link href="{% static 'css/loan.css' %}" rel="stylesheet">
+
 
 		<!-- SWITCHER -->
 		<link rel="stylesheet" id="switcher-css" type="text/css" href="{%static 'assets/switcher/css/switcher.css' %}" media="all" />
@@ -23,23 +25,7 @@
 		<script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 		<script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
-		<script>
-			function CarLoanCalculator()
-					{
-						form = document.myform
-						LoanAmount= form.LoanAmount.value
-						DownPayment= "0"
-						AnnualInterestRate = form.InterestRate.value/100
-						Years= form.NumberOfYears.value
-							MonthRate=AnnualInterestRate/12
-						NumPayments=Years*12
-						Prin=LoanAmount-DownPayment
-						
-						MonthPayment=Math.floor((Prin*MonthRate)/(1-Math.pow((1+MonthRate),(-1*NumPayments)))*100)/100
-							form.NumberOfPayments.value=NumPayments
-						form.MonthlyPayment.value=MonthPayment
-					}
-		</script>
+
 
 	</head>
 	<body class="m-detail" data-scrolling-animations="true" data-equal-height=".b-auto__main-item">
@@ -245,12 +231,58 @@
 								<div class="b-detail__main-info-text wow zoomInUp" data-wow-delay="0.5s">
 									<div class="b-detail__main-aside-about-form-links">
 										<a href="#" class="j-tab m-active s-lineDownCenter" data-to='#info1'>GENERAL INFORMATION</a>
+										<a href="#" class="j-tab " data-to='#info3'>Calculate Loan Amount</a>
+										<a href="#" class="j-tab " data-to='#info2'>Calculate Loan Table</a>
+
+
 									</div>
 									<div id="info1">
 										{{ info|linebreaks }}
 
 									</div>
-								
+									<div id="info3">
+										<div class="block grey-lighter">
+											<div class="wrap">
+
+												<div class="calculator-loan">
+													<div class="thirty form">
+
+													</div>
+
+													<div class="thirty">
+														<p><label>Results:</label></p>
+														<div class="results"></div>
+													</div>
+												</div>
+
+												<div class="clear"></div>
+
+											</div>
+										</div>
+
+									</div>
+									<div id="info2">
+												
+											<div class="block grey-lighter">
+											<div class="wrap">
+
+												<div class="calculator-amortization">
+													<div class="thirty form">
+
+													</div>
+
+													<div class="seventy">
+														<div class="results"></div>
+													</div>
+
+													<div class="clear"></div>
+												</div>
+
+
+											</div>
+										</div>
+
+									</div>								
 								</div>
 								<div class="b-detail__main-info-extra wow zoomInUp" data-wow-delay="0.5s">
 									<h2 class="s-titleDet">EXTRA FEATURES</h2>
@@ -351,6 +383,7 @@
 
 							</div>
 						</div>
+						
 						<div class="col-md-4 col-xs-12">
 							<aside class="b-detail__main-aside">
 								<div class="b-detail__main-aside-desc wow zoomInUp" data-wow-delay="0.5s">
@@ -397,30 +430,12 @@
 								{%endif%}
 
 
-								<div class="b-detail__main-aside-payment wow zoomInUp" data-wow-delay="0.5s">
-									<h2 class="s-titleDet">CAR PAYMENT CALCULATOR</h2>
-									<div class="b-detail__main-aside-payment-form">
-										<form action="/" method="post">
-											<input type="text" placeholder="TOTAL VALUE/LOAN AMOUNT" value="" name="name" />
-											<input type="text" placeholder="DOWN PAYMENT" value="" name="name" />
-											<div class="s-relative">
-												<select name="select" class="m-select">
-													<option value="">LOAN TERM IN MONTHS</option>
-												</select>
-												<span class="fa fa-caret-down"></span>
-											</div>
-											<input type="text" placeholder="INTEREST RATE IN %" value="" name="name" />
-											<button type="submit" class="btn m-btn">ESTIMATE PAYMENT<span class="fa fa-angle-right"></span></button>
-										</form>
-									</div>
-									<div class="b-detail__main-aside-about-call">
-										<span class="fa fa-calculator"></span>
-										<div>$250 <p>PER MONTH</p></div>
-										<p>Total Number of Payments: <span>50</span></p>
-									</div>
-								</div>
+
+
+
 							</aside>
 						</div>
+
 					</div>
 				</div>
 			</div>
@@ -517,7 +532,32 @@
 			</div>
 		</footer><!--b-footer-->
 		<!--Main-->   
-		<script src="{% static 'js/jquery-1.11.3.min.js'%}"></script>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+
+
+// start accrue.js
+$(document).ready(function(){
+
+	// set up normal loan calculation
+	$(".calculator-loan").accrue();
+
+
+	// set up the comparison calculator form.
+	$(".calculator-compare").accrue({
+		mode: "compare"
+	});
+
+
+	// set up the amortization schedule calculator
+	$(".calculator-amortization").accrue({
+		mode: "amortization"
+	});
+
+});
+
+</script>
+		<script src="{% static 'js/jquery.accrue.min.js'%}"></script>
 		<script src="{% static 'js/jquery-ui.min.js'%}"></script>
 		<script src="{% static 'js/bootstrap.min.js'%}"></script>
 		<script src="{% static 'js/modernizr.custom.js'%}"></script>

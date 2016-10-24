@@ -6,7 +6,7 @@ class User_Account(models.Model):
 	name = models.CharField(max_length = 500)
 	password = models.CharField(max_length = 100)
 	email = models.CharField(max_length = 100)
-	photo = models.FileField(upload_to = 'carsell/', default = 'carsell/nouser.jpg')
+	photo = models.FileField(upload_to = 'auth/user', default = 'carsell/nouser.jpg')
 	phone_no = models.IntegerField()
 	vericode = models.CharField(max_length = 100)
 	verified = models.IntegerField()

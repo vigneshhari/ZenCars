@@ -133,7 +133,9 @@ def add(request):
 			return HttpResponseRedirect("/car/add")
 	if(step =='3' ):
 			temp = Car_data_old.objects.get(car_id = int(car_id))
-			temp.photolinks = request.FILES['photolinks']
+			print request.POST.get('photolinks','')
+			if(str(request.POST.get('photolinks',''))  != '' ):
+				temp.photolinks = request.FILES['photolinks']
 			temp.videolink = videolink = request.POST.get('videolink','')
 			temp.general_information = request.POST.get('review','')
 			temp.save()

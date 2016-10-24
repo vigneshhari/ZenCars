@@ -8,3 +8,7 @@ psycopg2==2.6.1
 static3==0.6.1
 wsgiref==0.1.2
 email==4.0.2
+django-s3-storage==0.9.10
+boto==2.43.0
+django-boto==0.3.9
+django-storages==1.5.1

@@ -129,7 +129,7 @@
 							</div>
 							<div class="collapse navbar-collapse navbar-main-slide" id="nav">
 								<ul class="navbar-nav-menu">
-									<li><a href="compare.html">Home</a></li>
+									<li><a href="/home">Home</a></li>
 									{%if name != null%}
 									<li class="dropdown">
 										<a class="dropdown-toggle" data-toggle='dropdown' href="#">Account<span class="fa fa-caret-down"></span></a>
@@ -192,8 +192,12 @@
 									<div class="b-items__cell-info">
 										<div class="s-lineDownLeft b-items__cell-info-title">
 											<h2 class="">{{e.name}}</h2>
-											&nbsp&nbsp&nbsp<a href="{{e.sold}}"  style="color: orange">Sold Car ?</a>
+											&nbsp&nbsp&nbsp
+											{%if e.sold != None %}
+											<a href="{{e.sold}}"  style="color: orange">Sold Car ?</a>
+											{%endif%}
 												<a href="{{e.delete}}" style="color: red" >Delete</a>
+											
 										</div>
 										<p>{{e.info}}</p>
 										<div class="row m-smallPadding">
@@ -221,18 +225,6 @@
 
 							
 						</div>
-
-						<div class="b-items__pagination">
-							<div class="b-items__pagination-main wow zoomInUp" data-wow-delay="0.5s">
-								<a href="#" class="m-left"><span class="fa fa-angle-left"></span></a>
-								<span class="m-active"><a href="#">1</a></span>
-								<span><a href="#">2</a></span>
-								<span><a href="#">3</a></span>
-								<span><a href="#">4</a></span>
-								<a href="#" class="m-right"><span class="fa fa-angle-right"></span></a>    
-							</div>
-						</div>
-					</div>
 					
 				</div>
 			</div>

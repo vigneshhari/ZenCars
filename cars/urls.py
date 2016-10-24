@@ -14,5 +14,8 @@ urlpatterns = [
  	url(r'^home/', views.home),   
  	url(r'^about/', views.about),   
  	url(r'^contact/', views.contact),   
-
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] 
+if settings.DEBUG is True:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+handler404 = views.e404
+handler500 = views.e503

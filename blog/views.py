@@ -69,7 +69,7 @@ def list(request):
 			for img in i.photo.split(","):
 				pic.append({"link" : img , "ind" : temp});temp+=1
 			link = "/blog/blog?id=" + str(i.blog_id)
-			blog.append({"link" : link , "title" : i.title , "photo" : pic , 'count' : comm , 'author' : i.author , 'date' : i.date.date() , 'content' : (''.join(i.content.split("\n")))[:150] , "category" : category  } )
+			blog.append({"link" : link ,"id" : i.blog_id, "title" : i.title , "photo" : pic , 'count' : comm , 'author' : i.author , 'date' : i.date.date() , 'content' : (''.join(i.content.split("\n")))[:150] , "category" : category  } )
 		data['blog'] = blog
 	return render(request,"bloglist.html",data)
 

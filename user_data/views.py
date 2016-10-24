@@ -265,7 +265,8 @@ def view(request):
 		oldcar['year'] = i.year
 		oldcar['pic'] = i.photolinks
 		oldcar['trans'] = i.transmission 
-		oldcar['sold'] = "/auth/sold?car_id=" + str(i.car_id)
+		if(request.GET.get("type") == "sell"):
+			oldcar['sold'] = "/auth/sold?car_id=" + str(i.car_id)
 		oldcar['delete'] = "/auth/delete?car_id=" + str(i.car_id)
 		o.append(oldcar)
 		oldcar={}

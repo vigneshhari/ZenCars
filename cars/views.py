@@ -28,7 +28,7 @@ def home(request):
 		link = "/car/view?type=new&id=" + str(i.car_id)
 		new_first.append({"photo" : i.photolinks.split(",")[0] ,"url" : link, "name" : i.name , "milege" : i.milege , "price" : format(i.price,',d') })
 	data['second'] = new_first
-	new_car = Car_data_old.objects.all().order_by('-hits')[0:6];
+	new_car = Car_data_old.objects.all().filter(status = 'sell' , confirmed = 1).order_by('-hits')[0:6];
 	new_first = []
 	for i in new_car:
 		link = "/car/view?type=old&id=" + str(i.car_id)
@@ -54,3 +54,9 @@ def contact(request):
 	return render(request,"contact.html")
 def red(request):
 	return HttpResponseRedirect('/home')
+
+def e404(request):
+	return render(request,'404.html')
+
+def e503(request):
+	return render(request,'503.html')

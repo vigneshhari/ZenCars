@@ -16,19 +16,44 @@ password = zentech123
 """
 
 import os
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+os.environ['S3_USE_SIGV4'] = 'True'
 
+
+AWS_REGION = "ap-south-1"
+
+# The AWS access key used to access the storage buckets.
+AWS_ACCESS_KEY_ID = "AKIAJM3JTCFNFCKPDWOA"
+
+# The AWS secret access key used to access the storage buckets.
+AWS_SECRET_ACCESS_KEY = "xDiDT0AbXBfUqTM9eg0D5mcstaF7VGG2jlrotLlk"
+
+# The S3 bucket used to store uploaded files.
+AWS_S3_BUCKET_NAME = "zencars"
+
+AWS_S3_CUSTOM_DOMAIN = "s3.ap-south-1.amazonaws.com/zencars/media"
+
+AWS_HEADERS = {  # see http://developer.yahoo.com/performance/rules.html#expires
+        'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+        'Cache-Control': 'max-age=94608000',
+}
 
 STATIC_ROOT= "staticfiles"
 STATIC_URL = 'static'
+
+
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+MEDIA_ROOT = '/var/media/'
+MEDIAFILES_LOCATION = 'media'
+MEDIA_URL = "https://%s/media/" % (AWS_S3_CUSTOM_DOMAIN)
+
+DEFAULT_FILE_STORAGE = "django_s3_storage.storage.S3Storage"
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 # Quick-start development settings - unsuitable for production
@@ -38,9 +63,9 @@ SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 SECRET_KEY = 'p3_mui#wyza93+ilq+g6=0&x$tq)&=5_!bvj&4mo+iup&zh-g^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -52,6 +77,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_s3_storage',
     'user_data',
     'car_data',
     'blog',
@@ -80,6 +106,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
             ],
         },
     },

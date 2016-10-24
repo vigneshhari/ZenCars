@@ -9,6 +9,8 @@
 		<link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.png'%}" />
 
 		<link href="{% static 'css/master.css' %}" rel="stylesheet">
+		<link href="{% static 'css/loan.css' %}" rel="stylesheet">
+
 
 		<!-- SWITCHER -->
 		<link rel="stylesheet" id="switcher-css" type="text/css" href="{%static 'assets/switcher/css/switcher.css' %}" media="all" />
@@ -174,7 +176,6 @@
 					</div>
 					<div class="col-xs-9">
 						<div class="b-infoBar__btns">
-							<a href="#" class="btn m-btn m-infoBtn">PRINT THIS PAGE<span class="fa fa-angle-right"></span></a>
 							<a href="{{compare}}" class="btn m-btn m-infoBtn">Add to compare<span class="fa fa-angle-right"></span></a>
 						</div>
 					</div>
@@ -297,6 +298,8 @@
 									<div class="b-detail__main-aside-about-form-links">
 										<a href="#" class="j-tab m-active s-lineDownCenter" data-to='#info1'>GENERAL INQUIRY</a>
 										<a href="#" class="j-tab" data-to='#info2'>Varients</a>
+										<a href="#" class="j-tab " data-to='#info3'>Calculate Loan Amount</a>
+										<a href="#" class="j-tab " data-to='#info4'>Calculate Loan Table</a>
 									</div>
 									<div id="info1">
 										{{content | linebreaks}}
@@ -339,11 +342,49 @@
 					{%endfor%}
 				
 				<br>
+									</div>
+																	<div id="info3">
+										<div class="block grey-lighter">
+											<div class="wrap">
 
+												<div class="calculator-loan">
+													<div class="thirty form">
 
+													</div>
 
+													<div class="thirty">
+														<p><label>Results:</label></p>
+														<div class="results"></div>
+													</div>
+												</div>
+
+												<div class="clear"></div>
+
+											</div>
+										</div>
 
 									</div>
+									<div id="info4">
+												
+											<div class="block grey-lighter">
+											<div class="wrap">
+
+												<div class="calculator-amortization">
+													<div class="thirty form">
+
+													</div>
+
+													<div class="seventy">
+														<div class="results"></div>
+													</div>
+
+													<div class="clear"></div>
+												</div>
+											</div>
+										</div>
+
+									</div>	
+
 							</div>
 									<br>
 								&nbsp
@@ -401,6 +442,10 @@
 									  <input type="hidden" name="car" value="{{car_id}}">
 									   <input type="hidden" name="type" value="{{status}}">
 									<button type="submit" class="btn m-btn" >SEND COMMENT<span class="fa fa-angle-right"></span></button>
+									<br>
+									<br>
+									<br>
+									<br>
 								</form>
 							</div>
 							</div>
@@ -417,82 +462,65 @@
 
 							</div>
 						</div>
+
 						<div class="col-md-4 col-xs-12">
 							<aside class="b-detail__main-aside">
 								<div class="b-detail__main-aside-desc wow zoomInUp" data-wow-delay="0.5s">
-									
-								{%for e in spec %}
-									{% if e.val == "HEADING" %}
-									<h2 class="s-titleDet">{{val}}</h2>
+									<h2 class="s-titleDet">Description</h2>
+									{%for e in spec%}
+									{% if e.val == "HEADING"%}
+									<h2 class="s-titleDet">{{e.ind}}</h2>
 									{%else%}
 									<div class="row">
 										<div class="col-xs-6">
 											<h4 class="b-detail__main-aside-desc-title">{{e.ind}}</h4>
 										</div>
 										<div class="col-xs-6">
+											 {%if e.val == "True" %}
+											 <p class="b-detail__main-aside-desc-value"><i class="fa fa-check" aria-hidden="true"></i></p>
+											 {%elif e.val == "False"%}
+											 <p class="b-detail__main-aside-desc-value"><i class="fa fa-times" aria-hidden="true"></i></p>
+											 {%else%}
 											<p class="b-detail__main-aside-desc-value">{{e.val}}</p>
+											 {%endif%}
 										</div>
 									</div>
 									{%endif%}
-								{%endfor%}
+									{%endfor%}
 								</div>
+
+								{% if username != null%}
 								<div class="b-detail__main-aside-about wow zoomInUp" data-wow-delay="0.5s">
 									<h2 class="s-titleDet">INQUIRE ABOUT THIS VEHICLE</h2>
 									<div class="b-detail__main-aside-about-call">
 										<span class="fa fa-phone"></span>
-										<div>1-888-378-4027</div>
+										<div>+91 9562854642</div>
 										<p>Call the seller 24/7 and they would help you.</p>
 									</div>
 									<div class="b-detail__main-aside-about-seller">
-										<p>Seller Info: <span>NissanCarDealer</span></p>
+										<p>Seller Email: <span>info@zencars.com</span></p>
 									</div>
 									<div class="b-detail__main-aside-about-form">
 										<div class="b-detail__main-aside-about-form-links">
 											<a href="#" class="j-tab m-active s-lineDownCenter" data-to='#form1'>GENERAL INQUIRY</a>
-											<a href="#" class="j-tab" data-to='#form2'>SCHEDULE TEST DRIVE</a>
 										</div>
 										<form id="form1" action="/" method="post">
-											<input type="text" placeholder="YOUR NAME" value="" name="name" />
-											<input type="email" placeholder="EMAIL ADDRESS" value="" name="email" />
-											<input type="tel" placeholder="PHONE NO." value="" name="name" />
 											<textarea name="text" placeholder="message"></textarea>
 											<div><input type="checkbox" name="one" value="" /><label>Send me a copy of this message</label></div>
-											<div><input type="checkbox" name="two" value="" /><label>Send me a copy of this message</label></div>
-											<button type="submit" class="btn m-btn">SEND MESSAGE<span class="fa fa-angle-right"></span></button>
-										</form>
-										<form id="form2" action="/" method="post">
-											<input type="text" placeholder="YOUR NAME" value="" name="name" />
-											<textarea name="text" placeholder="message"></textarea>
-											<div><input type="checkbox" name="one" value="" /><label>Send me a copy of this message</label></div>
-											<div><input type="checkbox" name="two" value="" /><label>Send me a copy of this message</label></div>
 											<button type="submit" class="btn m-btn">SEND MESSAGE<span class="fa fa-angle-right"></span></button>
 										</form>
 									</div>
 								</div>
-								<div class="b-detail__main-aside-payment wow zoomInUp" data-wow-delay="0.5s">
-									<h2 class="s-titleDet">CAR PAYMENT CALCULATOR</h2>
-									<div class="b-detail__main-aside-payment-form">
-										<form action="/" method="post">
-											<input type="text" placeholder="TOTAL VALUE/LOAN AMOUNT" value="" name="name" />
-											<input type="text" placeholder="DOWN PAYMENT" value="" name="name" />
-											<div class="s-relative">
-												<select name="select" class="m-select">
-													<option value="">LOAN TERM IN MONTHS</option>
-												</select>
-												<span class="fa fa-caret-down"></span>
-											</div>
-											<input type="text" placeholder="INTEREST RATE IN %" value="" name="name" />
-											<button type="submit" class="btn m-btn">ESTIMATE PAYMENT<span class="fa fa-angle-right"></span></button>
-										</form>
-									</div>
-									<div class="b-detail__main-aside-about-call">
-										<span class="fa fa-calculator"></span>
-										<div>$250 <p>PER MONTH</p></div>
-										<p>Total Number of Payments: <span>50</span></p>
-									</div>
+								{%else%}
+								<div class="b-detail__main-aside-about wow zoomInUp" data-wow-delay="0.5s">
+									<h2 class="s-titleDet">Login Or Register Account To View Seller Information</h2>
 								</div>
+								{%endif%}
+
+	
 							</aside>
 						</div>
+
 					</div>
 				</div>
 			</div>
@@ -575,7 +603,32 @@
 			</div>
 		</footer><!--b-footer-->
 		<!--Main-->   
-		<script src="{% static 'js/jquery-1.11.3.min.js'%}"></script>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+
+
+// start accrue.js
+$(document).ready(function(){
+
+	// set up normal loan calculation
+	$(".calculator-loan").accrue();
+
+
+	// set up the comparison calculator form.
+	$(".calculator-compare").accrue({
+		mode: "compare"
+	});
+
+
+	// set up the amortization schedule calculator
+	$(".calculator-amortization").accrue({
+		mode: "amortization"
+	});
+
+});
+
+</script>
+		<script src="{% static 'js/jquery.accrue.min.js'%}"></script>
 		<script src="{% static 'js/jquery-ui.min.js'%}"></script>
 		<script src="{% static 'js/bootstrap.min.js'%}"></script>
 		<script src="{% static 'js/modernizr.custom.js'%}"></script>
