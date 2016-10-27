@@ -9,7 +9,7 @@ sudo pip install -r requirements.txt
 
 # Starting the Django Server 
 *in the root folder run <br>
-python manage.py collectstatic
+python manage.py collectstatic <br>
 python manage.py runserver
 
 *Note
